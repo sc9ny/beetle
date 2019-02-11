@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from authentication.models import Account
 from django.db import models
 
 # Create your models here.
@@ -7,7 +7,7 @@ from django.db import models
 class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(Account, null=True, blank=True, on_delete=models.SET_NULL)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -17,7 +17,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(Account, blank=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     associated_post = models.ForeignKey(Post, on_delete=models.CASCADE)

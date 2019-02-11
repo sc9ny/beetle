@@ -2,12 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b19b69c9-ac5a-4e4a-9dd6-26c479bd0f9b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userActivity/api/post.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userActivity/serializers/post.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userActivity/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/permission.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insect_framework/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/insect_framework/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insect_framework/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/insect_framework/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/api/post.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/serializers/post.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userActivity/views.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,39 +31,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/insect_framework/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
+            <state relative-caret-position="810">
+              <caret line="54" column="36" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/userActivity/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-                <marker date="1549595829196" expanded="true" signature="497:648" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/userActivity/serializers/post.py">
+        <entry file="file://$PROJECT_DIR$/user_activity/serializers/post.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="9" column="44" lean-forward="true" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+              <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -61,41 +50,57 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/userActivity/api/post.py">
+        <entry file="file://$PROJECT_DIR$/authentication/serializer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+            <state relative-caret-position="427">
+              <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/userActivity/urls.py">
+        <entry file="file://$PROJECT_DIR$/authentication/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+            <state relative-caret-position="615">
+              <caret line="42" selection-start-line="42" selection-end-line="42" />
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
+                <element signature="e#0#72#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/userActivity/views.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/insect_framework/urls.py">
+        <entry file="file://$PROJECT_DIR$/authentication/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="300">
+              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
               <folding>
-                <element signature="e#640#672#0" expanded="true" />
+                <element signature="e#0#56#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/authentication/permission.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/authentication/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,6 +120,18 @@
     <findStrings>
       <find>auth</find>
       <find>rest</find>
+      <find>userSignal</find>
+      <find>UserActivity</find>
+      <find>viewset</find>
+      <find>modelView</find>
+      <find>from django.contrib.</find>
+      <find>serializer</find>
+      <find>permission</find>
+      <find>User</find>
+      <find>is_admin</find>
+      <find>module</find>
+      <find>print</find>
+      <find>auth_user</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/static</dir>
@@ -126,16 +143,33 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/userActivity/models.py" />
         <option value="$PROJECT_DIR$/userActivity/admin.py" />
         <option value="$PROJECT_DIR$/static/main.js" />
         <option value="$PROJECT_DIR$/static/main.html" />
-        <option value="$PROJECT_DIR$/userActivity/api/post.py" />
         <option value="$PROJECT_DIR$/insect_framework/router.py" />
         <option value="$PROJECT_DIR$/userActivity/urls.py" />
-        <option value="$PROJECT_DIR$/insect_framework/urls.py" />
         <option value="$PROJECT_DIR$/userActivity/serializers/post.py" />
+        <option value="$PROJECT_DIR$/userActivity/api/post.py" />
+        <option value="$PROJECT_DIR$/userActivity/apps.py" />
+        <option value="$PROJECT_DIR$/userActivity/__init__.py" />
+        <option value="$PROJECT_DIR$/userActivity/userSignal.py" />
+        <option value="$PROJECT_DIR$/auth/models.py" />
+        <option value="$PROJECT_DIR$/auth/apps.py" />
+        <option value="$PROJECT_DIR$/auth/admin.py" />
+        <option value="$PROJECT_DIR$/auth/authSerializer.py" />
+        <option value="$PROJECT_DIR$/userActivity/models.py" />
+        <option value="$PROJECT_DIR$/authRelated/apps.py" />
+        <option value="$PROJECT_DIR$/user_activity/migrations/0001_initial.py" />
+        <option value="$PROJECT_DIR$/user_activity/apps.py" />
+        <option value="$PROJECT_DIR$/insect_framework/urls.py" />
+        <option value="$PROJECT_DIR$/user_activity/models.py" />
         <option value="$PROJECT_DIR$/insect_framework/settings.py" />
+        <option value="$PROJECT_DIR$/authentication/admin.py" />
+        <option value="$PROJECT_DIR$/authentication/models.py" />
+        <option value="$PROJECT_DIR$/authentication/urls.py" />
+        <option value="$PROJECT_DIR$/authentication/serializer.py" />
+        <option value="$PROJECT_DIR$/authentication/permission.py" />
+        <option value="$PROJECT_DIR$/authentication/views.py" />
       </list>
     </option>
   </component>
@@ -145,8 +179,8 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="303" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="120" />
     <option name="width" value="1280" />
     <option name="height" value="725" />
   </component>
@@ -156,6 +190,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,23 +201,28 @@
             <path>
               <item name="insect_framework" type="b2602c69:ProjectViewProjectNode" />
               <item name="insect_framework" type="462c0819:PsiDirectoryNode" />
+              <item name="authentication" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="insect_framework" type="b2602c69:ProjectViewProjectNode" />
+              <item name="insect_framework" type="462c0819:PsiDirectoryNode" />
               <item name="insect_framework" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="insect_framework" type="b2602c69:ProjectViewProjectNode" />
               <item name="insect_framework" type="462c0819:PsiDirectoryNode" />
-              <item name="userActivity" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
@@ -208,19 +248,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1549510255264</updated>
+      <workItem from="1549853563722" duration="1277000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5081000" />
+    <option name="totallyTimeSpent" value="27710000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="725" extended-state="6" />
+    <frame x="0" y="120" width="1280" height="725" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2536349" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25767368" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -232,6 +275,8 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Python Console" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="SciView" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -255,6 +300,9 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/userActivity/admin.py" />
+    <entry file="file://$PROJECT_DIR$/insect_framework/router.py" />
+    <entry file="file://$PROJECT_DIR$/userActivity/tests.py" />
     <entry file="file://$PROJECT_DIR$/static/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -262,87 +310,137 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/userActivity/admin.py">
+    <entry file="file://$PROJECT_DIR$/userActivity/serializers/post.py" />
+    <entry file="file://$PROJECT_DIR$/userActivity/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/userActivity/apps.py" />
+    <entry file="file://$PROJECT_DIR$/userActivity/views.py" />
+    <entry file="file://$PROJECT_DIR$/userActivity/urls.py" />
+    <entry file="file://$PROJECT_DIR$/userActivity/api/post.py" />
+    <entry file="file://$PROJECT_DIR$/auth/models.py" />
+    <entry file="file://$PROJECT_DIR$/auth/admin.py" />
+    <entry file="file://$PROJECT_DIR$/auth/apps.py" />
+    <entry file="file://$PROJECT_DIR$/auth/authSerializer.py" />
+    <entry file="file://$PROJECT_DIR$/userActivity/models.py" />
+    <entry file="file://$PROJECT_DIR$/userActivity/userSignal.py" />
+    <entry file="file://$PROJECT_DIR$/authRelated/apps.py" />
+    <entry file="file://$PROJECT_DIR$/authRelated/admin.py" />
+    <entry file="file://$PROJECT_DIR$/user_activity/apps.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="105">
+          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_activity/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="5" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insect_framework/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <folding>
+            <element signature="e#1#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/userActivity/api/post.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userActivity/views.py">
+    <entry file="file://$PROJECT_DIR$/authentication/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/userActivity/models.py">
+    <entry file="file://$PROJECT_DIR$/user_activity/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="285">
+          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
-            <marker date="1549595829196" expanded="true" signature="497:648" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userActivity/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userActivity/serializers/post.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="44" lean-forward="true" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/insect_framework/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
+        <state relative-caret-position="810">
+          <caret line="54" column="36" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/insect_framework/router.py">
+    <entry file="file://$PROJECT_DIR$/authentication/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="e#0#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/permission.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userActivity/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insect_framework/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
           <folding>
-            <element signature="e#640#672#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_activity/serializers/post.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/serializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
           </folding>
         </state>
       </provider>

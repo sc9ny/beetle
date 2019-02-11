@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'userActivity',
+    'user_activity.apps.UserActivityConfig',
+    'authentication.apps.AuthenticationConfig',
 ]
 
 MIDDLEWARE = [
@@ -87,12 +88,12 @@ DATABASES = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGINATE_BY': 10,
-    'PAGINATE_BY_PARAM': 'page_size',
-    'MAX_PAGINATE_BY': 100
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    )
 }
 
+AUTH_USER_MODEL = 'authentication.Account'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
