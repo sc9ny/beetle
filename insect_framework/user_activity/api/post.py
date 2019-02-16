@@ -1,26 +1,31 @@
 from rest_framework import viewsets
+from rest_framework import permissions
+
+from utils import HeaderPagination, IsStaffOrAccountOwner
+
 from ..models import Post
 from ..serializers.post import PostSerializer
 
-from rest_framework.response import Response
-from rest_framework import pagination
-
-# TODO: This needs more work.
-# class SomePagination(pagination.PageNumberPagination):
-#
-#     def get_paginated_response(self, data):
-#         return Response({
-#             'links': {
-#                'next': self.get_next_link(),
-#                'previous': self.get_previous_link()
-#             },
-#             'count': self.page.paginator.count,
-#             'total_pages': self.page.paginator.num_pages,
-#             'results': data
-#         })
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    paginator = None
-    #pagination_class = SomePagination
+    pagination_class = HeaderPagination
+
+    def get_permissions(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            self.permission_classes = [permissions.AllowAny,]
+        elif self.request.method == 'POST':
+            self.permission_classes = [permissions.IsAuthenticated,]
+        else:
+            self.permission_classes = [IsStaffOrAccountOwner,]
+        return super(PostViewSet, self).get_permissions()
+
+
+class MyPostViewSet(PostViewSet):
+
+    def get_queryset(self):
+        qs = super(PostViewSet, self).get_queryset()
+        qs = qs.filter(author=self.request.user)
+        # TODO: do some prefetch stuff here
+        return qs

@@ -1,19 +1,24 @@
 from rest_framework import permissions, viewsets, status
 from rest_framework.response import Response
+
+from utils import HeaderPagination, IsStaffOrAccountOwner
+
 from .serializer import AccountSerializer
-from .permission import IsAccountOwner
 from .models import Account
 
 class AccountViewSet(viewsets.ModelViewSet):
     lookup_field = 'username'
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
+    pagination_class = HeaderPagination
 
     def get_permissions(self):
         if (self.request.method in permissions.SAFE_METHODS or
             self.request.method == 'POST'):
-            return (permissions.AllowAny(),)
-        return (permissions.IsAuthenticated(), IsAccountOwner())
+            self.permission_classes = [permissions.AllowAny,]
+        self.permission_classes = [IsStaffOrAccountOwner,]
+
+        return super(AccountViewSet, self).get_permissions()
 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
