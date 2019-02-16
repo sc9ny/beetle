@@ -1,0 +1,13 @@
+{% load compress %}
+{% load staticfiles %}
+
+{% compress js %}
+
+<script type="text/javascript" src="{% static 'main.js' %}"></script>
+<script type="text/javascript" src="{% static 'webapp/config.js' %}"></script>
+<script type="text/javascript" src="{% static 'webapp/route.js' %}"></script>
+<script type="text/javascript" src="{% static 'webapp/Authentication/authentication.js' %}"></script>
+<script type="text/javascript" src="{% static 'webapp/Authentication/service.js' %}"></script>
+<script type="text/javascript" src="{% static 'webapp/Authentication/register.controller.js' %}"></script>
+
+{% endcompress %}

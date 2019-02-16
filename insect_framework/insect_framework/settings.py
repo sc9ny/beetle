@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'user_activity.apps.UserActivityConfig',
     'authentication.apps.AuthenticationConfig',
+    'compressor',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'insect_framework.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,6 +133,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = [
-    'static'
+    os.path.join(BASE_DIR,'static'),
 ]
+
+COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
