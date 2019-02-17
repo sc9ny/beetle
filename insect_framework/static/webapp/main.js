@@ -3,12 +3,17 @@
 
   angular
     .module('main', [
-      'webapp/config',
-      'webapp/routes',
-      'webapp/Authentication/authentication'
-    ]).run(run);
+      'config',
+      'route',
+      'authentication',
+      'ngMaterial'
+    ]);
 
-  run.$inject = ['$http'];
+  angular
+  .module('main')
+  .run(run);
+
+run.$inject = ['$http'];
 
 /**
 * @name run
@@ -18,7 +23,8 @@ function run($http) {
   $http.defaults.xsrfHeaderName = 'X-CSRFToken';
   $http.defaults.xsrfCookieName = 'csrftoken';
 }
-
-  angular
-    .module('routes', ['ngRoute']);
+  // angular
+  //   .module('routes', ['ngRoute']);
 })();
+
+
