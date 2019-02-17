@@ -12,6 +12,6 @@
       controller: 'RegisterController',
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/Authentication/templates/register.html'
-    }).otherwise('/');
+    }).otherwise('/notFound');
   }
 })();

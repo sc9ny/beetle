@@ -8,7 +8,7 @@
     ]);
 
   angular
-    .module('authentication.controllers', []);
+    .module('authentication.controllers', ['ngMessages']);
 
   angular
     .module('authentication.services', ['ngCookies']);
