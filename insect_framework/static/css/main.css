@@ -1,6 +1,15 @@
-body {
-    width: 100%;
+@import url('authentication.css');
+
+.imgbox {
+    display: grid;
     height: 100%;
-    position: fixed;
+}
+.center-fit {
+    max-width: 80%;
+    max-height: 80vh;
+    margin: auto;
 }
 
+.custom_container {
+    margin: 50px 50px;
+}

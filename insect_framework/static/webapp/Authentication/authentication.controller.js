@@ -19,7 +19,7 @@
     function register() {
       Authentication.register(self.email, self.password, self.username, self.confirm_password)
         .then (() => {
-          Authentication.login.login({email:self.email, password:self.password});
+          Authentication.login(self.email, self.password);
           $location.url('/');
         }, (response) =>{
 
@@ -27,6 +27,9 @@
            : response.data;
         });
 
+    }
+    this.logout = function () {
+      Authentication.logout();
     }
   }
 
@@ -38,12 +41,12 @@
       $location.url('/');
 
     this.login = function () {
-      Authentication.login.login({email: self.email, password:self.password}).$promise.then((success) => {
+      Authentication.login(self.email, self.password).then((success) => {
         Authentication.setAuthenticatedAccount(success);
         $location.url('/');
       }, (error) => {
         $scope.error = error.data.message;
       });
-    }
+    };
   }
 })();
