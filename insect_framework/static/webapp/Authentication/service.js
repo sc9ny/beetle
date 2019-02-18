@@ -52,7 +52,7 @@
     function unAuthenticate () {
       $cookies.remove('authenticatedAccount');
     }
-    function Login($resource) {
+    function login($resource) {
       let cfg = {
         email: '@email',
         password: '@password'

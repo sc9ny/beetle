@@ -3,7 +3,7 @@ import json
 from rest_framework import permissions, status, viewsets, views
 from rest_framework.response import Response
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from utils import HeaderPagination, IsStaffOrAccountOwner
 
 from .serializer import AccountSerializer
@@ -56,4 +56,13 @@ class LoginView(views.APIView):
                     'message': 'Invalid email or password.'
                 }, status=status.HTTP_401_UNAUTHORIZED)
         return Response({'message': 'Already Authenticated'},
-                        status =status.HTTP_400_BAD_REQUEST)
+                        status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogoutView(views.APIView):
+    permission_classes=[permissions.IsAuthenticated,]
+
+    def post(self, request, format=None):
+        logout(request)
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
