@@ -8,19 +8,16 @@
     .module('authentication.services')
     .factory('Authentication', Authentication);
 
-  Authentication.$inject = ['$cookies', '$http'];
+  Authentication.$inject = ['$cookies', '$http', '$resource'];
 
-  /**
-  * @namespace Authentication
-  * @returns {Factory}
-  */
-  function Authentication($cookies, $http) {
-    /**
-    * @name Authentication
-    * @desc The Factory to be returned
-    */
-    var Authentication = {
-      register: register
+  function Authentication($cookies, $http, $resource) {
+    let Authentication = {
+      register: register,
+      getAuthenticatedAccount: getAuthenticatedAccount,
+      isAuthenticated: isAuthenticated,
+      setAuthenticatedAccount: setAuthenticatedAccount,
+      unAuthenticate: unAuthenticate,
+      login: login
     };
 
     return Authentication;
@@ -33,7 +30,38 @@
         password: password,
         confirm_password: confirm_password,
         email: email
+      })
+    }
+    function getAuthenticatedAccount () {
+      if (!$cookies.get('authenticatedAccount'))
+        return;
+
+      return JSON.parse($cookies.get('authenticatedAccount'));
+    }
+
+    function isAuthenticated () {
+      return !!$cookies.get('authenticatedAccount')
+    }
+
+    function setAuthenticatedAccount(account) {
+      $cookies.put('authenticatedAccount', JSON.stringify(account),{
+        expires: (new Date(new Date().getTime() + 30 * 60 * 1000).toString())
       });
     }
+
+    function unAuthenticate () {
+      $cookies.remove('authenticatedAccount');
+    }
+    function Login($resource) {
+      let cfg = {
+        email: '@email',
+        password: '@password'
+      };
+      let action = {
+        login : {method: "POST"}
+      };
+      return $resource('/api/v1/login', cfg, action);
+    }
   }
+
 })();

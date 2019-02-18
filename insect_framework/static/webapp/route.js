@@ -8,10 +8,16 @@
   config.$inject = ['$routeProvider'];
 
   function config($routeProvider) {
-    $routeProvider.when('/register', {
+    $routeProvider.when('/register/', {
       controller: 'RegisterController',
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/Authentication/templates/register.html'
-    }).otherwise('/notFound');
+    }).
+    when ('/login/', {
+      controller: 'LoginController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/Authentication/templates/login.html'
+    }).
+    otherwise('/');
   }
 })();
