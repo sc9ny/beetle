@@ -19,7 +19,9 @@
     function register() {
       Authentication.register(self.email, self.password, self.username, self.confirm_password)
         .then (() => {
-          Authentication.login(self.email, self.password);
+          Authentication.login(self.email, self.password).then((success) => {
+            Authentication.setAuthenticatedAccount(success)
+          });
           $location.url('/');
         }, (response) =>{
 

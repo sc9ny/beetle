@@ -1,22 +1,31 @@
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <h1>Login</h1>
-    <div>
-      <form name="LoginForm" role="form" ng-submit="$ctrl.login()">
-        <md-input-container>
-          <label> Email </label>
-          <input type="email" name="email" ng-model="$ctrl.email">
-        </md-input-container>
+<div class="login-container">
 
-        <md-input-container>
-          <label>Password</label>
-          <input type="password" name="password" ng-model="$ctrl.password">
-        </md-input-container>
-        {{error}}
-        <div >
-          <md-button type="submit" >Submit</md-button>
-        </div>
-      </form>
+  <div class="login-reg-panel">
+    <div class="register-info-box">
+      <h2> Don't have an account?</h2>
+      <a href="/register"> Register Here!</a>
     </div>
-  </div>
+    <div class="white-panel">
+      <div>
+        <h2>Login</h2>
+        <div>
+          <form name="LoginForm" class="col-md-10" role="form" ng-submit="$ctrl.login()">
+            <div class="form-group">
+              <label class="float-left"> Email </label>
+              <input class="form-control" type="email" name="email" ng-model="$ctrl.email">
+            </div>
+
+            <div class="form-group">
+              <label class="float-left">Password</label>
+              <input class="form-control" type="password" name="password" ng-model="$ctrl.password">
+            </div>
+            {{error}}
+            <div >
+              <md-button class="float-left btn btn-dark" type="submit" >Submit</md-button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+	</div>
 </div>

@@ -13,12 +13,11 @@
     <base href="/" />
   </head>
   <body>
-    <div class="nav-bar">
-
-    </div>
-    <md-button class="md-primary" ng-href="/register"> Register</md-button>
-    <md-button ng-href="/">main</md-button>
-    <md-button ng-href="/login">Login</md-button>
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+      <md-button class="md-primary" ng-href="/register"> Register</md-button>
+      <md-button ng-href="/">main</md-button>
+      <md-button ng-href="/login">Login</md-button>
+    </nav>
     <div ng-view></div>
     {% include 'javascript.html' %}
   </body>
