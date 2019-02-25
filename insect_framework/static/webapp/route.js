@@ -18,6 +18,13 @@
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/Authentication/templates/login.html'
     }).
-    otherwise('/');
+    otherwise({
+      redirectTo: '/',
+      templateUrl: '/static/webapp/base.html',
+      controller: function ($scope) {
+        $scope.message = "WELCOME";
+        console.log('hi');
+      }
+    });
   }
 })();

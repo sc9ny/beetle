@@ -51,7 +51,6 @@
     }
 
     function unAuthenticate () {
-      console.log('unauth');
       $cookies.remove('authenticatedAccount');
     }
 

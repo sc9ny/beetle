@@ -1,5 +1,9 @@
 @import url('authentication.css');
 
+body, html {
+    background-color: #FFFFFF;
+}
+
 .imgbox {
     display: grid;
     height: 100%;
@@ -14,6 +18,33 @@
     margin: 50px 50px;
 }
 
+
+.home-header {
+    margin: 38px 15px;
+}
+
+.navbar-custom {
+    border-top: 1px solid black ;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem !important;
+    margin: 38px 15px;
+    background-color: white !important;
+    font-weight: 250 !important;
+}
+
+.custom-nav-link {
+    display: block;
+    padding: .1rem 1rem;
+    margin: .1rem 6rem;
+    color:black;
+}
+
+.nav-item > a:hover {
+    color: #ffaaa0;
+}
+
 .navbar-inner{
     height: 90px;
     min-height: 60px;
@@ -25,10 +56,7 @@
     padding: 20px 15px;
     padding: 35px 15px;
 }
-.navbar .btn-navbar {
-    margin-right: 0px;
-    margin-top:15px;
-}
+
 .brand img{
     margin-top: 5px;
 }
@@ -42,4 +70,39 @@
     .navbar .nav > li > a {
         padding: 10px 15px;
     }
+}
+
+
+a.radius-button.btn.btn-dark {
+    border-radius: 15px;
+    padding: 6px 30px;
+}
+
+.wrapper {
+    display:grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 3fr;
+    grid-template-areas:
+    "div1 div1 div1"
+    "div2 div3 div4"
+    "div5 div5 div6";
+    padding:2rem 2rem;
+}
+.q1 {
+    grid-area: div1;
+}
+.q2 {
+    grid-area: div2;
+}
+.q3 {
+    grid-area: div3;
+}
+.q4 {
+    grid-area: div4;
+}
+.q5 {
+    grid-area: div5;
+}
+.q6 {
+    grid-area: div6;
 }

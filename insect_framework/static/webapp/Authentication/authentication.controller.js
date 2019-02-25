@@ -9,8 +9,8 @@
     .controller('RegisterController', RegisterController)
     .controller('LoginController', LoginController);
 
-  RegisterController.$inject = ['$location', '$scope', 'Authentication'];
-  LoginController.$inject = ['Authentication', '$scope', '$location'];
+  RegisterController.$inject = ['$location', '$scope', 'Authentication', '$window'];
+  LoginController.$inject = ['Authentication', '$scope', '$location', '$window'];
 
   function RegisterController($location, $scope, Authentication) {
     let self = this;
@@ -22,7 +22,7 @@
           Authentication.login(self.email, self.password).then((success) => {
             Authentication.setAuthenticatedAccount(success)
           });
-          $location.url('/');
+        $window.location.href ='/';
         }, (response) =>{
 
          $scope.error = response.data.non_field_errors ? response.data.non_field_errors[0]
@@ -30,12 +30,9 @@
         });
 
     }
-    this.logout = function () {
-      Authentication.logout();
-    }
   }
 
-  function LoginController(Authentication, $scope, $location) {
+  function LoginController(Authentication, $scope, $location, $window) {
     let self = this;
     self.email ='';
     self.password = '';
@@ -45,7 +42,7 @@
     this.login = function () {
       Authentication.login(self.email, self.password).then((success) => {
         Authentication.setAuthenticatedAccount(success);
-        $location.url('/');
+        $window.location.href ='/';
       }, (error) => {
         $scope.error = error.data.message;
       });
