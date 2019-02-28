@@ -12,17 +12,29 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <base href="/" />
   </head>
-  <body>
-    <div class="home-header">
-      <span style="font-family: cursive;">Beetle Brothers</span>
-      <div class="float-right">
-        <a class="radius-button btn btn-dark" href="/register">About us</a>
+  <body ng-controller="mainController">
+    <div class="home-header" style="margin-bottom:4em;">
+      <span style="font-family: cursive;">Insect Brothers</span>
+      <div class="float-right" >
+        <span style="font-weight:250;">
+          {% if user.is_authenticated %}
+          <span class="text-uppercase" style="padding-right: 5em;">
+            <span style="color:black; padding-right:2em;">Logged in as {{user.username}} </span>
+            <a style="color:black;" href="#" ng-click="logout()">Logout</a>
+          </span>
+          {% else %}
+          <span style="padding-right: 5em;">
+            <a style="color:black; padding-right:2em;" href="/register/">REGISTER</a>
+            <a style="color:black;" href="/login/">LOGIN</a>
+          </span>
+          {% endif %}
+          <a class="radius-button btn btn-dark" href="/register">About us</a>
+        </span>
       </div>
     </div>
-    <nav class="navbar navbar-custom navbar-expand-lg sticky-top navbar-light"
-      ng-controller="mainController">
-      <a class="navbar-brand" href="#">Logo here
-        <!--<img src="" width="30" height="40" alt="">-->
+    <nav class="navbar navbar-custom  sticky-top navbar-light">
+      <a class="navbar-brand" href="/">
+        <img src="/static/media/logo.jpeg" width="200" height="110" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,21 +43,16 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
+            <!--<md-icon class="icon_24" md-svg-icon="/static/media/forum.svg"></md-icon>-->
             <a class="custom-nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
           </li>
+
           <li class="nav-item">
-            <a class="custom-nav-link" href="/register/">REGISTER</a>
+            <a class="custom-nav-link" href="/">FORUM/DISCUSSION</a>
           </li>
-          {% if user.is_authenticated %}
-          <!--why doesnt ng-if giving an error...? forced to use django template...-->
           <li class="nav-item">
-            <a class="custom-nav-link" href="" ng-click="logout()">Logout</a>
+            <a class="custom-nav-link" href="/">SALE</a>
           </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/login/">LOGIN</a>
-          </li>
-          {% endif %}
         </ul>
       </div>
     </nav>

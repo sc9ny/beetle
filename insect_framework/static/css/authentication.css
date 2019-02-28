@@ -5,7 +5,7 @@
 }
 
 .banner-sec {
-    background: url('/static/media/forest.jpg') no-repeat left bottom;
+    background: black;
     background-size: cover;
     min-height: 500px;
     max-height: 700px;
