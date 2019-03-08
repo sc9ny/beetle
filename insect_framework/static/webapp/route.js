@@ -18,6 +18,10 @@
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/Authentication/templates/login.html'
     }).
+    when ('/about/', {
+      controller: function () {},
+      templateUrl:'/static/webapp/about.html'
+    }).
     otherwise({
       redirectTo: '/',
       templateUrl: '/static/webapp/base.html',

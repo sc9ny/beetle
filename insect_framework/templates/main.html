@@ -6,10 +6,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-cookies.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-resource.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel = "stylesheet"
+      href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    {% include 'javascript.html' %}
     <base href="/" />
   </head>
   <body ng-controller="mainController">
@@ -28,7 +31,7 @@
             <a style="color:black;" href="/login/">LOGIN</a>
           </span>
           {% endif %}
-          <a class="radius-button btn btn-dark" href="/register">About us</a>
+          <a class="radius-button btn btn-dark" href="/about/">ABOUT US</a>
         </span>
       </div>
     </div>
@@ -44,7 +47,7 @@
         <ul class="navbar-nav">
           <li class="nav-item active">
             <!--<md-icon class="icon_24" md-svg-icon="/static/media/forum.svg"></md-icon>-->
-            <a class="custom-nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
+            <a class="custom-nav-link active" href="/">HOME <span class="sr-only">(current)</span></a>
           </li>
 
           <li class="nav-item">
@@ -53,10 +56,52 @@
           <li class="nav-item">
             <a class="custom-nav-link" href="/">SALE</a>
           </li>
+
+          <li class="nav-item">
+            <a class="custom-nav-link" href="/">GALLERY</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="custom-nav-link" href="/">Q&A</a>
+          </li>
         </ul>
       </div>
     </nav>
-    <div ng-view></div>
-    {% include 'javascript.html' %}
+    <div class="main-div" layout="row">
+      <nav class="side-nav sidebar">
+        <a class="navbar-brand" href="/">
+          <img src="/static/media/logo.jpeg" width="200" height="110" alt="">
+        </a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <!--<md-icon class="icon_24" md-svg-icon="/static/media/forum.svg"></md-icon>-->
+            <a class="custom-nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="custom-nav-link" href="/">FORUM/DISCUSSION</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="custom-nav-link" href="/">SALE</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="custom-nav-link" href="/">GALLERY</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="custom-nav-link" href="/">Q&A</a>
+          </li>
+
+        </ul>
+      </nav>
+      <div class="router-view" flex ng-view>
+
+      </div>
+    </div>
+
+
+
   </body>
 </html>
