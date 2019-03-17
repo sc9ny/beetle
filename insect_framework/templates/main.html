@@ -19,11 +19,12 @@
     <div class="home-header" style="margin-bottom:4em;">
       <span style="font-family: cursive;">Insect Brothers</span>
       <div class="float-right" >
-        <span style="font-weight:250;">
+        <span>
           {% if user.is_authenticated %}
-          <span class="text-uppercase" style="padding-right: 5em;">
-            <span style="color:black; padding-right:2em;">Logged in as {{user.username}} </span>
-            <a style="color:black;" href="#" ng-click="logout()">Logout</a>
+          <span class="text-uppercase">
+            <span class="auth-panel">{{user.username}} </span>
+            <a class="auth-panel" href="/profile/">MY PROFILE</a>
+            <a class="auth-panel" href="#" ng-click="logout()">LOGOUT</a>
           </span>
           {% else %}
           <span style="padding-right: 5em;">
@@ -73,6 +74,7 @@
           <img src="/static/media/logo.jpeg" width="200" height="110" alt="">
         </a>
         <ul class="navbar-nav">
+
           <li class="nav-item">
             <!--<md-icon class="icon_24" md-svg-icon="/static/media/forum.svg"></md-icon>-->
             <a class="custom-nav-link" href="/">HOME <span class="sr-only">(current)</span></a>

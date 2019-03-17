@@ -55,6 +55,12 @@ li.active > a{
         display: none !important;
     }
 }
+.auth-panel {
+    font-weight: 600;
+    color:black;
+    padding-right:2em;
+    color: #555555;
+}
 
 .side-nav {
     position:fixed;
@@ -130,6 +136,7 @@ a.radius-button.btn.btn-dark {
     border-radius: 15px;
     padding: 6px 30px;
     margin: 5px 0px;
+    font-weight:600;
 }
 
 .wrapper {

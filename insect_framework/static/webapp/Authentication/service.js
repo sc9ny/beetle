@@ -46,7 +46,7 @@
 
     function setAuthenticatedAccount(account) {
       $cookies.put('authenticatedAccount', JSON.stringify(account),{
-        expires: (new Date(new Date().getTime() + 30 * 60 * 1000).toString())
+        //expires: (new Date(new Date().getTime() + 30 * 60 * 1000).toString())
       });
     }
 

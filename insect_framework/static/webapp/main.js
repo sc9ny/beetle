@@ -6,6 +6,7 @@
       'config',
       'route',
       'authentication',
+      'profile',
       'ngMaterial'
     ]);
 

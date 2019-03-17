@@ -22,12 +22,16 @@
       controller: function () {},
       templateUrl:'/static/webapp/about.html'
     }).
+    when ('/profile/', {
+      controller: 'profileController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/userActivity/templates/profile.html'
+    }).
     otherwise({
       redirectTo: '/',
       templateUrl: '/static/webapp/base.html',
       controller: function ($scope) {
         $scope.message = "WELCOME";
-        console.log('hi');
       }
     });
   }
