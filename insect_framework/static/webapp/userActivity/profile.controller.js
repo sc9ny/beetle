@@ -5,14 +5,20 @@
     .module('profile.controllers')
     .controller('profileController', profileController);
 
-    profileController.$inject = ['Profile', 'Authentication'];
+    profileController.$inject =
+      ['Profile', 'Authentication', 'dynamicEntries'];
 
-    function profileController (Profile, Authentication) {
-      let user = Authentication.getAuthenticatedAccount().data;
-      let pro = Profile.myPosts().get(function (response, headerGetter) {
-        console.log(headerGetter('X-count'));
-        console.log(response);
-        //console.log(pro);
+    function profileController (Profile, Authentication, dynamicEntries) {
+      self = this;
+      this.user = Authentication.getAuthenticatedAccount().data;
+      this.myPosts = dynamicEntries(Profile);
+      this.promise = Profile.myPosts().query(function (response, headerGetter) {
+        self.posts = response;
+      });
+      this.promise = Profile.myComments().query(function (response, headerGetter)
+      {
+        self.comments = response;
       });
     }
+
 })();

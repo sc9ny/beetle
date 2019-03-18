@@ -17,10 +17,7 @@
       return Profile;
 
       function getPosts () {
-        let cfg = {
-          id: '@id'
-        };
-        return $resource ('api/v1/mypost/:id/', cfg);
+        return $resource ('api/v1/mypost/:id/');
       }
 
       function getComments () {

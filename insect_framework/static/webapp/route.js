@@ -27,11 +27,14 @@
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/userActivity/templates/profile.html'
     }).
+    when ('/', {
+      templateUrl: '/static/webapp/base.html'
+    }).
     otherwise({
-      redirectTo: '/',
-      templateUrl: '/static/webapp/base.html',
+      redirectTo: '/notFound/',
+      templateUrl: '/static/webapp/notFound.html',
       controller: function ($scope) {
-        $scope.message = "WELCOME";
+        
       }
     });
   }

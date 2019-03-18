@@ -15,5 +15,5 @@ urlpatterns = [
     path('api/v1/logout/', LogoutView.as_view(), name='logout'),
     path('api/v1/', include(v1_router.urls)),
     path('notFound/', notFoundView.as_view(), name='404'),
-    re_path('^.*$', IndexView.as_view(), name='index'),
+    re_path('^.*', IndexView.as_view(), name='index'),
 ]

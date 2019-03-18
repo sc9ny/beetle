@@ -1,1 +1,42 @@
-HELLO
+<md-content class="left-margin">
+  <md-card>
+    <md-card-content>
+      <div>
+        <p class="col-md-6">ID: {{$ctrl.user.username}} </p>
+        <p class="col-md-6">EMAIL: {{$ctrl.user.email}} </p>
+        <!-- Add input field here for the password -->
+        <form>
+          <div class="form-group col-md-6">
+            <label for="password"> PASSWORD </label>
+            <input type="password" class=form-control>
+          </div>
+          <div class="form-group col-md-6" >
+            <label for="confirm"> CONFIRM PASSWORD: </label>
+            <input type="password" class=form-control>
+          </div>
+          <md-button style="border: 1px solid; margin-left:15px;">
+            Submit
+          </md-button>
+        </form>
+      </div>
+    </md-card-content>
+  </md-card>
+
+  <div layout="row" flex>
+    <md-card flex="50">
+      <md-card-content>
+        My Posts
+        <md-virtual-repeat-container>
+          <div md-virtual-repeat="post in $ctrl.myPosts" md-on-demand flex>
+            {{post}}
+          </div>
+        </md-virtual-repeat-container>
+      </md-card-content>
+    </md-card>
+    <md-card flex="50">
+      <md-card-content>
+        My Comments
+      </md-card-content>
+    </md-card>
+  </div>
+</md-content>

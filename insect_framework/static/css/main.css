@@ -7,6 +7,10 @@ body, html {
     color: #555555;
 }
 
+.left-margin {
+  margin-left:20px;
+}
+
 .imgbox {
     display: grid;
     height: 100%;
@@ -89,6 +93,7 @@ li.active > a{
 @media (min-width: 900px) {
     .main-div {
         margin-left: 25%;
+        margin-right:5%;
     }
 }
 
@@ -193,5 +198,3 @@ a.radius-button.btn.btn-dark {
 .q8 {
     grid-area: div8;
 }
-
-

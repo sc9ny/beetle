@@ -7,6 +7,7 @@
       'route',
       'authentication',
       'profile',
+      'utils',
       'ngMaterial'
     ]);
 
@@ -33,7 +34,6 @@ function run($http) {
 function mainController(Authentication, $scope, $window) {
   $scope.loggedIn = Authentication.isAuthenticated();
   $scope.logout = function () {
-    console.log('awd?');
       Authentication.logout().then( ()=> {
         $window.location.href ='/';
       });
@@ -46,5 +46,3 @@ function mainController(Authentication, $scope, $window) {
 
 }
 })();
-
-
