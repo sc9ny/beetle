@@ -27,6 +27,11 @@
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/userActivity/templates/profile.html'
     }).
+    when ('/forum/', {
+      controller: 'forumController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/forum/templates/forum.html'
+    }).
     when ('/', {
       templateUrl: '/static/webapp/base.html'
     }).
@@ -34,7 +39,7 @@
       redirectTo: '/notFound/',
       templateUrl: '/static/webapp/notFound.html',
       controller: function ($scope) {
-        
+
       }
     });
   }

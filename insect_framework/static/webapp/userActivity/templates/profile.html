@@ -8,34 +8,48 @@
         <form>
           <div class="form-group col-md-6">
             <label for="password"> PASSWORD </label>
-            <input type="password" class=form-control>
+            <input ng-model=$ctrl.password type="password" class=form-control>
           </div>
           <div class="form-group col-md-6" >
             <label for="confirm"> CONFIRM PASSWORD: </label>
-            <input type="password" class=form-control>
+            <input ng-model="$ctrl.confirm_password" type="password" class=form-control>
           </div>
-          <md-button style="border: 1px solid; margin-left:15px;">
+          <md-button ng-click="$ctrl.changePassword()"
+            style="border: 1px solid; margin-left:15px;">
             Submit
           </md-button>
         </form>
+        <span ng-if="$ctrl.message" class="col-md-6 text-success">{{$ctrl.message}}</span>
+        <span ng-if="$ctrl.error" class="col-md-6 text-danger"> {{$ctrl.error}} </span>
       </div>
     </md-card-content>
   </md-card>
 
   <div layout="row" flex>
-    <md-card flex="50">
+    <md-card flex=>
+      <md-card-title>My Posts</md-card-title>
       <md-card-content>
-        My Posts
-        <md-virtual-repeat-container>
-          <div md-virtual-repeat="post in $ctrl.myPosts" md-on-demand flex>
-            {{post}}
-          </div>
+        <md-virtual-repeat-container style="height:500px;">
+          <md-list>
+            <md-divider></md-divider>
+            <div md-virtual-repeat="post in $ctrl.myPosts" md-on-demand md-item-size="70">
+              <md-list-item class="md-2-line" ng-if="post" layout-align="space-between center">
+                <span class="md-list-item-text">
+                  <h3>{{post.title}}</h3>
+                  <p> {{post.created | date:'MM/dd/yyyy'}} </p>
+                </span>
+                <span class="md-secondary">
+                   Comment count: {{post.comments.length}}
+                </span>
+              </md-list-item>
+              <md-divider></md-divider>
+
+            </div>
+            <div ng-if="!$ctrl.myPosts.length && $ctrl.myPosts.$resolved">
+              <md-subheader> You do not have any post </md-subheader>
+            </div>
+          </md-list>
         </md-virtual-repeat-container>
-      </md-card-content>
-    </md-card>
-    <md-card flex="50">
-      <md-card-content>
-        My Comments
       </md-card-content>
     </md-card>
   </div>

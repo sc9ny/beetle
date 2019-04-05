@@ -13,6 +13,7 @@
   function Authentication($cookies, $http, $location) {
     let Authentication = {
       register: register,
+      changePassword: changePassword,
       getAuthenticatedAccount: getAuthenticatedAccount,
       isAuthenticated: isAuthenticated,
       setAuthenticatedAccount: setAuthenticatedAccount,
@@ -31,6 +32,12 @@
         password: password,
         confirm_password: confirm_password,
         email: email
+      })
+    }
+    function changePassword(user_id, password, confirm_password) {
+      return $http.patch('api/v1/accounts/' + user_id +'/', {
+        password: password,
+        confirm_password: confirm_password
       })
     }
     function getAuthenticatedAccount () {

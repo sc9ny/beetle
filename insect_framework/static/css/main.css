@@ -54,7 +54,7 @@ li.active > a{
     font-weight: 250 !important;
 }
 
-@media (min-width:900px) {
+@media (min-width:901px) {
     .navbar-custom {
         display: none !important;
     }
@@ -79,8 +79,18 @@ li.active > a{
 .side-nav a {
     padding-bottom: 30px;
     color: #555555;
+}
+
+.side-nav-footer {
+  margin-top:100px;
+  margin-left: 2.5rem;
+}
+.side-nav-footer a {
+  padding: .1rem 1rem;
 
 }
+
+
 @media (max-width: 900px) {
     .side-nav {
         display: none !important;
@@ -144,14 +154,20 @@ a.radius-button.btn.btn-dark {
     font-weight:600;
 }
 
+.button-looking-anchor {
+  color: white;
+  border: 1px solid white;
+  padding: 10px 10px;
+}
+
 .wrapper {
     display: grid;
     grid-gap: 1em;
     grid-template-areas:
-    "intro"
     "pic1"
     "pic2"
     "pic3"
+    "intro"
     "div5"
     "div6"
 }
@@ -162,15 +178,14 @@ a.radius-button.btn.btn-dark {
 
 @media only screen and (min-width: 800px ) {
     .wrapper {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-areas:
 
-    "pic1 pic2 pic3"
-    "intro intro intro"
-    "div5 div5 div6"
-    "div5 div5 div7"
-    "div5 div5 div8";
+    "pic1 pic3"
+    "pic2 pic3"
+    "intro intro "
+
 }
 }
 
@@ -178,23 +193,46 @@ a.radius-button.btn.btn-dark {
     grid-area: intro;
 }
 .q2 {
+    -webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(90%);
     grid-area: pic1;
+    background-image: url("/static/media/giant_stag.png");
+    background-size: cover;
+	  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-position: center;
+  	height: 100%;
+  	min-height: 50vh;
+  	padding: 4em 0;
+    text-align: center;
+    color: white;
 }
 .q3 {
     grid-area: pic2;
+    background-image: url("/static/media/beetle1.jpeg");
+    background-size: cover;
+	  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-position: center;
+  	height: 100%;
+  	min-height: 50vh;
+  	padding: 0;
+    padding: 4em 0;
+    text-align: center;
+    color: white;
 }
 .q4 {
+
     grid-area: pic3;
-}
-.q5 {
-    grid-area: div5;
-}
-.q6 {
-    grid-area: div6;
-}
-.q7 {
-    grid-area: div7;
-}
-.q8 {
-    grid-area: div8;
+    background-image: url("/static/media/moth.jpg");
+    background-size: cover;
+	  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-position: center;
+  	height: 100%;
+  	min-height: 100vh;
+  	padding: 0;
+    padding: 4em 0;
+    text-align: center;
+    color: white;
 }

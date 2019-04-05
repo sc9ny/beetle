@@ -4,7 +4,7 @@
   angular
     .module('profile', [
       'profile.controllers',
-      'profile.services'
+      'profile.services',
     ]);
 
   angular
