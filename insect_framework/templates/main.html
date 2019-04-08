@@ -18,14 +18,13 @@
     {% include 'javascript.html' %}
 
   </head>
-  <body ng-controller="mainController">
-    <div class="home-header" style="margin-bottom:4em;">
-      <span style="font-family: cursive;">Insect Brothers</span>
-      <div class="float-right" >
+  <body ng-controller="mainController" class="background">
+    <div layout="row" layout-align="space-between center">
+      <div style="font-family: cursive; padding-left:15px;">Insect Brothers</div>
+      <div class="float-right">
         <span>
           {% if user.is_authenticated %}
           <span class="text-uppercase">
-            <span class="auth-panel">{{user.username}} </span>
             <a class="auth-panel" href="/profile/">MY PROFILE</a>
             <a class="auth-panel" href="#" ng-click="logout()">LOGOUT</a>
           </span>
@@ -55,7 +54,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="custom-nav-link" href="/">FORUM/DISCUSSION</a>
+            <a class="custom-nav-link" href="/forum/">FORUM/DISCUSSION</a>
           </li>
           <li class="nav-item">
             <a class="custom-nav-link" href="/">SALE</a>
@@ -71,20 +70,20 @@
         </ul>
       </div>
     </nav>
-    <div class="main-div" layout="row">
-      <nav class="side-nav sidebar">
+    <div layout="row" layout-fill class="view-animate-container">
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+      <nav class="side-nav" id="sidebar">
         <a class="navbar-brand" href="/">
           <img src="/static/media/logo.jpeg" width="200" height="110" alt="">
         </a>
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <!--<md-icon class="icon_24" md-svg-icon="/static/media/forum.svg"></md-icon>-->
             <a class="custom-nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
           </li>
 
           <li class="nav-item">
-            <a class="custom-nav-link" href="/">FORUM/DISCUSSION</a>
+            <a class="custom-nav-link" href="/forum/">FORUM/DISCUSSION</a>
           </li>
 
           <li class="nav-item">
@@ -111,8 +110,7 @@
           </a>
         </div>
       </nav>
-      <div class="router-view" flex ng-view>
-
+      <div class="view-animate" flex ng-view layout-fill>
       </div>
     </div>
 

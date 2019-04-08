@@ -1,4 +1,5 @@
 @import url('authentication.css');
+@import url('forum.css');
 
 body, html {
     background-color: #FFFFFF;
@@ -33,7 +34,8 @@ body, html {
 
 
 .home-header {
-    margin: 38px 15px;
+    margin: 0 15px;
+    margin-bottom: 38px;
 }
 a:hover {
     color: #ffaaa0 !important;
@@ -49,7 +51,8 @@ li.active > a{
     display: flex;
     align-items: center;
     padding: 1rem 1rem !important;
-    margin: 38px 15px;
+    margin-bottom: 38px
+    margin-top:38px;
     background-color: white !important;
     font-weight: 250 !important;
 }
@@ -67,10 +70,8 @@ li.active > a{
 }
 
 .side-nav {
-    position:fixed;
     top:0;
     bottom:0;
-    left:0;
     z-index:100;
     font-weight:600;
     border-right: 1px solid #f6f6f6;
@@ -172,11 +173,17 @@ a.radius-button.btn.btn-dark {
     "div6"
 }
 
-.about {
+.spaced-content {
     padding-left: 25px;
+    padding-top: 25px;
+    margin: auto;
+    position: absolute;
+    top: 40%;
+    -ms-transform: translateY(-40%);
+    transform: translateY(-40%);
 }
 
-@media only screen and (min-width: 800px ) {
+@media only screen and (min-width: 900px ) {
     .wrapper {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -185,8 +192,7 @@ a.radius-button.btn.btn-dark {
     "pic1 pic3"
     "pic2 pic3"
     "intro intro "
-
-}
+  }
 }
 
 .q1 {
@@ -235,4 +241,54 @@ a.radius-button.btn.btn-dark {
     padding: 4em 0;
     text-align: center;
     color: white;
+}
+
+
+.view-animate-container {
+  position:relative;
+}
+
+.view-animate {
+}
+
+.view-animate.ng-enter, .view-animate.ng-leave {
+  transition:all cubic-bezier(0.5, 0.460, 0.450, 0.940) 0.5s;
+
+  display:block;
+  width:100%;
+
+  position:relative;
+  left: 0;
+  top:0;
+  right:0;
+  bottom:0;
+}
+
+.view-animate.ng-enter {
+  left:100%;
+}
+.view-animate.ng-enter.ng-enter-active {
+  left:100%;
+}
+.view-animate.ng-leave.ng-leave-active {
+  left:-100%;
+}
+
+.md-content.md-default-them, md-content {
+  background-color: white;
+}
+
+.background {
+  background-image: url('/static/media/background.png');
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-position: center;
+  /* -webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
+  /* filter: grayscale(90%); */
+}
+
+.horizontal-center {
+  width:50%;
+  margin:40px auto;
 }

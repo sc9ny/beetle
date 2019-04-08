@@ -3,9 +3,9 @@ from rest_framework import permissions
 from rest_framework.response import Response
 
 class BasicPageNumberPagination(PageNumberPagination):
-    page_size=15
-    page_size_query_params = 'limit'
-    max_page_size =25
+    page_size = 15
+    page_size_query_param = 'limit'
+    max_page_size = 25
 
 
 class HeaderPagination(BasicPageNumberPagination):
@@ -26,7 +26,6 @@ class HeaderPagination(BasicPageNumberPagination):
         }
         if links:
             headers['Link'] = ', '.join(links)
-
         return Response(data, headers=headers)
 
 class IsStaffOrAccountOwner(permissions.BasePermission):

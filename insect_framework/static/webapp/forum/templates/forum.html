@@ -1,0 +1,19 @@
+<div class="spaced-content">
+  <ul class="forum-list">
+    <li ng-repeat="post in $ctrl.promise">
+      <a href="/post/"+{{post.id}}>
+        <div>
+          <strong>{{post.title}}</strong>
+          <p>{{post.content}}</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <nav aria-label="paginated" ng-if="$ctrl.paginate > 1">
+    <ul class="pagination horizontal-center">
+      <li class="page-item" ng-repeat="page in [] | range:$ctrl.paginate">
+        <button class="page-link" href=""> {{page+1}}</button>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -4,6 +4,7 @@
   angular
     .module('main', [
       'config',
+      'forum',
       'route',
       'authentication',
       'profile',

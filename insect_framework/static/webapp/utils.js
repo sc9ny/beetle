@@ -3,7 +3,8 @@
 
   angular
     .module('utils', ['ngMaterial'])
-    .factory('dynamicEntries', dynamicEntries);
+    .factory('dynamicEntries', dynamicEntries)
+    .filter ('range', range);
     dynamicEntries.$inject = [];
   function dynamicEntries () {
     return function (resource ,cfg) {
@@ -46,5 +47,13 @@
         }
       }
     }
+  }
+  function range () {
+    return function(input, total) {
+    total = parseInt(total);
+    for (var i=0; i<total; i++)
+      input.push(i);
+    return input;
+    };
   }
 })();

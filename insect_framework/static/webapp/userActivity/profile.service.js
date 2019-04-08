@@ -17,7 +17,7 @@
       return Profile;
 
       function getPosts () {
-        return $resource ('api/v1/mypost/:id/');
+        return $resource ('api/v1/mypost/');
       }
 
       function getComments () {
