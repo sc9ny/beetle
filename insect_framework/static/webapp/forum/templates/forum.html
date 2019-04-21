@@ -1,18 +1,39 @@
-<div class="spaced-content">
+<div class="spaced-content" flex>
+  <md-button class="simple-button" style="margin-left:40px;" href="/forum/create/">
+    <i style="font-size:18px;" class="far fa-edit"></i> Create
+  </md-button>
   <ul class="forum-list">
     <li ng-repeat="post in $ctrl.promise">
-      <a href="/post/"+{{post.id}}>
+      <a href="/forum/{{post.id}}/">
         <div>
-          <strong>{{post.title}}</strong>
+          <span class="overflow-title"><strong>{{post.title}}</strong></span>
           <p>{{post.content}}</p>
+          <span layout="row" layout-align="end center" ng-if="post.comments.length">
+            <i style="font-size:18px;" class="far fa-comment"></i>
+              <span style="padding-left: 5px;">{{post.comments.length}}</span>
+          </span>
         </div>
       </a>
     </li>
   </ul>
   <nav aria-label="paginated" ng-if="$ctrl.paginate > 1">
-    <ul class="pagination horizontal-center">
-      <li class="page-item" ng-repeat="page in [] | range:$ctrl.paginate">
-        <button class="page-link" href=""> {{page+1}}</button>
+    <ul class="pagination horizontal-center" layout-align="center center">
+      <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current-1]">
+        <button style="color:black;" ng-click="$ctrl.moveToPrevious($event)" class="page-link">
+           <<
+         </button>
+        <md-tooltip>Previous</md-tooltip>
+      </li>
+      <li class="page-item" ng-repeat="page in $ctrl.proceed[$ctrl.current]">
+        <button ng-style="{'color': ($ctrl.currentPage == page+1) ? '#ffaaa0' : 'black'}"
+          class="page-link" ng-click="$ctrl.requestNext(page+1)">
+          {{page+1}}
+        </button>
+      <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current+1]">
+        <button style="color:black;" class="page-link" ng-click=$ctrl.moveToNext($event)>
+           >>
+         </button>
+        <md-tooltip>Next</md-tooltip>
       </li>
     </ul>
   </nav>

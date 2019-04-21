@@ -10,7 +10,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{} by {}'.format(self.title, self.author)
+        return '{}'.format( self.author)
 
 
 class Comment(models.Model):
@@ -21,4 +21,4 @@ class Comment(models.Model):
     associated_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
 
     def __str__(self):
-        return 'Comment written by {} for post: {}'.format(self.author, self.associated_post)
+        return '{}'.format(self.author)

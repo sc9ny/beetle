@@ -32,6 +32,42 @@
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/forum/templates/forum.html'
     }).
+    when ('/forum/create/', {
+      controller: 'manageForumController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/forum/templates/forum_manage.html',
+      resolve : {
+        currentForum : () => {
+          return null;
+        },
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when ('/forum/update/:id/', {
+      controller: 'manageForumController',
+      controllerAs: '$ctrl',
+      templateUrl: 'static/webapp/forum/templates/forum_manage.html',
+      resolve: {
+        currentForum : ($route, Forum) => {
+          return Forum.get({id:$route.current.params.id}).$promise;
+        },
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when ('/forum/:id/', {
+      controller: 'forumDetailController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/forum/templates/forum_detail.html',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
     when ('/', {
       templateUrl: '/static/webapp/base.html'
     }).

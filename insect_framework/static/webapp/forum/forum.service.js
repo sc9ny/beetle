@@ -16,6 +16,6 @@
         post: {method: 'POST'},
         update: {method: 'PATCH'}
       }
-      return $resource ('api/v1/post/', cfg, action);
+      return $resource ('api/v1/post/:id/', cfg, action);
     }
 })();

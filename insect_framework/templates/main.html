@@ -18,10 +18,10 @@
     {% include 'javascript.html' %}
 
   </head>
-  <body ng-controller="mainController" class="background">
+  <body ng-controller="mainController">
     <div layout="row" layout-align="space-between center">
       <div style="font-family: cursive; padding-left:15px;">Insect Brothers</div>
-      <div class="float-right">
+      <div class="float-right" style="padding-right:15px;">
         <span>
           {% if user.is_authenticated %}
           <span class="text-uppercase">
@@ -110,7 +110,7 @@
           </a>
         </div>
       </nav>
-      <div class="view-animate" flex ng-view layout-fill>
+      <div class="view-animate background" flex ng-view layout-fill>
       </div>
     </div>
 

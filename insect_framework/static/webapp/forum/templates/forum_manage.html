@@ -1,0 +1,30 @@
+<div class="spaced-content" style="width:500px; margin-left:auto; margin-right:auto;">
+  <form name="forumForm" layout="column">
+    <md-input-container>
+      <label>Title:</label>
+      <input name="title" md-maxlength="50" required
+        ng-model="$ctrl.forum.title" type="text">
+      <div ng-messages="forumForm.title.$error" ng-show="forumForm.title.$touched">
+        <div ng-message="required">Title is required</div>
+        <div ng-message="md-maxlength"> Title is too long</div>
+      </div>
+    </md-input-container>
+    <md-input-container>
+      <label>Content:</label>
+      <textarea required name="content" style="display:block;"
+        ng-model="$ctrl.forum.content">
+      </textarea>
+      <div ng-messages="forumForm.content.$error" ng-show="forumForm.content.$touched">
+        <div ng-message="required">Content is required</div>
+      </div>
+    </md-input-container>
+    <div simditor ng-model="$ctrl.forum.content"></div>
+  </form>
+  <div layout="row" layout-align="end end">
+    <md-button class="simple-button" ng-click="$ctrl.submit()"
+      ng-disabled="forumForm.$invalid">
+      Submit
+    </md-button>
+    <md-button class="simple-button" href="/forum/">Cancel</md-button>
+  </div>
+</div>

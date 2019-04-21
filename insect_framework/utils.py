@@ -31,7 +31,7 @@ class HeaderPagination(BasicPageNumberPagination):
 class IsStaffOrAccountOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, user):
         if request.user:
-            return request.user.is_staff or user == request.user
+            return request.user.is_staff or str(user) == str(request.user)
         return False
 
 def get_permissions(self, cls):
