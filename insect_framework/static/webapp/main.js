@@ -9,7 +9,7 @@
       'authentication',
       'profile',
       'utils',
-      'ngMaterial'
+      'ngMaterial',
     ]);
 
   angular
@@ -20,7 +20,26 @@
       .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
       .defaultIconSet('/static/media/core-icons.svg', 24);
   })
-  .controller('mainController', mainController);
+  .controller('mainController', mainController)
+  .directive('ckEditor', [function () {
+  return {
+    require: '?ngModel',
+    link: function ($scope, elm, attr, ngModel) {
+
+        var ck = CKEDITOR.replace(elm[0]);
+
+        ck.on('pasteState', function () {
+            $scope.$apply(function () {
+                ngModel.$setViewValue(ck.getData());
+            });
+        });
+
+        ngModel.$render = function (value) {
+            ck.setData(ngModel.$modelValue);
+        };
+    }
+  };
+}]);
 
 run.$inject = ['$http'];
 mainController.$inject=['Authentication', '$scope', '$window'];

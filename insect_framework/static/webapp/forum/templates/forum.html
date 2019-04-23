@@ -6,12 +6,17 @@
     <li ng-repeat="post in $ctrl.promise">
       <a href="/forum/{{post.id}}/">
         <div>
-          <span class="overflow-title"><strong>{{post.title}}</strong></span>
-          <p>{{post.content}}</p>
-          <span layout="row" layout-align="end center" ng-if="post.comments.length">
-            <i style="font-size:18px;" class="far fa-comment"></i>
-              <span style="padding-left: 5px;">{{post.comments.length}}</span>
-          </span>
+          <div layout="row" layout-align="space-between center" class="title-padding-top">
+            <span class="overflow-title"><strong>{{post.title}}</strong></span>
+            <span ng-if="post.comments.length">
+              <i style="font-size:18px;" class="far fa-comment"></i>
+                <span>{{post.comments.length}}</span>
+            </span>
+          </div>
+          <p>
+            <ng-bind-html class="rich-container" ng-bind-html="post.content">
+            </ng-bind-html>
+          </p>
         </div>
       </a>
     </li>

@@ -7,11 +7,11 @@
     .controller('forumDetailController', forumDetailController)
     .controller('manageForumController', manageForumController);
 
-    forumController.$inject = ['Forum'];
-    forumDetailController.$inject = ['Forum' , '$routeParams', 'user'];
+    forumController.$inject = ['Forum', '$sanitize'];
+    forumDetailController.$inject = ['Forum' , '$routeParams', 'user', '$sanitize'];
     manageForumController.$inject = ['Forum', 'currentForum', 'user', '$location'];
 
-    function forumController (Forum) {
+    function forumController (Forum, $sanitize) {
       let self = this;
       this.limit = 12;
       this.currentPage = 1;
@@ -47,7 +47,7 @@
       }
     }
 
-    function forumDetailController (Forum, $routeParams, user) {
+    function forumDetailController (Forum, $routeParams, user ,$sanitize) {
       let self = this;
       self.user = user;
       self.currentForum = Forum.get({id:$routeParams.id});

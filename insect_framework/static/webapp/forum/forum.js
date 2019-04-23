@@ -5,6 +5,8 @@
     .module('forum', [
       'forum.controller',
       'forum.service',
+      'textAngular',
+      'ngSanitize'
     ]);
 
   angular

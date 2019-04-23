@@ -294,6 +294,7 @@ a.radius-button.btn.btn-dark {
 .overflow-text {
   text-overflow: ellipsis;
   word-wrap: break-word;
+
 }
 
 .overflow-title {
@@ -304,4 +305,13 @@ a.radius-button.btn.btn-dark {
 
 .simple-button {
   border: 1px solid black;
+}
+
+.max-length-content {
+  max-width: 1040px;
+}
+
+img {
+  max-width:100%;
+  max-height:100%;
 }

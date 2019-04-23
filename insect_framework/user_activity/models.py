@@ -1,10 +1,11 @@
 from authentication.models import Account
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
-    content = models.TextField()
+    content = RichTextUploadingField()
     author = models.ForeignKey(Account, null=True, blank=True, on_delete=models.SET_NULL)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

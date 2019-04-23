@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'user_activity.apps.UserActivityConfig',
     'authentication.apps.AuthenticationConfig',
     'compressor',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -142,5 +144,26 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
+MEDIA_URL ='/media/'
 
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+
+#...
+SITE_ID = 1
+
+####################################
+    ##  CKEDITOR CONFIGURATION ##
+####################################
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
+
+###################################

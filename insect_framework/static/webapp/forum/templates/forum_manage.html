@@ -1,4 +1,4 @@
-<div class="spaced-content" style="width:500px; margin-left:auto; margin-right:auto;">
+<div class="spaced-content" class="align-center">
   <form name="forumForm" layout="column">
     <md-input-container>
       <label>Title:</label>
@@ -10,21 +10,22 @@
       </div>
     </md-input-container>
     <md-input-container>
-      <label>Content:</label>
-      <textarea required name="content" style="display:block;"
-        ng-model="$ctrl.forum.content">
-      </textarea>
+      <text-angular required name="content" ng-model="$ctrl.forum.content" aria-label="rich">
+      </text-angular>
       <div ng-messages="forumForm.content.$error" ng-show="forumForm.content.$touched">
         <div ng-message="required">Content is required</div>
       </div>
+
     </md-input-container>
-    <div simditor ng-model="$ctrl.forum.content"></div>
+
   </form>
   <div layout="row" layout-align="end end">
     <md-button class="simple-button" ng-click="$ctrl.submit()"
-      ng-disabled="forumForm.$invalid">
+      ng-disabled="forumForm.$invalid" aria-label="submit">
       Submit
     </md-button>
-    <md-button class="simple-button" href="/forum/">Cancel</md-button>
+    <md-button class="simple-button" aria-label="cancel" href="/forum/">Cancel</md-button>
   </div>
+
+
 </div>
