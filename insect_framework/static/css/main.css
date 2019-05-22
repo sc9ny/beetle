@@ -301,6 +301,7 @@ a.radius-button.btn.btn-dark {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  word-wrap:break-word;
 }
 
 .simple-button {

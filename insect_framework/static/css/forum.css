@@ -23,8 +23,7 @@
 }
 
 .forum-list li > a > div {
-  height: 120px;
-  max-height:120px;
+  height: 130px;
   overflow:hidden;
   text-overflow: ellipsis;
   line-height: 22px;
@@ -33,6 +32,7 @@
 .forum-list li > a > div >p {
   padding-top: 15px;
   background-color: white;
+  max-height: 100px;
   overflow:hidden;
   word-wrap: break-word;
   text-overflow: ellipsis;
@@ -53,11 +53,15 @@
   margin-right: auto;
 }
 
+.forum-list-body > p {
+  max-height: 70%;
+}
+
 .rich-container >p {
-  overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
+  max-height: 70px;
+  overflow:hidden;
   word-wrap: break-word;
+  text-overflow: ellipsis;
 }
 
 .rich-container > p >img {

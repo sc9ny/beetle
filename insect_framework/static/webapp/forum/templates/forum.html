@@ -5,7 +5,7 @@
   <ul class="forum-list">
     <li ng-repeat="post in $ctrl.promise">
       <a href="/forum/{{post.id}}/">
-        <div>
+        <div class="forum-list-body md-truncate">
           <div layout="row" layout-align="space-between center" class="title-padding-top">
             <span class="overflow-title"><strong>{{post.title}}</strong></span>
             <span ng-if="post.comments.length">
