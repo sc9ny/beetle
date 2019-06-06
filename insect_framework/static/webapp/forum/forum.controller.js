@@ -8,7 +8,7 @@
     .controller('manageForumController', manageForumController);
 
     forumController.$inject = ['Forum', '$sanitize'];
-    forumDetailController.$inject = ['Forum' , '$routeParams', 'user', '$sanitize'];
+    forumDetailController.$inject = ['Forum' , '$routeParams', 'user', '$sanitize', 'Comment', '$location'];
     manageForumController.$inject = ['Forum', 'currentForum', 'user', '$location'];
 
     function forumController (Forum, $sanitize) {
@@ -29,6 +29,7 @@
           }
           this.proceed[page].push(i);
         }
+        self.content = response;
       });
 
       this.requestNext = function ($event) {
@@ -47,14 +48,27 @@
       }
     }
 
-    function forumDetailController (Forum, $routeParams, user ,$sanitize) {
-      let self = this;
-      self.user = user;
+    function forumDetailController (Forum, $routeParams, user ,$sanitize, Comment, $location) {
+      const self = this;
+      self.currentUser = user;
+      self.commentText = '';
       self.currentForum = Forum.get({id:$routeParams.id});
+
+      self.submitComment = function() {
+        let newComment = {
+          content: self.commentText,
+          associated_post: self.currentForum.id,
+          author: self.currentUser.username
+        };
+        console.log(newComment);
+        Comment.post(newComment).$promise.then(() => {
+          $location.url('/forum/' + self.currentForum.id);
+        })
+      }
     }
 
     function manageForumController (Forum, currentForum, user, $location) {
-      let self = this;
+      const self = this;
       self.forum = currentForum;
       self.currentUser = user;
       if (!self.forum) {
@@ -69,12 +83,16 @@
       this.submit = function() {
         if (self.forum.id) {
           Forum.update(self.forum).$promise.then(()=> {
-            $location.url('/forum/')
+            $location.url('/forum/' + self.forum.id)
+          }).catch ((error) => {
+            self.errorMessage = error.data.content[0];
           });
         }
         else {
-          Forum.post(self.forum).$promise.then(() => {
-            $location.url('/forum/')
+          Forum.post(self.forum).$promise.then((response) => {
+            $location.url('/forum/' + response.id)
+          }).catch((error) => {
+            self.errorMessage = error.data.content[0];
           });
         }
       }

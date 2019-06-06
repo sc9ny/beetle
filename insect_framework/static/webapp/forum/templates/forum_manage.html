@@ -26,6 +26,8 @@
     </md-button>
     <md-button class="simple-button" aria-label="cancel" href="/forum/">Cancel</md-button>
   </div>
-
+  <p layout="row" layout-align="end center" style="color: red;" ng-if="$ctrl.errorMessage">
+    <span><i class="fas fa-exclamation-triangle"></i> {{$ctrl.errorMessage}}</span>
+  </p>
 
 </div>

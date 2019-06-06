@@ -98,6 +98,13 @@ li.active > a{
     }
 }
 
+@media only screen and (min-width: 1280px) {
+  .centered {
+    width: 900px;
+    margin: auto;
+  }
+}
+
 .main-div {
     color: #555555;
 }
@@ -242,37 +249,6 @@ a.radius-button.btn.btn-dark {
     color: white;
 }
 
-
-.view-animate-container {
-  position:relative;
-}
-
-.view-animate {
-}
-
-.view-animate.ng-enter, .view-animate.ng-leave {
-  transition:all cubic-bezier(0.5, 0.460, 0.450, 0.940) 0.5s;
-
-  display:block;
-  width:100%;
-
-  position:relative;
-  left: 0;
-  top:0;
-  right:0;
-  bottom:0;
-}
-
-.view-animate.ng-enter {
-  left:100%;
-}
-.view-animate.ng-enter.ng-enter-active {
-  left:100%;
-}
-.view-animate.ng-leave.ng-leave-active {
-  left:-100%;
-}
-
 .md-content.md-default-them, md-content {
   background-color: white;
 }
@@ -312,7 +288,15 @@ a.radius-button.btn.btn-dark {
   max-width: 1040px;
 }
 
+.comment-list {
+  margin-top: 50px;
+}
+
 img {
   max-width:100%;
   max-height:100%;
+}
+
+md-progress-circular.md-default-theme path, md-progress-circular path {
+  stroke:#888888;
 }
