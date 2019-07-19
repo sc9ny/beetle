@@ -16,7 +16,8 @@
 
       let action = {
         post: {method: 'POST'},
-        update: {method: 'PATCH'}
+        update: {method: 'PATCH'},
+        delete: {method: 'DELETE'}
       }
       return $resource ('api/v1/post/:id/', cfg, action);
     }
@@ -27,8 +28,9 @@
       };
 
       let action = {
-        post: {methpd: 'POST'},
-        update: {method: 'PATCH'}
+        post: {method: 'POST'},
+        update: {method: 'PATCH'},
+        delete: {method: 'DELETE'}
       }
       return $resource ('api/v1/comment/:id/', cfg, action);
     }

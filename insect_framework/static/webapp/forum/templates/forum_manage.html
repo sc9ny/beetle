@@ -19,12 +19,21 @@
     </md-input-container>
 
   </form>
-  <div layout="row" layout-align="end end">
-    <md-button class="simple-button" ng-click="$ctrl.submit()"
-      ng-disabled="forumForm.$invalid" aria-label="submit">
-      Submit
+  <div layout="row" layout-align="space-between end">
+    <md-button class="md-warn" aria-label="delete"
+      ng-if="$ctrl.forum.id"
+      ng-click="$ctrl.deleteForum()">
+      delete
     </md-button>
-    <md-button class="simple-button" aria-label="cancel" href="/forum/">Cancel</md-button>
+    <div>
+      <md-button class="simple-button" ng-click="$ctrl.submit()"
+        ng-disabled="forumForm.$invalid" aria-label="submit">
+        Submit
+      </md-button>
+      <md-button class="simple-button" aria-label="cancel" href="/forum/">
+        Cancel
+      </md-button>
+    </div>
   </div>
   <p layout="row" layout-align="end center" style="color: red;" ng-if="$ctrl.errorMessage">
     <span><i class="fas fa-exclamation-triangle"></i> {{$ctrl.errorMessage}}</span>

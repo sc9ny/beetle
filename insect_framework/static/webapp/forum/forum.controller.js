@@ -7,16 +7,18 @@
     .controller('forumDetailController', forumDetailController)
     .controller('manageForumController', manageForumController);
 
-    forumController.$inject = ['Forum', '$sanitize'];
-    forumDetailController.$inject = ['Forum' , '$routeParams', 'user', '$sanitize', 'Comment', '$location'];
+    forumController.$inject = ['Forum', '$sanitize', 'user'];
+    forumDetailController.$inject = ['Forum' , '$routeParams', 'user',
+                                     '$sanitize', 'Comment', '$location', 'IsStaffOrAccountOwner'];
     manageForumController.$inject = ['Forum', 'currentForum', 'user', '$location'];
 
-    function forumController (Forum, $sanitize) {
+    function forumController (Forum, $sanitize, user) {
       let self = this;
       this.limit = 12;
       this.currentPage = 1;
       this.current =1;
       this.proceed = {};
+      this.currentUser = user;
 
       this.promise = Forum.query({page:1, limit: this.limit}, (response, headerGetter) => {
         self.postCounts = (parseInt(headerGetter('X-count')));
@@ -48,22 +50,30 @@
       }
     }
 
-    function forumDetailController (Forum, $routeParams, user ,$sanitize, Comment, $location) {
+    function forumDetailController (Forum, $routeParams, user ,$sanitize, Comment, $location, IsStaffOrAccountOwner) {
       const self = this;
       self.currentUser = user;
       self.commentText = '';
       self.currentForum = Forum.get({id:$routeParams.id});
-
+      self.permission = function(content) {
+        return IsStaffOrAccountOwner(self.currentUser, content);
+      }
       self.submitComment = function() {
         let newComment = {
           content: self.commentText,
           associated_post: self.currentForum.id,
           author: self.currentUser.username
         };
-        console.log(newComment);
         Comment.post(newComment).$promise.then(() => {
           $location.url('/forum/' + self.currentForum.id);
         })
+      }
+
+      self.deleteComment = function(comment, index) {
+        // need to manually remove item from DOM
+        Comment.delete({id:comment.id}).$promise.then((response) => {
+          self.currentForum.comments.splice(index, 1);
+        });
       }
     }
 
@@ -78,6 +88,12 @@
           author: self.currentUser.username,
           comments: []
         };
+      }
+
+      this.deleteForum = function() {
+        Forum.delete({id:self.forum.id}).$promise.then(()=> {
+          $location.url('/forum/');
+        })
       }
 
       this.submit = function() {
@@ -96,6 +112,5 @@
           });
         }
       }
-
     }
 })();

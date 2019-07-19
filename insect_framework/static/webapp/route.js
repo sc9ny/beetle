@@ -30,7 +30,12 @@
     when ('/forum/', {
       controller: 'forumController',
       controllerAs: '$ctrl',
-      templateUrl: '/static/webapp/forum/templates/forum.html'
+      templateUrl: '/static/webapp/forum/templates/forum.html',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
     }).
     when ('/forum/create/', {
       controller: 'manageForumController',

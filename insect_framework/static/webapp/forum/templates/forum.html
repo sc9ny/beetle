@@ -4,8 +4,10 @@
 </div>
 
 <div class="spaced-content centered" flex ng-if="$ctrl.promise.$resolved">
-  <md-button class="simple-button" style="margin-left:40px;" href="/forum/create/">
-    <i style="font-size:18px;" class="far fa-edit"></i> Create
+  <md-button class="simple-button" ng-if="$ctrl.currentUser"
+    style="margin-left:40px;" href="/forum/create/">
+    <i style="font-size:18px;" class="far fa-edit"></i>
+    Create
   </md-button>
   <ul class="forum-list">
     <li ng-repeat="post in $ctrl.promise">

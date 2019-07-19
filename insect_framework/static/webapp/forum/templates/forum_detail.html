@@ -3,7 +3,7 @@
     ng-if="!$ctrl.currentForum.$resolved" style="height:500px;">
     <md-progress-circular></md-progress-circular>
   </md-card>
-  <md-card flex class="max-length-content" ng-if="$ctrl.currentForum.$resolved">
+  <md-card flex class="max-length-content centered" ng-if="$ctrl.currentForum.$resolved">
     <md-card-header layout="row">
       <md-card-header-text>
         <div class="md-title">{{$ctrl.currentForum.title}}</div>
@@ -17,7 +17,8 @@
         {{$ctrl.currentForum.created | date:'MM/dd/yyyy'}}
         <md-button class="md-icon-button" aria-label="edit"
           href="/forum/update/{{$ctrl.currentForum.id}}/"
-          style="top:13px;">
+          style="padding-top:6px;"
+          ng-if="$ctrl.permission($ctrl.currentForum)">
           <i style="font-size:14px;" class="far fa-edit"></i>
         </md-button>
       </div>
@@ -28,30 +29,41 @@
     <md-list class="comment-list">
       <i class="fas fa-comment-alt"></i> Comments
       <md-divider style="margin-top: 20px;"></md-divider>
-      <md-list-item class="md-2-line" ng-repeat="comment in $ctrl.currentForum.comments">
-        <div flex layout="column" layout-align="center start">
+      <md-list-item ng-if="!$ctrl.currentForum.comments.length">
+        There is no comment to this forum
+      </md-list-item>
+      <md-list-item class="md-2-line" ng-if="$ctrl.currentForum.comments.length"
+        ng-repeat="comment in $ctrl.currentForum.comments">
+        <div flex="10" layout="column" layout-align="center start">
           <div>{{comment.author}} </div>
           <div> {{comment.created| date:"MM/dd/yyyy" }} </div>
         </div>
         <div flex="85" style="overflow: hidden; word-wrap: break-word;">
           {{comment.content}}
         </div>
+        <div flex="5">
+          <md-button class="md-icon-button" aria-label="delete"
+            ng-click="$ctrl.deleteComment(comment, $index)"
+            ng-if="$ctrl.permission(comment)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </md-button>
+        </div>
         <md-divider></md-divider>
       </md-list-item>
     </md-list>
-    <form name="commentForm" style="margin-top: 20px;">
-      <md-card>
-        <div style="margin: 30px;">
-        <md-input-container style="width:100%;">
-            <label> Write your comment here </label>
-            <textarea ng-model=$ctrl.commentText aria-label="commentText" placeholder="What's in your mind?">
-            </textarea>
-          </md-input-container>
-          <md-button ng-click="$ctrl.submitComment()" flex="10" class="simple-button">
-            Submit
-          </md-button>
-        </div>
-      </md-card>
-    </form>
   </md-card>
+  <form name="commentForm" style="margin-top: 20px;" ng-if="$ctrl.currentUser">
+    <md-card class="max-length-content centered">
+      <div style="margin: 30px;">
+      <md-input-container style="width:100%;">
+          <label> Write your comment here </label>
+          <textarea ng-model=$ctrl.commentText aria-label="commentText" placeholder="What's in your mind?">
+          </textarea>
+        </md-input-container>
+        <md-button ng-click="$ctrl.submitComment()" flex="10" class="simple-button">
+          Submit
+        </md-button>
+      </div>
+    </md-card>
+  </form>
 </div>

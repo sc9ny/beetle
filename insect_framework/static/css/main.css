@@ -182,11 +182,10 @@ a.radius-button.btn.btn-dark {
 
 .spaced-content {
     padding-left: 25px;
-    padding-right:25px;
     padding-top: 25px;
     margin: auto;
     position: relative;
-    top: 20%;
+    top: 10%;
 }
 
 @media only screen and (min-width: 900px ) {
@@ -254,7 +253,7 @@ a.radius-button.btn.btn-dark {
 }
 
 .background {
-  background-image: url('/static/media/background.png');
+  /* background-image: url('/static/media/background.png'); */
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -285,7 +284,7 @@ a.radius-button.btn.btn-dark {
 }
 
 .max-length-content {
-  max-width: 1040px;
+  max-width: 1280px;
 }
 
 .comment-list {

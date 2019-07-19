@@ -1,2 +1,12 @@
 Django==2.1.5
+django-appconf==1.0.2
+django-ckeditor==5.6.1
+django-compressor==2.2
+django-js-asset==1.2.2
+djangorestframework==3.9.2
+image==1.5.27
+Pillow==6.0.0
+psycopg2==2.7.7
 pytz==2018.5
+rcssmin==1.0.6
+rjsmin==1.0.12

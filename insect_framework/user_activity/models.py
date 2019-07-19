@@ -11,7 +11,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{}'.format( self.author)
+        return 'author-{}-id-{}'.format(self.author, self.id)
 
 
 class Comment(models.Model):

@@ -4,6 +4,7 @@
   angular
     .module('utils', ['ngMaterial'])
     .factory('dynamicEntries', dynamicEntries)
+    .service('IsStaffOrAccountOwner', IsStaffOrAccountOwner)
     .filter ('range', range);
     dynamicEntries.$inject = [];
   function dynamicEntries () {
@@ -55,5 +56,11 @@
       input.push(i);
     return input;
     };
+  }
+
+  function IsStaffOrAccountOwner () {
+    return function(user, content) {
+      return user.is_staff || user.username === content.author;
+    }
   }
 })();

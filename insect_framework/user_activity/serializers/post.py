@@ -16,3 +16,9 @@ class PostSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['author'] = self.context['request'].user
         return super(PostSerializer, self).create(validated_data)
+
+
+    def validate_content(self, value):
+        if (len(value.encode('utf-8'))) < 512000:
+            return value
+        raise serializers.ValidationError('Please limit your content to 500KB')
