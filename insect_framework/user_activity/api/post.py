@@ -1,5 +1,4 @@
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import permissions, viewsets, filters
 
 from utils import HeaderPagination, IsStaffOrAccountOwner
 
@@ -11,6 +10,8 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('-id')
     serializer_class = PostSerializer
     pagination_class = HeaderPagination
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'content', 'author__username']
 
     def get_permissions(self):
         if self.request.method in permissions.SAFE_METHODS:

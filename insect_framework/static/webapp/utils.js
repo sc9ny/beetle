@@ -5,7 +5,10 @@
     .module('utils', ['ngMaterial'])
     .factory('dynamicEntries', dynamicEntries)
     .service('IsStaffOrAccountOwner', IsStaffOrAccountOwner)
-    .filter ('range', range);
+    .filter ('range', range)
+    .component('search', {
+        
+    });
     dynamicEntries.$inject = [];
   function dynamicEntries () {
     return function (resource ,cfg) {

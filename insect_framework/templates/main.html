@@ -23,9 +23,8 @@
     {% include 'javascript.html' %}
 
   </head>
-  <body ng-controller="mainController">
-    <div layout="row" layout-align="space-between center">
-      <div style="font-family: cursive; padding-left:15px;">Insect Brothers</div>
+  <body ng-controller="mainController" >
+    <div layout="row" layout-align="end center" style="min-height:50px;">
       <div class="float-right" style="padding-right:15px;">
         <span>
           {% if user.is_authenticated %}
@@ -39,7 +38,7 @@
             <a style="color:black;" href="/login/">LOGIN</a>
           </span>
           {% endif %}
-          <a class="radius-button btn btn-dark" href="/about/">ABOUT US</a>
+
         </span>
       </div>
     </div>
@@ -75,13 +74,10 @@
         </ul>
       </div>
     </nav>
-    <div layout="row" layout-fill class="view-animate-container">
+    <div layout="row" class="view-animate-container">
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <nav class="side-nav" id="sidebar">
-        <a class="navbar-brand" href="/">
-          <img src="/static/media/logo.jpeg" width="200" height="110" alt="">
-        </a>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" style="margin-top: 150px;">
 
           <li class="nav-item">
             <a class="custom-nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
@@ -115,8 +111,16 @@
           </a>
         </div>
       </nav>
-      <div class="view-animate background" flex ng-view layout-fill>
+      <div layout="column" class="centered">
+        <div class="view-animate background" flex ng-view>
+        </div>
+
+        <div style="margin-top: 200px;">
+          <md-divider></md-divider>
+          <a style="font-style: italic; font-family:cursive; font-weight:400;" href="/about/">ABOUT US</a>
+        </div>
       </div>
+
     </div>
 
 

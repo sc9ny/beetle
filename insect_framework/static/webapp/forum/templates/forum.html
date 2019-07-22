@@ -3,50 +3,56 @@
   <md-progress-circular></md-progress-circular>
 </div>
 
-<div class="spaced-content centered" flex ng-if="$ctrl.promise.$resolved">
-  <md-button class="simple-button" ng-if="$ctrl.currentUser"
-    style="margin-left:40px;" href="/forum/create/">
-    <i style="font-size:18px;" class="far fa-edit"></i>
-    Create
-  </md-button>
-  <ul class="forum-list">
-    <li ng-repeat="post in $ctrl.promise">
-      <a href="/forum/{{post.id}}/">
-        <div class="forum-list-body md-truncate">
-          <div layout="row" layout-align="space-between center" class="title-padding-top">
-            <span class="overflow-title"><strong>{{post.title}}</strong></span>
-            <span ng-if="post.comments.length">
-              <i style="font-size:18px;" class="far fa-comment"></i>
-                <span>{{post.comments.length}}</span>
-            </span>
+<div flex ng-if="$ctrl.promise.$resolved" style="margin-top:200px;">
+  <div ng-if="!$ctrl.promise.length">
+    No registered post yet
+  </div>
+  <div flex layout="column" layout-align="center center">
+    <ul class="forum-list" style="padding-left:0;" ng-if="$ctrl.promise.length" >
+      <li ng-repeat="post in $ctrl.promise" >
+        <a href="/forum/{{post.id}}/">
+          <div class="forum-list-body md-truncate">
+            <div layout="row" layout-align="space-between center" class="title-padding-top">
+              <span class="overflow-title post-title"><strong>{{post.title}}</strong></span>
+              <span ng-if="post.comments.length">
+                <i style="font-size:18px;" class="far fa-comment"></i>
+                  <span>{{post.comments.length}}</span>
+              </span>
+            </div>
+            <p>
+              <ng-bind-html class="rich-container" ng-bind-html="post.content">
+              </ng-bind-html>
+            </p>
           </div>
-          <p>
-            <ng-bind-html class="rich-container" ng-bind-html="post.content">
-            </ng-bind-html>
-          </p>
-        </div>
-      </a>
-    </li>
-  </ul>
-  <nav aria-label="paginated" ng-if="$ctrl.paginate > 1">
-    <ul class="pagination horizontal-center" layout-align="center center">
-      <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current-1]">
-        <button style="color:black;" ng-click="$ctrl.moveToPrevious($event)" class="page-link">
-           <<
-         </button>
-        <md-tooltip>Previous</md-tooltip>
-      </li>
-      <li class="page-item" ng-repeat="page in $ctrl.proceed[$ctrl.current]">
-        <button ng-style="{'color': ($ctrl.currentPage == page+1) ? '#ffaaa0' : 'black'}"
-          class="page-link" ng-click="$ctrl.requestNext(page+1)">
-          {{page+1}}
-        </button>
-      <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current+1]">
-        <button style="color:black;" class="page-link" ng-click=$ctrl.moveToNext($event)>
-           >>
-         </button>
-        <md-tooltip>Next</md-tooltip>
+        </a>
       </li>
     </ul>
-  </nav>
+    <nav aria-label="paginated" ng-if="$ctrl.paginate > 1">
+      <ul class="pagination" >
+        <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current-1]">
+          <button style="color:black;" ng-click="$ctrl.moveToPrevious($event)" class="page-link">
+             <<
+           </button>
+          <md-tooltip>Previous</md-tooltip>
+        </li>
+        <li class="page-item" ng-repeat="page in $ctrl.proceed[$ctrl.current]">
+          <button ng-style="{'color': ($ctrl.currentPage == page+1) ? '#ffaaa0' : 'black'}"
+            class="page-link" ng-click="$ctrl.requestNext(page+1)">
+            {{page+1}}
+          </button>
+        <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current+1]">
+          <button style="color:black;" class="page-link" ng-click=$ctrl.moveToNext($event)>
+             >>
+           </button>
+          <md-tooltip>Next</md-tooltip>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div layout="row" layout-align="end center">
+  <md-button class="md-fab" ng-if="$ctrl.currentUser"
+    href="/forum/create/">
+    <i style="font-size:18px;" class="far fa-edit"></i>
+  </md-button>
 </div>
