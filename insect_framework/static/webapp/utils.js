@@ -7,6 +7,29 @@
     .service('IsStaffOrAccountOwner', IsStaffOrAccountOwner)
     .filter ('range', range)
     .component('search', {
+      templateUrl: '/static/webapp/search.html',
+      transclude: true,
+      bindings: {
+        onChange: '&',
+        onClear: '&?',
+        disabled: '<?',
+      },
+      controller: function($element) {
+        this.$onChange = function(changes) {
+          if(changes.focus && changes.focus.currentValue) {
+            $element.find('input').focus();
+          }
+        };
+
+        this.clearSearch = function() {
+          this.searchText ='';
+          this.onChange({seachText: ''});
+          if (angular.isFunction(this.onClear)) {
+            this.onClear();
+          }
+        }
+      }
+
         
     });
     dynamicEntries.$inject = [];

@@ -1,27 +1,30 @@
-<div class="spaced-content" flex>
+<div flex>
   <md-card class="max-length-content" layout="column" layout-align="center center"
     ng-if="!$ctrl.currentForum.$resolved" style="height:500px;">
     <md-progress-circular></md-progress-circular>
   </md-card>
   <md-card flex class="max-length-content centered" ng-if="$ctrl.currentForum.$resolved">
-    <md-card-header layout="row">
-      <md-card-header-text>
-        <div class="md-title">{{$ctrl.currentForum.title}}</div>
+    <md-card-header layout="row" flex>
+      <md-card-header-text flex>
+        <div class="md-title" flex style="word-wrap: break-word;">{{$ctrl.currentForum.title}}</div>
 
-        <div class="md-subhead">
-          <i class="far fa-user" style="font-size:14px;"></i>
+        <div class="md-subhead" layout="row" layout-align="space-between center">
+          <div>
+            <i class="far fa-user" style="font-size:14px;"></i>
             By {{$ctrl.currentForum.author}}
+          </div>
+          <div>
+            {{$ctrl.currentForum.created | date:'MM/dd/yyyy'}}
+            <md-button class="md-icon-button" aria-label="edit"
+              href="/forum/update/{{$ctrl.currentForum.id}}/"
+              style="padding-top:6px;"
+              ng-if="$ctrl.permission($ctrl.currentForum)">
+              <i style="font-size:14px;" class="far fa-edit"></i>
+            </md-button>
+          </div>
         </div>
+
       </md-card-header-text>
-      <div class="md-subhead">
-        {{$ctrl.currentForum.created | date:'MM/dd/yyyy'}}
-        <md-button class="md-icon-button" aria-label="edit"
-          href="/forum/update/{{$ctrl.currentForum.id}}/"
-          style="padding-top:6px;"
-          ng-if="$ctrl.permission($ctrl.currentForum)">
-          <i style="font-size:14px;" class="far fa-edit"></i>
-        </md-button>
-      </div>
     </md-card-header>
     <md-card-content class="overflow-text fit-picture">
       <ng-bind-html ng-bind-html="$ctrl.currentForum.content"></ng-bind-html>

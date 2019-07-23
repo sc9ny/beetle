@@ -2,6 +2,10 @@
 .post-title {
   max-width:145px;
 }
+
+.forum-list {
+  margin-top: 1rem;
+}
 .forum-list li {
   display: inline-block;
   border-top: 2px solid black;
@@ -42,11 +46,6 @@
   border: 0 !important;
 }
 
-.align-center {
-  width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .forum-list-body > p {
   max-height: 70%;

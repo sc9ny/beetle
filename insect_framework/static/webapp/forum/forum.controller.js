@@ -19,6 +19,7 @@
       this.current =1;
       this.proceed = {};
       this.currentUser = user;
+      this.hasSearched = false;
 
       this.promise = Forum.query({page:1, limit: this.limit}, (response, headerGetter) => {
         self.postCounts = (parseInt(headerGetter('X-count')));
@@ -33,6 +34,24 @@
         }
         self.content = response;
       });
+
+      this.search = function (searchText) {
+      this.hasSearched = true;
+      console.log(searchText);
+        this.promise = Forum.query({page:1, limit: this.limit, 'search' : this.searchText}, (response, headerGetter) => {
+          self.postCounts = (parseInt(headerGetter('X-count')));
+          self.paginate = Math.ceil(self.postCounts / this.limit);
+          let page = 0;
+          for (let i = 0; i < self.paginate; i++) {
+            if (i % 10 === 0) {
+              page++;
+              this.proceed[page] =[];
+            }
+            this.proceed[page].push(i);
+          }
+          self.content = response;
+        })
+      }
 
       this.requestNext = function ($event) {
         this.promise = Forum.query({page:$event, limit:this.limit});

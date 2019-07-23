@@ -105,14 +105,11 @@ li.active > a{
   }
 }
 
-.main-div {
-    color: #555555;
-}
-@media (min-width: 900px) {
-    .main-div {
-        margin-left: 25%;
-        margin-right:5%;
-    }
+
+.align-center {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .router-view {
@@ -299,3 +296,7 @@ img {
 md-progress-circular.md-default-theme path, md-progress-circular path {
   stroke:#888888;
 }
+
+.search-input {
+  height:40px;
+  border: none;
