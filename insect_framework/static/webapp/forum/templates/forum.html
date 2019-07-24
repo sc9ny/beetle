@@ -1,19 +1,26 @@
-<div layout-fill layout="column" layout-align="center center" flex
-  ng-if="!$ctrl.promise.$resolved">
+<div layout-fill layout="column" layout-align="center center" ng-if="!$ctrl.promise.$resolved">
   <md-progress-circular></md-progress-circular>
 </div>
 
-<div flex ng-if="$ctrl.promise.$resolved" style="margin-top:100px;" >
-  <div ng-if="!$ctrl.promise.length">
+<div flex ng-if="$ctrl.content" style="margin-top:100px;" >
+  <div ng-if="!$ctrl.promise.length && !$ctrl.hasSearched">
     No registered post yet
   </div>
-
+  <div flex layout="row" layout-align="center center">
+    <search flex on-change="$ctrl.search(searchText)" style="margin-left:30px;"
+            disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved" >
+    </search>
+    <md-button class="md-icon-button" ng-if="$ctrl.currentUser" aria-label="forum-create"
+    href="/forum/create/" style="margin-right:30px;">
+    <i style="font-size:18px;" class="far fa-edit"></i>
+    <md-tooltip>Create</md-tooltip>
+  </md-button>
+  </div>
   <div flex layout="column" layout-align="center center">
-
-    <ul class="forum-list align-center" style="padding-left:0;">
-      <div flex layout="row" style="margin-right:75px;">
-      <search flex on-change="$ctrl.search()" disabled="$ctrl.hasSearched && !$ctrl.promise.length" ></search>
+    <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length">
+      No result found
     </div>
+    <ul class="forum-list" style="padding-left:0; text-align: center;">
       <li ng-repeat="post in $ctrl.promise" >
         <a href="/forum/{{post.id}}/">
           <div class="forum-list-body md-truncate">
@@ -56,8 +63,5 @@
   </div>
 </div>
 <div layout="row" layout-align="end center">
-  <md-button class="md-fab" ng-if="$ctrl.currentUser" aria-label="forum-create"
-    href="/forum/create/">
-    <i style="font-size:18px;" class="far fa-edit"></i>
-  </md-button>
+
 </div>

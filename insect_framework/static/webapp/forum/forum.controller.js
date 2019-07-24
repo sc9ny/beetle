@@ -37,8 +37,7 @@
 
       this.search = function (searchText) {
       this.hasSearched = true;
-      console.log(searchText);
-        this.promise = Forum.query({page:1, limit: this.limit, 'search' : this.searchText}, (response, headerGetter) => {
+        this.promise = Forum.query({page:1, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
           self.postCounts = (parseInt(headerGetter('X-count')));
           self.paginate = Math.ceil(self.postCounts / this.limit);
           let page = 0;
@@ -51,6 +50,7 @@
           }
           self.content = response;
         })
+        console.log(this.promise);
       }
 
       this.requestNext = function ($event) {

@@ -9,11 +9,12 @@
       ['Profile', 'Authentication', 'dynamicEntries'];
 
     function profileController (Profile, Authentication, dynamicEntries) {
-      self = this;
+      const self = this;
       this.password = ""
       this.confirm_password= ""
       this.user = Authentication.getAuthenticatedAccount().data;
       self.myPosts = dynamicEntries(Profile.myPosts().query);
+      this.hasSearched = false;
 
       this.changePassword = function () {
         Authentication.changePassword(self.user.username, self.password,
@@ -26,6 +27,12 @@
             self.error = "Password not matched"
             self.message=""
           });
+      }
+
+      this.search = function(searchText) {
+      this.hasSearched = true;
+        let cfg = {search: searchText}
+        self.myPosts = dynamicEntries(Profile.myPosts().query, cfg);
       }
     }
 

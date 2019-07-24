@@ -1,14 +1,13 @@
 <div layout="row">
-  <md-button class="md-icon-button"><i class="material-icons">search</i></md-button>
+  <md-button class="md-icon-button" style="cursor: default;"><i class="material-icons">search</i></md-button>
 
   <input ng-model="$ctrl.searchText" ng-change="$ctrl.onChange({searchText:$ctrl.searchText})"
-         placeholder="Search" ng-model-options="{debounce: 300}" flex
-         ng-disabled="{{$ctrl.disabled}}" class="search-input">
+         placeholder="Search" ng-model-options="{debounce: 300}" flex auto-focus="{{$ctrl.focus}}"
+         ng-disabled="$ctrl.disabled" class="search-input">
   <md-button class="md-icon-button" tabIndex="-1" ng-show="$ctrl.searchText" ng-click="$ctrl.clearSearch()"
              aria-label="Clear search">
-      <i class="material-icons">search</i>
+      <i class="material-icons">close</i>
 <!--    <md-icon md-svg-icon="ic_close_24px"></md-icon>-->
     <md-tooltip>Clear</md-tooltip>
   </md-button>
-  <div ng-transclude layout="row"></div>
 </div>

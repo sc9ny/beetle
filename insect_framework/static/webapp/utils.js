@@ -8,11 +8,11 @@
     .filter ('range', range)
     .component('search', {
       templateUrl: '/static/webapp/search.html',
-      transclude: true,
       bindings: {
         onChange: '&',
         onClear: '&?',
-        disabled: '<?',
+        focus: '<?',
+        disabled: '<?'
       },
       controller: function($element) {
         this.$onChange = function(changes) {
@@ -33,48 +33,57 @@
         
     });
     dynamicEntries.$inject = [];
-  function dynamicEntries () {
-    return function (resource ,cfg) {
-      cfg = cfg || {};
-      if (!cfg.limit) {
-        cfg.limit = 15;
-      }
-      return {
-        length : 0,
-        loadedPages : {},
-        $resolved: false,
-        getItemAtIndex : function (index) {
-          let pageNumber = Math.max(Math.ceil(index / cfg.limit), 1);
-          if (index > 0 && index % cfg.limit === 0)
-            pageNumber++;
-          let page = this.loadedPages[pageNumber];
-          if (page) {
-            return page[index % cfg.limit];
+    function dynamicEntries () {
+      return function (resource ,cfg) {
+        cfg = cfg || {};
+        if (!cfg.limit) {
+          cfg.limit = 15;
+        }
+        return {
+          length : 0,
+          loadedPages : {},
+          $resolved: false,
+          getItemAtIndex : function (index) {
+            let pageNumber = Math.max(Math.ceil(index / cfg.limit), 1);
+            if (index > 0 && index % cfg.limit === 0)
+              pageNumber++;
+            let page = this.loadedPages[pageNumber];
+            if (page) {
+              return page[index % cfg.limit];
+            }
+            else if (page !== null) {
+              this.fetchPage_(pageNumber);
+            }
+          },
+          getLength : function () {
+            if (this.length === 0)
+              return cfg.limit;
+            return this.length;
+          },
+          fetchPage_ : function (pageNumber) {
+            this.loadedPages[pageNumber] = null;
+            let queryParams = {
+              page: pageNumber,
+            };
+            angular.extend(queryParams, cfg);
+              this.promise = resource(queryParams, (response, headerGetter) => {
+              this.length = parseInt(headerGetter('X-count'))
+              this.loadedPages[pageNumber] = response;
+              this.$resolved = true;
+            });
+          },
+          updateCfg: function(newCfg) {
+            angular.extend(cfg, newCfg);
+          },
+          resetParams: function() {
+            this.$resolved = false;
+            this.loadedPages= {};
+            this.length = 0;
           }
-          else if (page !== null) {
-            this.fetchPage_(pageNumber);
-          }
-        },
-        getLength : function () {
-          if (this.length === 0)
-            return cfg.limit;
-          return this.length;
-        },
-        fetchPage_ : function (pageNumber) {
-          this.loadedPages[pageNumber] = null;
-          let queryParams = {
-            page: pageNumber,
-          };
-          angular.extend(queryParams, cfg);
-          this.promise = resource(queryParams, (response, headerGetter) => {
-            this.length = parseInt(headerGetter('X-count'))
-            this.loadedPages[pageNumber] = response;
-            this.$resolved = true;
-          });
         }
       }
     }
-  }
+
   function range () {
     return function(input, total) {
     total = parseInt(total);
@@ -89,4 +98,5 @@
       return user.is_staff || user.username === content.author;
     }
   }
+
 })();
