@@ -1,0 +1,9 @@
+<div>
+    <input type="file" multiple onchange="angular.element(this).scope().imageUpload(event)" />
+    <hr />
+    <div ng-repeat="step in steps" layout="column" layout-align="center center">
+      <img ng-src="{{step}}" alt="" style="max-width:300px; max-height:300px;"/>
+      <input type="text">
+    </div>
+
+ </div>

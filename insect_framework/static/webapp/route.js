@@ -73,6 +73,26 @@
         }
       }
     }).
+    when ('/gallery/', {
+      controller: 'galleryController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/gallery/templates/gallery.html',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when('/gallery/create/', {
+      controller: 'galleryManageController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/gallery/templates/gallery_manage.html',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
     when ('/', {
       templateUrl: '/static/webapp/base.html'
     }).

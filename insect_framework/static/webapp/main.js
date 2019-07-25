@@ -8,6 +8,7 @@
       'route',
       'authentication',
       'profile',
+      'gallery',
       'utils',
       'ngMaterial',
     ]);

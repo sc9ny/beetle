@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'user_activity.apps.UserActivityConfig',
     'authentication.apps.AuthenticationConfig',
+    'gallery.apps.GalleryConfig',
     'compressor',
     'ckeditor',
     'ckeditor_uploader',
@@ -144,7 +145,8 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
-MEDIA_URL ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'uploaded_media')
+MEDIA_URL = '/media/'
 
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
