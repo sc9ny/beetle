@@ -93,6 +93,19 @@
         }
       }
     }).
+    when('/gallery/:id/', {
+      controller: 'galleryDetailController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/gallery/templates/gallery_detail.html',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        },
+        currentGallery: ($route, GalleryPost) => {
+          return GalleryPost.get({id:$route.current.params.id}).$promise;
+        }
+      }
+    }).
     when ('/', {
       templateUrl: '/static/webapp/base.html'
     }).

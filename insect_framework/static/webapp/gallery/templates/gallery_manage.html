@@ -1,9 +1,39 @@
-<div>
-    <input type="file" multiple onchange="angular.element(this).scope().imageUpload(event)" />
-    <hr />
-    <div ng-repeat="step in steps" layout="column" layout-align="center center">
-      <img ng-src="{{step}}" alt="" style="max-width:300px; max-height:300px;"/>
-      <input type="text">
-    </div>
+<form name="galleryForm" class="gallery-container">
+  <div layout="column">
+    <md-input-container>
+        <input name="title" type="text" ng-model="newGalleryPost.title" aria-label="title"
+               placeholder="Title" md-maxlength="50" required>
+        <div ng-messages="galleryForm.title.$error" ng-show="galleryForm.title.$touched">
+            <div ng-message="required">Title is required</div>
+            <div ng-message="md-maxlength"> Title is too long</div>
+        </div>
+    </md-input-container>
 
- </div>
+    <input type="file" multiple ng-file-model="files" aria-label="photos"
+           onchange="angular.element(this).scope().imageUpload(event)" />
+  </div>
+  <div>
+    <img style="width: 100%;" ng-src="{{selectedImage}}" alt=""/>
+    <div ng-if="steps">
+      <a class="prev" ng-click="plusSlides(-1)">&#10094;</a>
+      <a class="next" ng-click="plusSlides(1)">&#10095;</a>
+    </div>
+  </div>
+
+  <div ng-if="steps" class="caption-container" layout="row" layout-align="center center">
+    <md-input-container flex="70" >
+      <input type="text" ng-model="files[slideIndex].description" placeholder="Type description of your photo here"/>
+    </md-input-container>
+  </div>
+
+  <div layout="row" layout-align="center center" class="caption-container" ng-if="steps">
+    <div ng-repeat="step in steps" layout="column">
+      <img class="demo cursor" ng-src="{{step}}" alt="" ng-click="currentSlide($index)"/>
+    </div>
+  </div>
+</form>
+<div layout="row" layout-align="end center">
+  <md-button class="simple-button" ng-disabled="galleryForm.$invalid" aria-label="submit" ng-click="upload()">
+    upload
+  </md-button>
+</div>

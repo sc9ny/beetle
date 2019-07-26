@@ -14,7 +14,7 @@
 
     function forumController (Forum, $sanitize, user) {
       let self = this;
-      this.limit = 12;
+      this.limit = 15;
       this.currentPage = 1;
       this.current =1;
       this.proceed = {};
@@ -50,7 +50,6 @@
           }
           self.content = response;
         })
-        console.log(this.promise);
       }
 
       this.requestNext = function ($event) {

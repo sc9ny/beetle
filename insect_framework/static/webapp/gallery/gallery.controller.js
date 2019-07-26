@@ -3,29 +3,101 @@
 
   angular.module('gallery.controller')
   .controller('galleryController', galleryController)
-  .controller('galleryManageController', galleryManageController);
+  .controller('galleryManageController', galleryManageController)
+  .controller('galleryDetailController', galleryDetailController);
 
-  galleryController.$inject = ['user'];
-  galleryManageController.$inject = ['user', '$scope'];
+  galleryController.$inject = ['user', 'GalleryPost'];
+  galleryManageController.$inject = ['user', '$scope', 'Gallery', 'GalleryPost'];
+  galleryDetailController.$inject = ['user', 'currentGallery'];
 
-  function galleryController(user) {
-    console.log('galleryCon')
+  function galleryController(user, GalleryPost) {
+    const self = this;
+    this.hasSearched = false;
+    this.limit =15;
+    this.currentPage = 1;
+    this.current =1;
+    this.proceed = {};
+    this.currentUser = user;
+    this.promise = GalleryPost.query({page:1, limit: this.limit}, (response, headerGetter) => {
+      self.postCounts = (parseInt(headerGetter('X-count')));
+      self.paginate = Math.ceil(self.postCounts / this.limit);
+      let page = 0;
+      for (let i = 0; i < self.paginate; i++) {
+        if (i % 10 === 0) {
+          page++;
+          this.proceed[page] =[];
+        }
+        this.proceed[page].push(i);
+      }
+      self.content = response;
+    })
+
+    this.search = function(searchText) {
+      console.log(searchText);
+    }
+    this.requestNext = function ($event) {
+        this.promise = GalleryPost.query({page:$event, limit:this.limit});
+        this.currentPage =$event;
+      }
+
+      this.moveToNext = function ($event) {
+        this.current++;
+        this.requestNext(this.proceed[this.current][0]+1);
+      }
+
+      this.moveToPrevious = function ($event) {
+        this.current--;
+        this.requestNext(this.proceed[this.current][0]+1);
+      }
   }
 
-  function galleryManageController(user, $scope) {
+  function galleryDetailController(user, currentGallery) {
+    const self = this;
+    this.currentUser = user;
+    this.currentGallery = currentGallery;
+    console.log(this.currentGallery);
+    this.selectedImage = this.currentGallery.photos[0].image
+    console.log(this.selectedImage);
+  }
+
+
+  function galleryManageController(user, $scope, Gallery, GalleryPost) {
+    $scope.slideIndex = 0;
+    $scope.previousIndex = undefined;
+    $scope.files =[];
+    $scope.newGalleryPost = new GalleryPost({
+      title: ''
+    });
+
+    $scope.upload = function() {
+      //$scope.newGalleryPost.$save();
+      for (let i = 0; i < $scope.files.length; i++) {
+        let gallery = new Gallery ($scope.files[i])
+        gallery.$save();
+      }
+    }
+
+    $scope.showSlides = function() {
+      var captionText = document.getElementById("caption");
+      if ($scope.slideIndex > $scope.steps.length-1) {
+        $scope.slideIndex = 0;
+      }
+      if ($scope.slideIndex < 0) {$scope.slideIndex = $scope.steps.length-1}
+      //captionText.innerHTML = dots[$scope.slideIndex-1].alt;
+      $scope.selectedImage = $scope.steps[$scope.slideIndex];
+    }
     $scope.imageUpload = function(event){
       var steps= [];
       var isLastFile = false;
 
       for(var i = 0 ; i < event.target.files.length ; i++){
-        console.log('File array log :' + event.target.files[i].name);
         var reader = new FileReader();
         reader.onload = function(e){
           $scope.$apply(function(){
             steps.push(e.target.result);
             if(isLastFile){
               $scope.steps = steps;
-              console.log($scope.steps);
+              $scope.showSlides(0);
             }
           })
         }
@@ -35,48 +107,49 @@
         reader.readAsDataURL(event.target.files[i]);
       }
     }
+    if ($scope.steps)
+        $scope.showSlides(0);
 
+    // Next/previous controls
+    $scope.plusSlides = function(n) {
+     $scope.slideIndex += n;
+      $scope.showSlides();
+    }
 
-//    const self = this;
-//    this.images = [];
-//    $scope.selectFile = function (e) {
-//      angular.forEach(e.target.files, (file) => {
-//        let reader = new FileReader();
-//        reader.onload = function(e) {
-//          self.images.push(e.target.result);
-//          $scope.$apply();
-//        };
-//        reader.readAsDataURL(e.target.files[0]);
-//      })
-//
-//    }
+    // Thumbnail image controls
+    $scope.currentSlide = function(n) {
+      $scope.previousIndex =$scope.slideIndex;
+      $scope.slideIndex = n
+      $scope.showSlides($scope.slideIndex);
+    }
   }
 })();
 
-//<html>
-//<head>
-//    <title></title>
-//</head>
-//<body>
-//    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
-//    <script type="text/javascript">
-//        var app = angular.module('MyApp', [])
-//        app.controller('MyController', function ($scope) {
-//            $scope.SelectFile = function (e) {
-//                var reader = new FileReader();
-//                reader.onload = function (e) {
-//                    $scope.PreviewImage = e.target.result;
-//                    $scope.$apply();
-//                };
-//
-//                reader.readAsDataURL(e.target.files[0]);
-//            };
-//        });
-//    </script>
-//    <div ng-app="MyApp" ng-controller="MyController">
-//        <input type="file" onchange="angular.element(this).scope().SelectFile(event)" />
-//        <hr />
-//        <img ng-src="{{PreviewImage}}" ng-show="PreviewImage != null" alt="" style="height:200px;width:200px" />
-//     </div>
-//</body>
-//</html>
+angular.module('gallery.controller').directive('ngFileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var model = $parse(attrs.ngFileModel);
+            var isMultiple = attrs.multiple;
+            var modelSetter = model.assign;
+            element.bind('change', function () {
+                var values = [];
+                angular.forEach(element[0].files, function (item) {
+                    var value = {
+                        image: item,
+                        description: '',
+                        gallery_post: 1,
+                    };
+                    values.push(value);
+                });
+                scope.$apply(function () {
+                    if (isMultiple) {
+                        modelSetter(scope, values);
+                    } else {
+                        modelSetter(scope, values[0]);
+                    }
+                });
+            });
+        }
+    };
+}]);
