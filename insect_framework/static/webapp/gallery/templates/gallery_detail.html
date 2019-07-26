@@ -1,23 +1,23 @@
-<md-card>
+<md-card class="gallery-container">
   <md-card-header>
     <div class="md-title" flex style="word-wrap: break-word;">{{$ctrl.currentGallery.title}}</div>
   </md-card-header>
   <md-card-content>
   <div>
       {{$ctrl.selectedImage}}
-    <img style="width: 100%;" ng-src="http://127.0.0.1:8000/media/6fe52db2-66bb-4ae8-9d1c-e9d511cbe097.JPGs  " alt=""/>
+    <img style="width: 100%;" ng-src="{{$ctrl.selectedImage.image}}" alt=""/>
     <div>
-      <a class="prev" ng-click="plusSlides(-1)">&#10094;</a>
-      <a class="next" ng-click="plusSlides(1)">&#10095;</a>
+      <a class="prev" ng-click="$ctrl.plusSlides(-1)">&#10094;</a>
+      <a class="next" ng-click="$ctrl.plusSlides(1)">&#10095;</a>
     </div>
   </div>
   <div ng-if="steps" class="caption-container" layout="row" layout-align="center center">
-      <span></span>
+      <span>{{$ctrl.selectedImage.description}}</span>
   </div>
 
-  <div layout="row" layout-align="center center" class="caption-container" ng-if="steps">
-    <div ng-repeat="step in steps" layout="column">
-      <img class="demo cursor" ng-src="{{step}}" alt="" ng-click="currentSlide($index)"/>
+  <div layout="row" layout-align="center center" class="caption-container" ng-if="$ctrl.currentGallery.photos">
+    <div ng-repeat="photo in $ctrl.currentGallery.photos" layout="column">
+      <img class="demo cursor" ng-src="{{photo.image}}" alt="" ng-click="$ctrl.currentSlide($index)"/>
     </div>
   </div>
   </md-card-content>

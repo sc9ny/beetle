@@ -55,9 +55,29 @@
     const self = this;
     this.currentUser = user;
     this.currentGallery = currentGallery;
-    console.log(this.currentGallery);
-    this.selectedImage = this.currentGallery.photos[0].image
-    console.log(this.selectedImage);
+    this.selectedImage = this.currentGallery.photos[0]
+    this.slideIndex = 0;
+
+    this.showSlides = function() {
+      var captionText = document.getElementById("caption");
+      if (this.slideIndex > this.currentGallery.photos.length-1) {
+        this.slideIndex = 0;
+      }
+      if (this.slideIndex < 0) {this.slideIndex = this.currentGallery.photos.length-1}
+      //captionText.innerHTML = dots[$scope.slideIndex-1].alt;
+      this.selectedImage = this.currentGallery.photos[this.slideIndex].image;
+    }
+    this.plusSlides = function(n) {
+     this.slideIndex += n;
+      this.showSlides();
+    }
+
+    // Thumbnail image controls
+    this.currentSlide = function(n) {
+      this.previousIndex =this.slideIndex;
+      this.slideIndex = n
+      this.showSlides();
+    }
   }
 
 
@@ -120,7 +140,7 @@
     $scope.currentSlide = function(n) {
       $scope.previousIndex =$scope.slideIndex;
       $scope.slideIndex = n
-      $scope.showSlides($scope.slideIndex);
+      $scope.showSlides();
     }
   }
 })();

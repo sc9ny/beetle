@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="main" >
+<html lang="en">
   <head>
-    <base href="/">
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-animate.min.js"></script>
@@ -21,9 +21,9 @@
     <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js'></script>
     <link rel="stylesheet" href="http://textangular.com/dist/textAngular.css" type="text/css">
     {% include 'javascript.html' %}
-
+    <base href="/">
   </head>
-  <body ng-controller="mainController" >
+  <body ng-app="main" >
     <div layout="row" layout-align="end center" style="min-height:50px;">
       <div class="float-right" style="padding-right:15px;">
         <span>

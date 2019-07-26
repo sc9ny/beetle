@@ -6,6 +6,7 @@ from rest_framework.routers import DefaultRouter
 
 from authentication.views import LoginView, LogoutView
 from .views import IndexView, notFoundView
+from django.views.generic.base import RedirectView
 
 v1_router = DefaultRouter()
 
@@ -18,6 +19,6 @@ urlpatterns = [
     path('api/v1/logout/', LogoutView.as_view(), name='logout'),
     path('api/v1/', include(v1_router.urls)),
     path('notFound/', notFoundView.as_view(), name='404'),
-    re_path('^.*', IndexView.as_view(), name='index'),
+
     path('ckeditor/', include('ckeditor_uploader.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [re_path('^.*', IndexView.as_view(), name='index')]

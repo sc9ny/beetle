@@ -53,6 +53,7 @@ function run($http) {
   $http.defaults.xsrfCookieName = 'csrftoken';
 }
 function mainController(Authentication, $scope, $window) {
+console.log('main')
   $scope.loggedIn = Authentication.isAuthenticated();
   $scope.logout = function () {
       Authentication.logout().then( ()=> {
