@@ -1,6 +1,3 @@
-<md-button href="/gallery/create/" aria-label="gallery create"> CREATE </md-button>
-
-
 <div layout-fill layout="column" layout-align="center center" ng-if="!$ctrl.promise.$resolved">
   <md-progress-circular></md-progress-circular>
 </div>
@@ -13,36 +10,37 @@
     <search flex on-change="$ctrl.search(searchText)" style="margin-left:30px;"
             disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved" >
     </search>
-    <md-button class="md-icon-button" ng-if="$ctrl.currentUser" aria-label="forum-create"
-    href="/forum/create/" style="margin-right:30px;">
+    <md-button class="md-icon-button" ng-if="$ctrl.currentUser" aria-label="gallery-create"
+    href="/gallery/create/" style="margin-right:30px;">
     <i style="font-size:18px;" class="far fa-edit"></i>
     <md-tooltip>Create</md-tooltip>
   </md-button>
   </div>
-  <div flex layout="column" layout-align="center center">
+  <div flex layout="column">
     <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length">
       No result found
     </div>
-    <ul class="forum-list" style="padding-left:0; text-align: center;">
-      <li ng-repeat="post in $ctrl.promise" >
-        <a href="/gallery/{{post.id}}/">
-          <div class="forum-list-body md-truncate">
-            <div layout="row" layout-align="space-between center" class="title-padding-top">
-              <span class="overflow-title post-title"><strong>{{post.title}}</strong></span>
-              <span ng-if="post.comments.length">
-                <i style="font-size:18px;" class="far fa-comment"></i>
-                  <span>{{post.comments.length}}</span>
-              </span>
-            </div>
-            <p>
-              <ng-bind-html class="rich-container" ng-bind-html="post.content">
-              </ng-bind-html>
-            </p>
+    <div layout="column" ng-repeat="post in $ctrl.promise" >
+      <div layout="column" layout-align="center center" layout-align-gt-xs="start center"
+           layout-gt-xs="row" ng-if="$index % 3 == 0" flex class="post-container post-list-body md-truncate">
+        <a href="gallery/{{$ctrl.promise[$index].id}}/">
+          <div class="post" ng-if="$ctrl.promise[$index]">
+            <strong>{{$ctrl.promise[$index].title}}</strong>
           </div>
         </a>
-      </li>
-    </ul>
-    <nav aria-label="paginated" ng-if="$ctrl.paginate > 1">
+        <a href="gallery/{{$ctrl.promise[$index+1].id}}/" ng-if="$ctrl.promise[$index+1]">
+          <div class="post" ng-if="$ctrl.promise[$index]">
+            <strong>{{$ctrl.promise[$index+1].title}}</strong>
+          </div>
+        </a>
+        <a href="gallery/{{$ctrl.promise[$index+2].id}}/" ng-if="$ctrl.promise[$index+2]">
+          <div class="post">
+            <strong>{{$ctrl.promise[$index+2].title}}</strong>
+          </div>
+        </a>
+      </div>
+    </div>
+    <nav aria-label="paginated" ng-if="$ctrl.paginate > 1" layout="column" layout-align="center center">
       <ul class="pagination" >
         <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current-1]">
           <button style="color:black;" ng-click="$ctrl.moveToPrevious($event)" class="page-link">

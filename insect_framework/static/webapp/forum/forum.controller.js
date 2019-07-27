@@ -36,7 +36,8 @@
       });
 
       this.search = function (searchText) {
-      this.hasSearched = true;
+        this.hasSearched = true;
+        this.searchQuery = {'search': searchText}
         this.promise = Forum.query({page:1, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
           self.postCounts = (parseInt(headerGetter('X-count')));
           self.paginate = Math.ceil(self.postCounts / this.limit);
@@ -53,7 +54,11 @@
       }
 
       this.requestNext = function ($event) {
-        this.promise = Forum.query({page:$event, limit:this.limit});
+        let query = {page: $event, limit: this.limit}
+        if (this.hasSearched) {
+          angular.extend(query, self.searchQuery);
+        }
+        this.promise = Forum.query(query);
         this.currentPage =$event;
       }
 

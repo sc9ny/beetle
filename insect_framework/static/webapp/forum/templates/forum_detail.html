@@ -28,7 +28,7 @@
     </md-card-header>
     <md-card-content class="overflow-text fit-picture">
       <ng-bind-html ng-bind-html="$ctrl.currentForum.content"></ng-bind-html>
-    <md-card-content>
+
     <md-list class="comment-list">
       <i class="fas fa-comment-alt"></i> Comments
       <md-divider style="margin-top: 20px;"></md-divider>
@@ -54,6 +54,7 @@
         <md-divider></md-divider>
       </md-list-item>
     </md-list>
+    </md-card-content>
   </md-card>
   <form name="commentForm" style="margin-top: 20px;" ng-if="$ctrl.currentUser">
     <md-card class="max-length-content centered">

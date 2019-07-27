@@ -7,8 +7,8 @@
   .controller('galleryDetailController', galleryDetailController);
 
   galleryController.$inject = ['user', 'GalleryPost'];
-  galleryManageController.$inject = ['user', '$scope', 'Gallery', 'GalleryPost'];
-  galleryDetailController.$inject = ['user', 'currentGallery'];
+  galleryManageController.$inject = ['user', '$scope', 'Gallery', 'GalleryPost', '$location'];
+  galleryDetailController.$inject = ['user', 'currentGallery', 'GalleryComment', 'IsStaffOrAccountOwner'];
 
   function galleryController(user, GalleryPost) {
     const self = this;
@@ -33,30 +33,50 @@
     })
 
     this.search = function(searchText) {
-      console.log(searchText);
+      this.hasSearched = true;
+      this.searchQuery = {'search': searchText};
+      this.searchQuery = {'search': searchText}
+        this.promise = GalleryPost.query({page:1, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
+          self.postCounts = (parseInt(headerGetter('X-count')));
+          self.paginate = Math.ceil(self.postCounts / this.limit);
+          let page = 0;
+          for (let i = 0; i < self.paginate; i++) {
+            if (i % 10 === 0) {
+              page++;
+              this.proceed[page] =[];
+            }
+            this.proceed[page].push(i);
+          }
+          self.content = response;
+        })
     }
     this.requestNext = function ($event) {
-        this.promise = GalleryPost.query({page:$event, limit:this.limit});
-        this.currentPage =$event;
+      let query = {page: $event, limit: this.limit};
+      if (this.hasSearched) {
+        angular.extend(query, this.searchQuery)
       }
+      this.promise = GalleryPost.query(query);
+      this.currentPage =$event;
+    }
 
-      this.moveToNext = function ($event) {
-        this.current++;
-        this.requestNext(this.proceed[this.current][0]+1);
-      }
+    this.moveToNext = function ($event) {
+      this.current++;
+      this.requestNext(this.proceed[this.current][0]+1);
+    }
 
-      this.moveToPrevious = function ($event) {
-        this.current--;
-        this.requestNext(this.proceed[this.current][0]+1);
-      }
+    this.moveToPrevious = function ($event) {
+      this.current--;
+      this.requestNext(this.proceed[this.current][0]+1);
+    }
   }
 
-  function galleryDetailController(user, currentGallery) {
+  function galleryDetailController(user, currentGallery, GalleryComment, IsStaffOrAccountOwner) {
     const self = this;
     this.currentUser = user;
     this.currentGallery = currentGallery;
     this.selectedImage = this.currentGallery.photos[0]
     this.slideIndex = 0;
+    this.commentText = '';
 
     this.showSlides = function() {
       var captionText = document.getElementById("caption");
@@ -65,7 +85,7 @@
       }
       if (this.slideIndex < 0) {this.slideIndex = this.currentGallery.photos.length-1}
       //captionText.innerHTML = dots[$scope.slideIndex-1].alt;
-      this.selectedImage = this.currentGallery.photos[this.slideIndex].image;
+      this.selectedImage = this.currentGallery.photos[this.slideIndex];
     }
     this.plusSlides = function(n) {
      this.slideIndex += n;
@@ -78,10 +98,19 @@
       this.slideIndex = n
       this.showSlides();
     }
+
+    this.submitComment = function() {
+      let newComment = new GalleryComment({comment: self.commentText, gallery_post: self.currentGallery.id})
+      newComment.$save();
+    }
+
+    this.permission = function(content) {
+      return IsStaffOrAccountOwner(self.currentUser, content);
+    }
   }
 
 
-  function galleryManageController(user, $scope, Gallery, GalleryPost) {
+  function galleryManageController(user, $scope, Gallery, GalleryPost, $location) {
     $scope.slideIndex = 0;
     $scope.previousIndex = undefined;
     $scope.files =[];
@@ -90,11 +119,17 @@
     });
 
     $scope.upload = function() {
-      //$scope.newGalleryPost.$save();
-      for (let i = 0; i < $scope.files.length; i++) {
-        let gallery = new Gallery ($scope.files[i])
-        gallery.$save();
-      }
+      $scope.newGalleryPost.$save().then(response => {
+        for (let i = 0; i < $scope.files.length; i++) {
+          $scope.files[i].gallery_post = response.id
+          let gallery = new Gallery ($scope.files[i])
+          gallery.$save();
+        }
+        $location.url('/gallery/'+response.id+'/');
+      }, (error) => {
+        $scope.error = 'Error in processing images.'
+      });
+
     }
 
     $scope.showSlides = function() {
@@ -158,7 +193,7 @@ angular.module('gallery.controller').directive('ngFileModel', ['$parse', functio
                     var value = {
                         image: item,
                         description: '',
-                        gallery_post: 1,
+                        gallery_post: undefined,
                     };
                     values.push(value);
                 });

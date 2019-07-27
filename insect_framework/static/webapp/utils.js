@@ -93,8 +93,16 @@
     };
   }
 
-  function IsStaffOrAccountOwner () {
+  function IsStaffOrAccountOwner (Authentication, $location) {
     return function(user, content) {
+      if (!angular.isDefined(user) && Authentication.isAuthenticated()) {
+        console.log(user);
+        Authentication.logout();
+        $location.url('/login/')
+      }
+      if (!angular.isDefined(user)) {
+        return false;
+      }
       return user.is_staff || user.username === content.author;
     }
   }

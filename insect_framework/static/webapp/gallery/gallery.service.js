@@ -24,7 +24,9 @@ function transformImageRequest(data) {
 
   angular.module('gallery.service')
   .factory('Gallery', Gallery)
-  .factory('GalleryPost', GalleryPost);
+  .factory('GalleryPost', GalleryPost)
+  .factory('SimpleGalleryPost', SimpleGalleryPost)
+  .factory('GalleryComment', GalleryComment);
 
   function Gallery ($resource) {
     let action = {
@@ -32,7 +34,6 @@ function transformImageRequest(data) {
         'method' : 'POST',
         'transformRequest': transformImageRequest,
         'headers' : {'Content-Type': undefined},
-        isArray: true
       }
     }
 
@@ -41,6 +42,14 @@ function transformImageRequest(data) {
 
   function GalleryPost ($resource) {
     return $resource('/api/v1/gallery-post/:id/', {id: '@id'})
+  }
+
+  function SimpleGalleryPost ($resource) {
+    return $resource('/api/v1/simple-gallery-post/:id', {id: '@id'})
+  }
+
+  function GalleryComment ($resource) {
+    return $resource('/api/v1/gallery-comment/:id', {id: '@id'})
   }
 
 })();

@@ -301,3 +301,43 @@ md-progress-circular.md-default-theme path, md-progress-circular path {
 .search-input {
   height:40px;
   border: none;
+}
+
+.post {
+  display: block;
+  width: 200px;
+  border-top: 2px solid black;
+  margin: 10px 25px 0 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*gallery and forum style*/
+.post-container > a {
+  color: black;
+}
+
+.post-container {
+    margin-top: 1rem;
+}
+
+.post-list-body > p {
+  max-height: 70%;
+}
+
+.page-link {
+  margin-top: 50px;
+  color:black;
+  border: 0 !important;
+}
+
+.post-title {
+  max-width:145px;
+}
+
+.post-container > a > div {
+  height: 130px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  line-height: 22px;
+}

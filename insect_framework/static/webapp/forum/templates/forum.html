@@ -7,7 +7,7 @@
     No registered post yet
   </div>
   <div flex layout="row" layout-align="center center">
-    <search flex on-change="$ctrl.search(searchText)" style="margin-left:30px;"
+    <search flex on-change="$ctrl.search(searchText)"
             disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved" >
     </search>
     <md-button class="md-icon-button" ng-if="$ctrl.currentUser" aria-label="forum-create"
@@ -16,30 +16,80 @@
     <md-tooltip>Create</md-tooltip>
   </md-button>
   </div>
-  <div flex layout="column" layout-align="center center">
+  <div flex layout="column" >
     <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length">
       No result found
     </div>
-    <ul class="forum-list" style="padding-left:0; text-align: center;">
-      <li ng-repeat="post in $ctrl.promise" >
-        <a href="/forum/{{post.id}}/">
-          <div class="forum-list-body md-truncate">
+    <div layout="column" ng-repeat="post in $ctrl.promise" >
+      <div layout="column" layout-align="center center" layout-align-gt-xs="start center"
+           layout-gt-xs="row" ng-if="$index % 3 == 0" flex class="post-container post-list-body md-truncate">
+        <a href="forum/{{$ctrl.promise[$index].id}}/">
+          <div class="post forum-list-body md-truncate">
             <div layout="row" layout-align="space-between center" class="title-padding-top">
-              <span class="overflow-title post-title"><strong>{{post.title}}</strong></span>
-              <span ng-if="post.comments.length">
+              <span class="overflow-title post-title"><strong>{{$ctrl.promise[$index].title}}</strong></span>
+              <span ng-if="$ctrl.promise[$index].comments.length">
                 <i style="font-size:18px;" class="far fa-comment"></i>
-                  <span>{{post.comments.length}}</span>
+                  <span>{{$ctrl.promise[$index].comments.length}}</span>
               </span>
             </div>
             <p>
-              <ng-bind-html class="rich-container" ng-bind-html="post.content">
+              <ng-bind-html class="rich-container" ng-bind-html="$ctrl.promise[$index].content">
               </ng-bind-html>
             </p>
           </div>
         </a>
-      </li>
-    </ul>
-    <nav aria-label="paginated" ng-if="$ctrl.paginate > 1">
+        <a href="forum/{{$ctrl.promise[$index+1].id}}/" ng-if="$ctrl.promise[$index+1]">
+          <div class="post forum-list-body md-truncate">
+            <div layout="row" layout-align="space-between center" class="title-padding-top">
+              <span class="overflow-title post-title"><strong>{{$ctrl.promise[$index+1].title}}</strong></span>
+              <span ng-if="$ctrl.promise[$index+1].comments.length">
+                <i style="font-size:18px;" class="far fa-comment"></i>
+                  <span>{{$ctrl.promise[$index+1].comments.length}}</span>
+              </span>
+            </div>
+            <p>
+              <ng-bind-html class="rich-container" ng-bind-html="$ctrl.promise[$index+1].content">
+              </ng-bind-html>
+            </p>
+          </div>
+        </a>
+        <a href="forum/{{$ctrl.promise[$index+2].id}}/" ng-if="$ctrl.promise[$index+2]">
+          <div class="post forum-list-body md-truncate">
+            <div layout="row" layout-align="space-between center" class="title-padding-top">
+              <span class="overflow-title post-title"><strong>{{$ctrl.promise[$index+2].title}}</strong></span>
+              <span ng-if="$ctrl.promise[$index+2].comments.length">
+                <i style="font-size:18px;" class="far fa-comment"></i>
+                  <span>{{$ctrl.promise[$index+2].comments.length}}</span>
+              </span>
+            </div>
+            <p>
+              <ng-bind-html class="rich-container" ng-bind-html="$ctrl.promise[$index+2].content">
+              </ng-bind-html>
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+<!--    <ul class="forum-list" style="padding-left:0; text-align: center;">-->
+<!--      <li ng-repeat="post in $ctrl.promise" >-->
+<!--        <a href="/forum/{{post.id}}/">-->
+<!--          <div class="forum-list-body md-truncate">-->
+<!--            <div layout="row" layout-align="space-between center" class="title-padding-top">-->
+<!--              <span class="overflow-title post-title"><strong>{{post.title}}</strong></span>-->
+<!--              <span ng-if="post.comments.length">-->
+<!--                <i style="font-size:18px;" class="far fa-comment"></i>-->
+<!--                  <span>{{post.comments.length}}</span>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <p>-->
+<!--              <ng-bind-html class="rich-container" ng-bind-html="post.content">-->
+<!--              </ng-bind-html>-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--    </ul>-->
+    <nav aria-label="paginated" ng-if="$ctrl.paginate > 1" layout="column" layout-align="center center">
       <ul class="pagination" >
         <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current-1]">
           <button style="color:black;" ng-click="$ctrl.moveToPrevious($event)" class="page-link">

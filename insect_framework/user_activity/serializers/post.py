@@ -17,7 +17,6 @@ class PostSerializer(serializers.ModelSerializer):
         validated_data['author'] = self.context['request'].user
         return super(PostSerializer, self).create(validated_data)
 
-
     def validate_content(self, value):
         if (len(value.encode('utf-8'))) < 512000:
             return value
