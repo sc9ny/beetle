@@ -86,3 +86,20 @@
 .demo:hover {
   opacity: 1;
 }
+
+.gallery-description label {
+  color: white;
+}
+
+md-input-container.gallery-description.md-input-focused label {
+  color: white;
+  left: 0;
+}
+
+.gallery-post {
+  border:1px solid black;
+}
+
+.gallery-post > img {
+  width: 200px;
+}

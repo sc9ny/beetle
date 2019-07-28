@@ -7,7 +7,7 @@
     No registered post yet
   </div>
   <div flex layout="row" layout-align="center center">
-    <search flex on-change="$ctrl.search(searchText)" style="margin-left:30px;"
+    <search flex on-change="$ctrl.search(searchText)"
             disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved" >
     </search>
     <md-button class="md-icon-button" ng-if="$ctrl.currentUser" aria-label="gallery-create"
@@ -17,25 +17,46 @@
   </md-button>
   </div>
   <div flex layout="column">
-    <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length">
+    <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length" class="align-center">
       No result found
     </div>
     <div layout="column" ng-repeat="post in $ctrl.promise" >
       <div layout="column" layout-align="center center" layout-align-gt-xs="start center"
            layout-gt-xs="row" ng-if="$index % 3 == 0" flex class="post-container post-list-body md-truncate">
         <a href="gallery/{{$ctrl.promise[$index].id}}/">
-          <div class="post" ng-if="$ctrl.promise[$index]">
-            <strong>{{$ctrl.promise[$index].title}}</strong>
+          <div class="post gallery-post" ng-if="$ctrl.promise[$index]">
+            <div layout="row" layout-align="space-between" style="margin: 5px 0 5px 0;">
+              <strong>{{$ctrl.promise[$index].title}}</strong>
+              <span ng-if="$ctrl.promise[$index].comments.length">
+                <i style="font-size:18px;" class="far fa-comment"></i>
+                <span>{{$ctrl.promise[$index].comments.length}}</span>
+              </span>
+            </div>
+            <img ng-src="{{$ctrl.promise[$index].photos[0].image}}"/>
           </div>
         </a>
         <a href="gallery/{{$ctrl.promise[$index+1].id}}/" ng-if="$ctrl.promise[$index+1]">
-          <div class="post" ng-if="$ctrl.promise[$index]">
-            <strong>{{$ctrl.promise[$index+1].title}}</strong>
+          <div class="post gallery-post">
+            <div layout="row" layout-align="space-between" style="margin: 5px 0 5px 0;">
+              <strong>{{$ctrl.promise[$index+1].title}}</strong>
+              <span ng-if="$ctrl.promise[$index+1].comments.length">
+                <i style="font-size:18px;" class="far fa-comment"></i>
+                <span>{{$ctrl.promise[$index+1].comments.length}}</span>
+              </span>
+            </div>
+            <img ng-src="{{$ctrl.promise[$index+1].photos[0].image}}"/>
           </div>
         </a>
         <a href="gallery/{{$ctrl.promise[$index+2].id}}/" ng-if="$ctrl.promise[$index+2]">
-          <div class="post">
-            <strong>{{$ctrl.promise[$index+2].title}}</strong>
+          <div class="post gallery-post">
+            <div layout="row" layout-align="space-between" style="margin: 5px 0 5px 0;">
+              <strong>{{$ctrl.promise[$index+2].title}}</strong>
+              <span ng-if="$ctrl.promise[$index+2].comments.length">
+                <i style="font-size:18px;" class="far fa-comment"></i>
+                <span>{{$ctrl.promise[$index+2].comments.length}}</span>
+              </span>
+            </div>
+            <img ng-src="{{$ctrl.promise[$index+2].photos[0].image}}"/>
           </div>
         </a>
       </div>

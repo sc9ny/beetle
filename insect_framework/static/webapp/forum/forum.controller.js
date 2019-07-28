@@ -36,6 +36,7 @@
       });
 
       this.search = function (searchText) {
+      console.log(searchText)
         this.hasSearched = true;
         this.searchQuery = {'search': searchText}
         this.promise = Forum.query({page:1, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
@@ -51,6 +52,10 @@
           }
           self.content = response;
         })
+        if (!angular.isDefined(searchText)) {
+          this.hasSearched = false;
+          this.currentPage = 1;
+        }
       }
 
       this.requestNext = function ($event) {
@@ -87,8 +92,10 @@
           associated_post: self.currentForum.id,
           author: self.currentUser.username
         };
-        Comment.post(newComment).$promise.then(() => {
-          $location.url('/forum/' + self.currentForum.id);
+        Comment.post(newComment).$promise.then((response) => {
+          //$location.url('/forum/' + self.currentForum.id);
+          self.commentText='';
+          self.currentForum.comments.push(response);
         })
       }
 

@@ -35,16 +35,16 @@
       <md-list-item ng-if="!$ctrl.currentForum.comments.length">
         There is no comment to this forum
       </md-list-item>
-      <md-list-item class="md-2-line" ng-if="$ctrl.currentForum.comments.length"
-        ng-repeat="comment in $ctrl.currentForum.comments">
-        <div flex="10" layout="column" layout-align="center start">
-          <div>{{comment.author}} </div>
+      <md-list-item ng-if="$ctrl.currentForum.comments.length" style="margin-left:30px;" flex class="forum-comment-list"
+        ng-repeat="comment in $ctrl.currentForum.comments" layout="column" layout-align="start start">
+        <div flex="100" style="width:100%;" layout="row" layout-align="space-between center">
+          <div> <i class="far fa-user" style="font-size:14px; margin-right:10px;"></i>{{comment.author}} </div>
           <div> {{comment.created| date:"MM/dd/yyyy" }} </div>
         </div>
-        <div flex="85" style="overflow: hidden; word-wrap: break-word;">
+        <div style="overflow: hidden; word-wrap: break-word; margin:10px 0 5px 15px;">
           {{comment.content}}
         </div>
-        <div flex="5">
+        <div class="md-secondary">
           <md-button class="md-icon-button" aria-label="delete"
             ng-click="$ctrl.deleteComment(comment, $index)"
             ng-if="$ctrl.permission(comment)">
@@ -64,7 +64,7 @@
           <textarea ng-model=$ctrl.commentText aria-label="commentText" placeholder="What's in your mind?">
           </textarea>
         </md-input-container>
-        <md-button ng-click="$ctrl.submitComment()" flex="10" class="simple-button">
+        <md-button ng-click="$ctrl.submitComment()" class="simple-button">
           Submit
         </md-button>
       </div>

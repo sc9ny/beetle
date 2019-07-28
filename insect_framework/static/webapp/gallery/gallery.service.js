@@ -41,15 +41,18 @@ function transformImageRequest(data) {
   }
 
   function GalleryPost ($resource) {
-    return $resource('/api/v1/gallery-post/:id/', {id: '@id'})
+    let action = {
+      update: {method: 'PATCH'}
+    }
+    return $resource('/api/v1/gallery-post/:id/', {id: '@id'}, action)
   }
 
   function SimpleGalleryPost ($resource) {
-    return $resource('/api/v1/simple-gallery-post/:id', {id: '@id'})
+    return $resource('/api/v1/simple-gallery-post/:id/', {id: '@id'})
   }
 
   function GalleryComment ($resource) {
-    return $resource('/api/v1/gallery-comment/:id', {id: '@id'})
+    return $resource('/api/v1/gallery-comment/:id/', {id: '@id'})
   }
 
 })();

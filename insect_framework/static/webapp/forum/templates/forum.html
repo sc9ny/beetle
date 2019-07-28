@@ -1,4 +1,4 @@
-<div layout-fill layout="column" layout-align="center center" ng-if="!$ctrl.promise.$resolved">
+<div flex layout="column" layout-align="center center" ng-if="!$ctrl.promise.$resolved">
   <md-progress-circular></md-progress-circular>
 </div>
 
@@ -17,10 +17,10 @@
   </md-button>
   </div>
   <div flex layout="column" >
-    <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length">
+    <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length" class="align-center">
       No result found
     </div>
-    <div layout="column" ng-repeat="post in $ctrl.promise" >
+    <div layout="column" ng-repeat="post in $ctrl.promise" ng-if="$ctrl.content">
       <div layout="column" layout-align="center center" layout-align-gt-xs="start center"
            layout-gt-xs="row" ng-if="$index % 3 == 0" flex class="post-container post-list-body md-truncate">
         <a href="forum/{{$ctrl.promise[$index].id}}/">
@@ -70,25 +70,6 @@
         </a>
       </div>
     </div>
-<!--    <ul class="forum-list" style="padding-left:0; text-align: center;">-->
-<!--      <li ng-repeat="post in $ctrl.promise" >-->
-<!--        <a href="/forum/{{post.id}}/">-->
-<!--          <div class="forum-list-body md-truncate">-->
-<!--            <div layout="row" layout-align="space-between center" class="title-padding-top">-->
-<!--              <span class="overflow-title post-title"><strong>{{post.title}}</strong></span>-->
-<!--              <span ng-if="post.comments.length">-->
-<!--                <i style="font-size:18px;" class="far fa-comment"></i>-->
-<!--                  <span>{{post.comments.length}}</span>-->
-<!--              </span>-->
-<!--            </div>-->
-<!--            <p>-->
-<!--              <ng-bind-html class="rich-container" ng-bind-html="post.content">-->
-<!--              </ng-bind-html>-->
-<!--            </p>-->
-<!--          </div>-->
-<!--        </a>-->
-<!--      </li>-->
-<!--    </ul>-->
     <nav aria-label="paginated" ng-if="$ctrl.paginate > 1" layout="column" layout-align="center center">
       <ul class="pagination" >
         <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current-1]">

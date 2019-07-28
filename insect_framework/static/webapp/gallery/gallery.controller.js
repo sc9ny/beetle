@@ -35,7 +35,6 @@
     this.search = function(searchText) {
       this.hasSearched = true;
       this.searchQuery = {'search': searchText};
-      this.searchQuery = {'search': searchText}
         this.promise = GalleryPost.query({page:1, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
           self.postCounts = (parseInt(headerGetter('X-count')));
           self.paginate = Math.ceil(self.postCounts / this.limit);
@@ -49,6 +48,10 @@
           }
           self.content = response;
         })
+      if (!angular.isDefined(searchText)) {
+          this.hasSearched = false;
+          this.currentPage = 1;
+      }
     }
     this.requestNext = function ($event) {
       let query = {page: $event, limit: this.limit};
@@ -101,7 +104,17 @@
 
     this.submitComment = function() {
       let newComment = new GalleryComment({comment: self.commentText, gallery_post: self.currentGallery.id})
-      newComment.$save();
+      newComment.$save().then((response) => {
+        self.currentGallery.comments.push(response);
+        this.commentText = '';
+      });
+    }
+
+    self.deleteComment = function(comment, index) {
+      // need to manually remove item from DOM
+      GalleryComment.delete({id:comment.id}).$promise.then((response) => {
+        self.currentGallery.comments.splice(index, 1);
+      });
     }
 
     this.permission = function(content) {

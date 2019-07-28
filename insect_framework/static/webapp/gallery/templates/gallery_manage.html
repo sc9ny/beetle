@@ -9,7 +9,7 @@
         </div>
     </md-input-container>
 
-    <input type="file" multiple ng-file-model="files" aria-label="photos"
+    <input type="file" multiple ng-file-model="files" aria-label="photos" ng-if="!newGalleryPost.id"
            onchange="angular.element(this).scope().imageUpload(event)" />
   </div>
   <div>
@@ -21,8 +21,8 @@
   </div>
 
   <div ng-if="steps" class="caption-container" layout="row" layout-align="center center">
-    <md-input-container flex="70" >
-      <input type="text" ng-model="files[slideIndex].description" placeholder="Type description of your photo here"/>
+    <md-input-container flex="70" class="gallery-description">
+      <input type="text" ng-model="files[slideIndex].description" style="color: white;" placeholder="Type description for this photo"/>
     </md-input-container>
   </div>
 

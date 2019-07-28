@@ -41,3 +41,7 @@
 .title-padding-top {
   padding-top: 5px;
 }
+
+.forum-comment-list:before {
+  min-height:5px;
+}
