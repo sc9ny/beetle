@@ -1,56 +1,63 @@
 <md-card class="gallery-container">
   <md-card-header>
     <md-card-header-text flex>
-        <div class="md-title" flex style="word-wrap: break-word;">{{$ctrl.currentGallery.title}}</div>
+      <div class="md-title" flex style="word-wrap: break-word;">{{$ctrl.currentGallery.title}}</div>
 
-        <div class="md-subhead" layout="row" layout-align="space-between center">
-          <div>
-            <i class="far fa-user" style="font-size:14px;"></i>
-            By {{$ctrl.currentGallery.author}}
-          </div>
-          <div>
-            {{$ctrl.currentGallerycreated | date:'MM/dd/yyyy'}}
-          </div>
+      <div class="md-subhead" layout="row" layout-align="space-between center">
+        <div>
+          <i class="far fa-user" style="font-size:14px;"></i>
+          By {{$ctrl.currentGallery.author}}
         </div>
+        <div>
+          {{$ctrl.currentGallerycreated | date:'MM/dd/yyyy'}}
+          <md-button class="md-icon-button" aria-label="edit"
+                       ng-click="$ctrl.deleteGalleryPost()"
+                       style="padding-top:6px;"
+                       ng-if="$ctrl.permission($ctrl.currentGallery)">
+              <i style="font-size:14px;" class="far fa-edit"></i>
+            </md-button>
+        </div>
+      </div>
 
-      </md-card-header-text>
+    </md-card-header-text>
   </md-card-header>
   <md-card-content>
-  <div>
-    <img style="width: 100%;" ng-src="{{$ctrl.selectedImage.image}}" alt=""/>
     <div>
-      <a class="prev" ng-click="$ctrl.plusSlides(-1)">&#10094;</a>
-      <a class="next" ng-click="$ctrl.plusSlides(1)">&#10095;</a>
+      <img style="width: 100%;" ng-src="{{$ctrl.selectedImage.image}}" alt=""/>
+      <div>
+        <a class="prev" ng-click="$ctrl.plusSlides(-1)">&#10094;</a>
+        <a class="next" ng-click="$ctrl.plusSlides(1)">&#10095;</a>
+      </div>
     </div>
-  </div>
-  <div ng-if="$ctrl.selectedImage.description" class="caption-container" layout="row" layout-align="center center">
+    <div ng-if="$ctrl.selectedImage.description" class="caption-container" layout="row" layout-align="center center">
       <span>{{$ctrl.selectedImage.description}}</span>
-  </div>
-
-  <div layout="row" layout-align="center center" class="caption-container" ng-if="$ctrl.currentGallery.photos">
-    <div ng-repeat="photo in $ctrl.currentGallery.photos" layout="column">
-      <img class="demo cursor" ng-src="{{photo.image}}" alt="" ng-click="$ctrl.currentSlide($index)"/>
     </div>
-  </div>
-  <md-list class="comment-list">
+
+    <div layout="row" layout-align="center center" class="caption-container" ng-if="$ctrl.currentGallery.photos">
+      <div ng-repeat="photo in $ctrl.currentGallery.photos" layout="column">
+        <img class="demo cursor" ng-src="{{photo.image}}" alt="" ng-click="$ctrl.currentSlide($index)"/>
+      </div>
+    </div>
+    <md-list class="comment-list">
       <i class="fa fa-comment-alt"></i> Comments
       <md-divider style="margin-top: 20px;"></md-divider>
       <md-list-item ng-if="!$ctrl.currentGallery.comments.length">
         There is no comment to this forum
       </md-list-item>
-      <md-list-item ng-if="$ctrl.currentGallery.comments.length" style="margin-left:30px;" flex class="forum-comment-list"
-        ng-repeat="comment in $ctrl.currentGallery.comments" layout="column" layout-align="start start">
+      <md-list-item ng-if="$ctrl.currentGallery.comments.length" style="margin-left:30px;" flex
+                    class="forum-comment-list"
+                    ng-repeat="comment in $ctrl.currentGallery.comments" layout="column" layout-align="start start">
         <div flex="100" style="width:100%;" layout="row" layout-align="space-between center">
-          <div> <i class="far fa-user" style="font-size:14px; margin-right:10px;"></i>{{comment.author}} </div>
-          <div> {{comment.created| date:"MM/dd/yyyy" }} </div>
+          <div><i class="far fa-user" style="font-size:14px; margin-right:10px;"></i>{{comment.author}}</div>
+          <div> {{comment.created| date:"MM/dd/yyyy" }}</div>
         </div>
         <div style="overflow: hidden; word-wrap: break-word; margin:10px 0 5px 15px;">
           {{comment.comment}}
         </div>
         <div class="md-secondary">
           <md-button class="md-icon-button" aria-label="delete"
-            ng-click="$ctrl.deleteComment(comment, $index)"
-            ng-if="$ctrl.permission(comment)">
+                     ng-click="$ctrl.deleteComment(comment, $index)"
+                     ng-if="$ctrl.permission(comment)">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </md-button>
         </div>
@@ -61,16 +68,16 @@
 </md-card>
 
 <form name="commentForm" style="margin-top: 20px;" ng-if="$ctrl.currentUser">
-    <md-card class="max-length-content centered">
-      <div style="margin: 30px;">
+  <md-card class="max-length-content centered">
+    <div style="margin: 30px;">
       <md-input-container style="width:100%;">
-          <label> Write your comment here </label>
-          <textarea ng-model=$ctrl.commentText aria-label="commentText" placeholder="What's in your mind?">
+        <label> Write your comment here </label>
+        <textarea ng-model=$ctrl.commentText aria-label="commentText" placeholder="What's in your mind?">
           </textarea>
-        </md-input-container>
-        <md-button ng-click="$ctrl.submitComment()" class="simple-button">
-          Submit
-        </md-button>
-      </div>
-    </md-card>
-  </form>
+      </md-input-container>
+      <md-button ng-click="$ctrl.submitComment()" class="simple-button">
+        Submit
+      </md-button>
+    </div>
+  </md-card>
+</form>

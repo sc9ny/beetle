@@ -8,7 +8,7 @@
 
   galleryController.$inject = ['user', 'GalleryPost'];
   galleryManageController.$inject = ['user', '$scope', 'Gallery', 'GalleryPost', '$location'];
-  galleryDetailController.$inject = ['user', 'currentGallery', 'GalleryComment', 'IsStaffOrAccountOwner'];
+  galleryDetailController.$inject = ['user', 'currentGallery', 'GalleryComment', 'IsStaffOrAccountOwner', '$location'];
 
   function galleryController(user, GalleryPost) {
     const self = this;
@@ -73,7 +73,7 @@
     }
   }
 
-  function galleryDetailController(user, currentGallery, GalleryComment, IsStaffOrAccountOwner) {
+  function galleryDetailController(user, currentGallery, GalleryComment, IsStaffOrAccountOwner, $location) {
     const self = this;
     this.currentUser = user;
     this.currentGallery = currentGallery;
@@ -110,6 +110,12 @@
       });
     }
 
+    this.deleteGalleryPost = function () {
+      self.currentGallery.$delete().then(() => {
+        $location.url('/gallery/')
+      })
+    }
+
     self.deleteComment = function(comment, index) {
       // need to manually remove item from DOM
       GalleryComment.delete({id:comment.id}).$promise.then((response) => {
@@ -127,11 +133,13 @@
     $scope.slideIndex = 0;
     $scope.previousIndex = undefined;
     $scope.files =[];
+    $scope.filesLabel = 'No file selected';
     $scope.newGalleryPost = new GalleryPost({
       title: ''
     });
 
     $scope.upload = function() {
+      console.log($scope.files);
       $scope.newGalleryPost.$save().then(response => {
         for (let i = 0; i < $scope.files.length; i++) {
           $scope.files[i].gallery_post = response.id
@@ -165,6 +173,7 @@
             steps.push(e.target.result);
             if(isLastFile){
               $scope.steps = steps;
+              $scope.filesLabel= $scope.steps.length + ' selected';
               $scope.showSlides(0);
             }
           })
@@ -172,7 +181,13 @@
         if(i == event.target.files.length - 1){
           isLastFile  = true;
         }
-        reader.readAsDataURL(event.target.files[i]);
+        console.log(event.target.files[i]);
+        if (event.target.files[i].type.split('/')[0] !== 'image') {
+          alert ('Excluded invalid images')
+
+        }
+        else
+          reader.readAsDataURL(event.target.files[i]);
       }
     }
     if ($scope.steps)
@@ -194,30 +209,33 @@
 })();
 
 angular.module('gallery.controller').directive('ngFileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            var model = $parse(attrs.ngFileModel);
-            var isMultiple = attrs.multiple;
-            var modelSetter = model.assign;
-            element.bind('change', function () {
-                var values = [];
-                angular.forEach(element[0].files, function (item) {
-                    var value = {
-                        image: item,
-                        description: '',
-                        gallery_post: undefined,
-                    };
-                    values.push(value);
-                });
-                scope.$apply(function () {
-                    if (isMultiple) {
-                        modelSetter(scope, values);
-                    } else {
-                        modelSetter(scope, values[0]);
-                    }
-                });
-            });
-        }
-    };
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var model = $parse(attrs.ngFileModel);
+      var isMultiple = attrs.multiple;
+      var modelSetter = model.assign;
+      element.bind('change', function () {
+        var values = [];
+        angular.forEach(element[0].files, function (item) {
+
+          if (item.type.split('/')[0] === 'image') {
+            var value = {
+              image: item,
+              description: '',
+              gallery_post: undefined,
+            };
+            values.push(value);
+          }
+        });
+        scope.$apply(function () {
+          if (isMultiple) {
+              modelSetter(scope, values);
+          } else {
+              modelSetter(scope, values[0]);
+          }
+        });
+      });
+    }
+  };
 }]);

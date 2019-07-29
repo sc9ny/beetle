@@ -1,16 +1,18 @@
 <form name="galleryForm" class="gallery-container">
   <div layout="column">
     <md-input-container>
-        <input name="title" type="text" ng-model="newGalleryPost.title" aria-label="title"
-               placeholder="Title" md-maxlength="50" required>
-        <div ng-messages="galleryForm.title.$error" ng-show="galleryForm.title.$touched">
-            <div ng-message="required">Title is required</div>
-            <div ng-message="md-maxlength"> Title is too long</div>
-        </div>
+      <input name="title" type="text" ng-model="newGalleryPost.title" aria-label="title"
+             placeholder="Title" md-maxlength="50" required>
+      <div ng-messages="galleryForm.title.$error" ng-show="galleryForm.title.$touched">
+        <div ng-message="required">Title is required</div>
+        <div ng-message="md-maxlength"> Title is too long</div>
+      </div>
     </md-input-container>
 
-    <input type="file" multiple ng-file-model="files" aria-label="photos" ng-if="!newGalleryPost.id"
-           onchange="angular.element(this).scope().imageUpload(event)" />
+    <input type="file" multiple name="file" id="file" ng-file-model="files" aria-label="photos" class="inputfile"
+           onchange="angular.element(this).scope().imageUpload(event)"/>
+    <label for="file"><span class="photo-choose-button">Choose a file </span><span class="photo-file-length">{{filesLabel}}</span></label>
+
   </div>
   <div>
     <img style="width: 100%;" ng-src="{{selectedImage}}" alt=""/>
@@ -22,7 +24,8 @@
 
   <div ng-if="steps" class="caption-container" layout="row" layout-align="center center">
     <md-input-container flex="70" class="gallery-description">
-      <input type="text" ng-model="files[slideIndex].description" style="color: white;" placeholder="Type description for this photo"/>
+      <input type="text" ng-model="files[slideIndex].description" style="color: white;"
+             placeholder="Type description for this photo"/>
     </md-input-container>
   </div>
 
@@ -33,7 +36,7 @@
   </div>
 </form>
 <div layout="row" layout-align="end center">
-  <md-button class="simple-button" ng-disabled="galleryForm.$invalid" aria-label="submit" ng-click="upload()">
+  <md-button class="simple-button" ng-disabled="galleryForm.$invalid || !files.length" aria-label="submit" ng-click="upload()">
     upload
   </md-button>
 </div>

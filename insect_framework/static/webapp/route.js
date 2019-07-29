@@ -107,8 +107,7 @@
       }
     }).
     when ('/', {
-      templateUrl: '/static/webapp/base.html',
-      controller: 'mainController'
+      templateUrl: '/static/webapp/base.html'
     }).
     otherwise({
       redirectTo: '/notFound/',

@@ -3,7 +3,7 @@
     <md-input-container>
       <label>Title:</label>
       <input name="title" md-maxlength="50" required
-        ng-model="$ctrl.forum.title" type="text">
+             ng-model="$ctrl.forum.title" type="text">
       <div ng-messages="forumForm.title.$error" ng-show="forumForm.title.$touched">
         <div ng-message="required">Title is required</div>
         <div ng-message="md-maxlength"> Title is too long</div>
@@ -21,13 +21,13 @@
   </form>
   <div layout="row" layout-align="space-between end">
     <md-button class="md-warn" aria-label="delete"
-      ng-if="$ctrl.forum.id"
-      ng-click="$ctrl.deleteForum()">
+               ng-if="$ctrl.forum.id"
+               ng-click="$ctrl.deleteForum()">
       delete
     </md-button>
     <div>
       <md-button class="simple-button" ng-click="$ctrl.submit()"
-        ng-disabled="forumForm.$invalid" aria-label="submit">
+                 ng-disabled="forumForm.$invalid" aria-label="submit">
         Submit
       </md-button>
       <md-button class="simple-button" aria-label="cancel" href="/forum/">

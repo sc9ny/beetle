@@ -2,25 +2,25 @@
   <md-progress-circular></md-progress-circular>
 </div>
 
-<div flex ng-if="$ctrl.content" style="margin-top:100px;" >
+<div flex ng-if="$ctrl.content" style="margin-top:100px;">
   <div ng-if="!$ctrl.promise.length && !$ctrl.hasSearched">
     No registered post yet
   </div>
   <div flex layout="row" layout-align="center center">
     <search flex on-change="$ctrl.search(searchText)"
-            disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved" >
+            disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved">
     </search>
     <md-button class="md-icon-button" ng-if="$ctrl.currentUser" aria-label="gallery-create"
-    href="/gallery/create/" style="margin-right:30px;">
-    <i style="font-size:18px;" class="far fa-edit"></i>
-    <md-tooltip>Create</md-tooltip>
-  </md-button>
+               href="/gallery/create/" style="margin-right:30px;">
+      <i style="font-size:18px;" class="far fa-edit"></i>
+      <md-tooltip>Create</md-tooltip>
+    </md-button>
   </div>
   <div flex layout="column">
     <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length" class="align-center">
       No result found
     </div>
-    <div layout="column" ng-repeat="post in $ctrl.promise" >
+    <div layout="column" ng-repeat="post in $ctrl.promise">
       <div layout="column" layout-align="center center" layout-align-gt-xs="start center"
            layout-gt-xs="row" ng-if="$index % 3 == 0" flex class="post-container post-list-body md-truncate">
         <a href="gallery/{{$ctrl.promise[$index].id}}/">
@@ -62,22 +62,22 @@
       </div>
     </div>
     <nav aria-label="paginated" ng-if="$ctrl.paginate > 1" layout="column" layout-align="center center">
-      <ul class="pagination" >
+      <ul class="pagination">
         <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current-1]">
           <button style="color:black;" ng-click="$ctrl.moveToPrevious($event)" class="page-link">
-             <<
-           </button>
+            <<
+          </button>
           <md-tooltip>Previous</md-tooltip>
         </li>
         <li class="page-item" ng-repeat="page in $ctrl.proceed[$ctrl.current]">
           <button ng-style="{'color': ($ctrl.currentPage == page+1) ? '#ffaaa0' : 'black'}"
-            class="page-link" ng-click="$ctrl.requestNext(page+1)">
+                  class="page-link" ng-click="$ctrl.requestNext(page+1)">
             {{page+1}}
           </button>
         <li class="page-item" ng-if="$ctrl.proceed[$ctrl.current+1]">
           <button style="color:black;" class="page-link" ng-click=$ctrl.moveToNext($event)>
-             >>
-           </button>
+            >>
+          </button>
           <md-tooltip>Next</md-tooltip>
         </li>
       </ul>

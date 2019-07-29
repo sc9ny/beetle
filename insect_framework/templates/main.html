@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="main">
   <head>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
@@ -23,7 +23,7 @@
     {% include 'javascript.html' %}
     <base href="/">
   </head>
-  <body ng-app="main" >
+  <body ng-controller="mainController">
     <div layout="row" layout-align="end center" style="min-height:50px;">
       <div class="float-right" style="padding-right:15px;">
         <span>
