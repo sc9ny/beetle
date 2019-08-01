@@ -6,7 +6,7 @@
   <div ng-if="!$ctrl.promise.length && !$ctrl.hasSearched">
     No registered post yet
   </div>
-  <div flex layout="row" layout-align="center center">
+  <div flex layout="row">
     <search flex on-change="$ctrl.search(searchText)"
             disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved">
     </search>
@@ -22,42 +22,44 @@
     </div>
     <div layout="column" ng-repeat="post in $ctrl.promise">
       <div layout="column" layout-align="center center" layout-align-gt-xs="start center"
-           layout-gt-xs="row" ng-if="$index % 3 == 0" flex class="post-container post-list-body md-truncate">
-        <a href="gallery/{{$ctrl.promise[$index].id}}/">
-          <div class="post gallery-post" ng-if="$ctrl.promise[$index]">
-            <div layout="row" layout-align="space-between" style="margin: 5px 0 5px 0;">
+           layout-gt-xs="row" ng-if="$index % 3 == 0">
+        <a href="gallery/{{$ctrl.promise[$index].id}}/" ng-if="$ctrl.promise[$index]">
+          <md-card class="gallery">
+            <img ng-src="{{$ctrl.promise[$index].photos[0].image}}"/>
+            <md-card-content layout="row" layout-align="space-between">
               <strong>{{$ctrl.promise[$index].title}}</strong>
               <span ng-if="$ctrl.promise[$index].comments.length">
                 <i style="font-size:18px;" class="far fa-comment"></i>
                 <span>{{$ctrl.promise[$index].comments.length}}</span>
               </span>
-            </div>
-            <img ng-src="{{$ctrl.promise[$index].photos[0].image}}"/>
-          </div>
+            </md-card-content>
+          </md-card>
         </a>
         <a href="gallery/{{$ctrl.promise[$index+1].id}}/" ng-if="$ctrl.promise[$index+1]">
-          <div class="post gallery-post">
-            <div layout="row" layout-align="space-between" style="margin: 5px 0 5px 0;">
+          <md-card class="gallery">
+            <img ng-src="{{$ctrl.promise[$index+1].photos[0].image}}"/>
+            <md-card-content layout="row" layout-align="space-between">
               <strong>{{$ctrl.promise[$index+1].title}}</strong>
               <span ng-if="$ctrl.promise[$index+1].comments.length">
                 <i style="font-size:18px;" class="far fa-comment"></i>
                 <span>{{$ctrl.promise[$index+1].comments.length}}</span>
               </span>
-            </div>
-            <img ng-src="{{$ctrl.promise[$index+1].photos[0].image}}"/>
-          </div>
+            </md-card-content>
+
+          </md-card>
         </a>
         <a href="gallery/{{$ctrl.promise[$index+2].id}}/" ng-if="$ctrl.promise[$index+2]">
-          <div class="post gallery-post">
-            <div layout="row" layout-align="space-between" style="margin: 5px 0 5px 0;">
+          <md-card class="gallery">
+            <img ng-src="{{$ctrl.promise[$index+2].photos[0].image}}"/>
+            <md-card-content layout="row" layout-align="space-between" >
               <strong>{{$ctrl.promise[$index+2].title}}</strong>
               <span ng-if="$ctrl.promise[$index+2].comments.length">
                 <i style="font-size:18px;" class="far fa-comment"></i>
                 <span>{{$ctrl.promise[$index+2].comments.length}}</span>
               </span>
-            </div>
-            <img ng-src="{{$ctrl.promise[$index+2].photos[0].image}}"/>
-          </div>
+            </md-card-content>
+
+          </md-card>
         </a>
       </div>
     </div>

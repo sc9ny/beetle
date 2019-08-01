@@ -161,8 +161,8 @@ a.radius-button.btn.btn-dark {
 }
 
 .button-looking-anchor {
-  color: white;
-  border: 1px solid white;
+  color: black;
+  border: 1px solid black;
   padding: 10px 10px;
 }
 
@@ -202,10 +202,10 @@ a.radius-button.btn.btn-dark {
     grid-area: intro;
 }
 .q2 {
-    -webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(90%);
+    /*-webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
+    /*filter: grayscale(90%);*/
     grid-area: pic1;
-    background-image: url("/static/media/giant_stag.png");
+    background-image: url("/static/media/muel.jpg");
     background-size: cover;
 	  -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -214,11 +214,11 @@ a.radius-button.btn.btn-dark {
   	min-height: 50vh;
   	padding: 4em 0;
     text-align: center;
-    color: white;
+    color: black;
 }
 .q3 {
     grid-area: pic2;
-    background-image: url("/static/media/beetle1.jpeg");
+    background-image: url("/static/media/ugan.jpg");
     background-size: cover;
 	  -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -228,12 +228,11 @@ a.radius-button.btn.btn-dark {
   	padding: 0;
     padding: 4em 0;
     text-align: center;
-    color: white;
 }
 .q4 {
 
     grid-area: pic3;
-    background-image: url("/static/media/moth.jpg");
+    background-image: url("/static/media/metal.jpg");
     background-size: cover;
 	  -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -243,7 +242,6 @@ a.radius-button.btn.btn-dark {
   	padding: 0;
     padding: 4em 0;
     text-align: center;
-    color: white;
 }
 
 .md-content.md-default-them, md-content {
@@ -341,3 +339,5 @@ md-progress-circular.md-default-theme path, md-progress-circular path {
   text-overflow: ellipsis;
   line-height: 22px;
 }
+
+input:focus {outline: none; }
