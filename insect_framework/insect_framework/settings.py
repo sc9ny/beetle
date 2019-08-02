@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'user_activity.apps.UserActivityConfig',
     'authentication.apps.AuthenticationConfig',
     'gallery.apps.GalleryConfig',
+    'sale.apps.SaleConfig',
+    'question.apps.QuestionConfig',
     'compressor',
     'ckeditor',
     'ckeditor_uploader',

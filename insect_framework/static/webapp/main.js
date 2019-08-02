@@ -10,6 +10,8 @@
       'profile',
       'gallery',
       'utils',
+      'sale',
+      'question',
       'ngMaterial',
     ]);
 
