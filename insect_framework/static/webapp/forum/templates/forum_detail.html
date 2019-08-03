@@ -16,7 +16,7 @@
           <div>
             {{$ctrl.currentForum.created | date:'MM/dd/yyyy'}}
             <md-button class="md-icon-button" aria-label="edit"
-                       href="/forum/update/{{$ctrl.currentForum.id}}/"
+                       href="/{{$ctrl.navigate}}/update/{{$ctrl.currentForum.id}}/"
                        style="padding-top:6px;"
                        ng-if="$ctrl.permission($ctrl.currentForum)">
               <i style="font-size:14px;" class="far fa-edit"></i>

@@ -20,6 +20,7 @@
       this.proceed = {};
       this.currentUser = user;
       this.hasSearched = false;
+      this.navigate ='forum';
 
       this.promise = Forum.query({page:1, limit: this.limit}, (response, headerGetter) => {
         self.postCounts = (parseInt(headerGetter('X-count')));
@@ -82,6 +83,7 @@
       const self = this;
       self.currentUser = user;
       self.commentText = '';
+      self.navigate ='forum';
       self.currentForum = Forum.get({id:$routeParams.id});
       self.permission = function(content) {
         return IsStaffOrAccountOwner(self.currentUser, content);

@@ -23,7 +23,7 @@ class CreateAnswerSerializer(AnswerSerializer):
 
 class QuestionSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(read_only=True, slug_field='username')
-    comments = AnswerSerializer(many=True, read_only=True)
+    comments = AnswerSerializer(many=True, read_only=True, source='answer')
 
     class Meta:
         model = Question

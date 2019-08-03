@@ -106,6 +106,98 @@
         }
       }
     }).
+    when('/question/', {
+      controller: 'questionController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/forum/templates/forum.html/',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when('/question/:id/', {
+      controller: 'questionDetailController',
+      controllerAs: '$ctrl',
+      templateUrl: 'static/webapp/forum/templates/forum_detail.html/',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when ('/question/create/', {
+      controller: 'manageQuestionController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/forum/templates/forum_manage.html/',
+      resolve : {
+        currentForum : () => {
+          return null;
+        },
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when ('/question/update/:id/', {
+      controller: 'manageQuestionController',
+      controllerAs: '$ctrl',
+      templateUrl: 'static/webapp/forum/templates/forum_manage.html/',
+      resolve: {
+        currentForum : ($route, Question) => {
+          return Question.get({id:$route.current.params.id}).$promise;
+        },
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when('/sale/', {
+      controller: 'saleController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/forum/templates/forum.html/',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when('/sale/:id/', {
+      controller: 'saleDetailController',
+      controllerAs: '$ctrl',
+      templateUrl: 'static/webapp/forum/templates/forum_detail.html/',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when ('/sale/create/', {
+      controller: 'manageSaleController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/forum/templates/forum_manage.html/',
+      resolve : {
+        currentForum : () => {
+          return null;
+        },
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+    when ('/sale/update/:id/', {
+      controller: 'manageSaleController',
+      controllerAs: '$ctrl',
+      templateUrl: 'static/webapp/forum/templates/forum_manage.html/',
+      resolve: {
+        currentForum : ($route, Sale) => {
+          return Sale.get({id:$route.current.params.id}).$promise;
+        },
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
     when ('/', {
       templateUrl: '/static/webapp/base.html'
     }).

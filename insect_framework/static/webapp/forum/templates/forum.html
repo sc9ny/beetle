@@ -7,7 +7,7 @@
     No registered post yet
   </div>
   <div flex layout="row" layout-align="center center">
-    <search flex on-change="$ctrl.search(searchText)"
+    <search flex="50" on-change="$ctrl.search(searchText)" flex-gt-xs="100"
             disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved">
     </search>
     <md-button class="md-icon-button" ng-if="$ctrl.currentUser" aria-label="forum-create"
@@ -23,7 +23,7 @@
     <div layout="column" ng-repeat="post in $ctrl.promise" ng-if="$ctrl.content">
       <div layout="column" layout-align="center center" layout-align-gt-xs="start center"
            layout-gt-xs="row" ng-if="$index % 3 == 0" flex class="post-container post-list-body md-truncate">
-        <a href="forum/{{$ctrl.promise[$index].id}}/">
+        <a href="{{$ctrl.navigate}}/{{$ctrl.promise[$index].id}}/">
           <div class="post forum-list-body md-truncate">
             <div layout="row" layout-align="space-between center" class="title-padding-top">
               <span class="overflow-title post-title"><strong>{{$ctrl.promise[$index].title}}</strong></span>
@@ -38,7 +38,7 @@
             </p>
           </div>
         </a>
-        <a href="forum/{{$ctrl.promise[$index+1].id}}/" ng-if="$ctrl.promise[$index+1]">
+        <a href="{{$ctrl.navigate}}/{{$ctrl.promise[$index+1].id}}/" ng-if="$ctrl.promise[$index+1]">
           <div class="post forum-list-body md-truncate">
             <div layout="row" layout-align="space-between center" class="title-padding-top">
               <span class="overflow-title post-title"><strong>{{$ctrl.promise[$index+1].title}}</strong></span>
@@ -53,7 +53,7 @@
             </p>
           </div>
         </a>
-        <a href="forum/{{$ctrl.promise[$index+2].id}}/" ng-if="$ctrl.promise[$index+2]">
+        <a href="{{$ctrl.navigate}}/{{$ctrl.promise[$index+2].id}}/" ng-if="$ctrl.promise[$index+2]">
           <div class="post forum-list-body md-truncate">
             <div layout="row" layout-align="space-between center" class="title-padding-top">
               <span class="overflow-title post-title"><strong>{{$ctrl.promise[$index+2].title}}</strong></span>
