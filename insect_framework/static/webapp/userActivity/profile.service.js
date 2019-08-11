@@ -3,9 +3,11 @@
 
   angular
     .module('profile.services')
-    .factory('Profile', Profile);
+    .factory('Profile', Profile)
+    .factory('UserProfile', UserProfile);
 
     Profile.$inject = ['$resource'];
+    UserProfile.$inject = ['$resource'];
 
     function Profile ($resource) {
 
@@ -26,5 +28,10 @@
         };
         return $resource ('api/v1/mycomment/:id/', cfg);
       }
+    }
+
+    function UserProfile ($resource) {
+
+      return $resource ('api/v1/accounts/:username/');
     }
 })();

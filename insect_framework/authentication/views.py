@@ -19,7 +19,8 @@ class AccountViewSet(viewsets.ModelViewSet):
         if (self.request.method in permissions.SAFE_METHODS or
             self.request.method == 'POST'):
             self.permission_classes = [permissions.AllowAny,]
-        self.permission_classes = [IsStaffOrAccountOwner,]
+        else:
+            self.permission_classes = [IsStaffOrAccountOwner,]
 
         return super(AccountViewSet, self).get_permissions()
 

@@ -4,10 +4,10 @@
       <div class="md-title" flex style="word-wrap: break-word;">{{$ctrl.currentGallery.title}}</div>
 
       <div class="md-subhead" layout="row" layout-align="space-between center">
-        <div>
+        <a href="/profile/{{$ctrl.currentForum.author}}" class="md-subhead">
           <i class="far fa-user" style="font-size:14px;"></i>
           By {{$ctrl.currentGallery.author}}
-        </div>
+        </a>
         <div>
           {{$ctrl.currentGallerycreated | date:'MM/dd/yyyy'}}
           <md-button class="md-icon-button" aria-label="edit"
@@ -48,7 +48,10 @@
                     class="forum-comment-list"
                     ng-repeat="comment in $ctrl.currentGallery.comments" layout="column" layout-align="start start">
         <div flex="100" style="width:100%;" layout="row" layout-align="space-between center">
-          <div><i class="far fa-user" style="font-size:14px; margin-right:10px;"></i>{{comment.author}}</div>
+          <a href="/profile/{{comment.author}}" class="md-body-2" style="color:black;">
+            <i class="far fa-user" style="font-size:14px;"></i>
+            {{comment.author}}
+          </a>
           <div> {{comment.created| date:"MM/dd/yyyy" }}</div>
         </div>
         <div style="overflow: hidden; word-wrap: break-word; margin:10px 0 5px 15px;">

@@ -37,6 +37,14 @@ class GalleryPostViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsStaffOrAccountOwner, ]
         return super(GalleryPostViewSet, self).get_permissions()
 
+    def get_queryset(self):
+        username = self.request.query_params.get('profile', None)
+        if username is not None:
+            queryset = GalleryPost.objects.filter(author__username=username)
+            return queryset
+        queryset = super(GalleryPostViewSet, self).get_queryset()
+        return queryset
+
 
 class SimpleGalleryPostViewSet(viewsets.ModelViewSet):
     queryset = GalleryPost.objects.all().order_by('-id')
@@ -44,6 +52,14 @@ class SimpleGalleryPostViewSet(viewsets.ModelViewSet):
     pagination_class = HeaderPagination
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'author__username']
+
+    def get_queryset(self):
+        username = self.request.query_params.get('profile', None)
+        if username is not None:
+            queryset = GalleryPost.objects.filter(author__username=username)
+            return queryset
+        queryset = super(GalleryPostViewSet, self).get_queryset()
+        return queryset
 
 
 class CommentViewSet(viewsets.ModelViewSet):

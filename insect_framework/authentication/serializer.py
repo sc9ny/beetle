@@ -3,6 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth import update_session_auth_hash
 from .models import Account
 
+
 class AccountSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=False, write_only=True)
     confirm_password = serializers.CharField(required=False, write_only=True)

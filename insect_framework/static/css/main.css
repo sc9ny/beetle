@@ -166,6 +166,10 @@ a.radius-button.btn.btn-dark {
   padding: 10px 10px;
 }
 
+.regular-text-anchor {
+  color: black;
+}
+
 .wrapper {
     display: grid;
     grid-gap: 1em;
@@ -341,3 +345,7 @@ md-progress-circular.md-default-theme path, md-progress-circular path {
 }
 
 input:focus {outline: none; }
+
+md-tabs .md-tab.md-active {
+  color: black;
+}

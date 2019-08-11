@@ -47,7 +47,8 @@ class GalleryPostSerializer(serializers.ModelSerializer):
 
 
 class SimpleGalleryPostSerializer(serializers.ModelSerializer):
+    author = serializers.SlugRelatedField(read_only=True, slug_field='username')
     class Meta:
         model = GalleryPost
-        fields = ['id', 'title', 'author', 'created']
-        read_only_fields = ('id', 'title', 'author', 'created')
+        fields = ['id', 'title', 'author', 'created', 'comments']
+        read_only_fields = ('id', 'title', 'author', 'created', 'comments')

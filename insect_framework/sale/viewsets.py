@@ -22,6 +22,14 @@ class SaleViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsStaffOrAccountOwner,]
         return super(SaleViewSet, self).get_permissions()
 
+    def get_queryset(self):
+        username = self.request.query_params.get('profile', None)
+        if username is not None:
+            queryset = Sale.objects.filter(author__username=username)
+            return queryset
+        queryset = super(SaleViewSet, self).get_queryset()
+        return queryset
+
 
 class SaleCommentViewSet(viewsets.ModelViewSet):
     serializer_class = SaleCommentSerializer

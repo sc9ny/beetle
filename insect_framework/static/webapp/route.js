@@ -27,6 +27,16 @@
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/userActivity/templates/profile.html/'
     }).
+    when ('/profile/:id/', {
+      controller: 'userProfileController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/userActivity/templates/user-profile.html/',
+      resolve : {
+        otherUser: ($route, UserProfile) => {
+          return UserProfile.get({username: $route.current.params.id}).$promise;
+        }
+      }
+    }).
     when ('/forum/', {
       controller: 'forumController',
       controllerAs: '$ctrl',

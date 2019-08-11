@@ -22,6 +22,14 @@ class QuestionViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsStaffOrAccountOwner,]
         return super(QuestionViewSet, self).get_permissions()
 
+    def get_queryset(self):
+        username = self.request.query_params.get('profile', None)
+        if username is not None:
+            queryset = Question.objects.filter(author__username=username)
+            return queryset
+        queryset = super(QuestionViewSet, self).get_queryset()
+        return queryset
+
 
 class AnswerViewSet(viewsets.ModelViewSet):
     serializer_class = AnswerSerializer

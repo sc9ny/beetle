@@ -22,6 +22,14 @@ class PostViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsStaffOrAccountOwner,]
         return super(PostViewSet, self).get_permissions()
 
+    def get_queryset(self):
+        username = self.request.query_params.get('profile', None)
+        if username is not None:
+            queryset = Post.objects.filter(author__username=username)
+            return queryset
+        queryset = super(PostViewSet, self).get_queryset()
+        return queryset
+
 
 class MyPostViewSet(PostViewSet):
 
