@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'compressor',
     'ckeditor',
     'ckeditor_uploader',
+    'chat',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +79,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'insect_framework.wsgi.application'
+ASGI_APPLICATION = 'insect_framework.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 # Database
