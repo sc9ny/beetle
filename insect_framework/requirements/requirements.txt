@@ -10,3 +10,4 @@ psycopg2==2.7.7
 pytz==2018.5
 rcssmin==1.0.6
 rjsmin==1.0.12
+django-filter==2.2.0

@@ -6,7 +6,7 @@
 
   questionController.$inject =['user', 'Question', '$sanitize'];
   questionDetailController.$inject = ['Question' , '$routeParams', 'user',
-                                     '$sanitize', 'Answer', '$location', 'IsStaffOrAccountOwner'];
+                                     '$sanitize', 'Answer', '$location', 'IsStaffOrAccountOwner', 'currentQuestion'];
   manageQuestionController.$inject = ['Question', 'currentForum', 'user', '$location'];
 
   function questionController (user, Question, $sanitize) {
@@ -76,12 +76,12 @@
       }
   }
 
-  function questionDetailController(Question , $routeParams, user, $sanitize, Answer, $location, IsStaffOrAccountOwner) {
+  function questionDetailController(Question , $routeParams, user, $sanitize, Answer, $location, IsStaffOrAccountOwner, currentQuestion) {
     const self = this;
       self.currentUser = user;
       self.commentText = '';
       self.navigate ='question';
-      self.currentForum = Question.get({id:$routeParams.id});
+      self.currentForum = currentQuestion;
       self.permission = function(content) {
         return IsStaffOrAccountOwner(self.currentUser, content);
       }

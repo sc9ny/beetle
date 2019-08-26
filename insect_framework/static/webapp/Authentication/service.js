@@ -41,8 +41,10 @@
       })
     }
     function getAuthenticatedAccount () {
-      if (!$cookies.get('authenticatedAccount'))
+      if (!$cookies.get('authenticatedAccount')) {
+        logout();
         return {};
+      }
 
       return JSON.parse($cookies.get('authenticatedAccount'));
     }
@@ -70,7 +72,7 @@
 
     function logout() {
       return $http.post('/api/v1/logout/').then((success) =>{
-        this.unAuthenticate();
+        unAuthenticate();
         $location.url('/')
       })
     }

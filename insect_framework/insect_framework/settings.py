@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'chat',
     'channels',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

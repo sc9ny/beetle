@@ -6,7 +6,7 @@
 
   saleController.$inject =['user', 'Sale', '$sanitize'];
   saleDetailController.$inject = ['Sale' , '$routeParams', 'user',
-                                     '$sanitize', 'SaleComment', '$location', 'IsStaffOrAccountOwner'];
+                                     '$sanitize', 'SaleComment', '$location', 'IsStaffOrAccountOwner', 'currentSale'];
   manageSaleController.$inject = ['Sale', 'currentForum', 'user', '$location'];
 
   function saleController (user, Sale, $sanitize) {
@@ -76,12 +76,12 @@
       }
   }
 
-  function saleDetailController(Sale , $routeParams, user, $sanitize, SaleComment, $location, IsStaffOrAccountOwner) {
+  function saleDetailController(Sale , $routeParams, user, $sanitize, SaleComment, $location, IsStaffOrAccountOwner, currentSale) {
     const self = this;
       self.currentUser = user;
       self.commentText = '';
       self.navigate ='sale';
-      self.currentForum = Sale.get({id:$routeParams.id});
+      self.currentForum = currentSale;
       self.permission = function(content) {
         return IsStaffOrAccountOwner(self.currentUser, content);
       }

@@ -4,13 +4,21 @@
   angular
     .module('profile.controllers')
     .controller('profileController', profileController)
-    .controller('userProfileController', userProfileController);
+    .controller('userProfileController', userProfileController)
+    .component('profileComponent', {
+      templateUrl: '/static/webapp/userActivity/templates/user-profile.html/',
+      controller: userProfileController,
+      controllerAs: '$ctrl',
+      bindings: {
+        user: '<'
+      }
+    });
 
     profileController.$inject =
       ['Profile', 'Authentication', 'dynamicEntries'];
 
     userProfileController.$inject = ['UserProfile', 'Authentication', 'dynamicEntries',
-                                     'otherUser', 'Forum', 'SimpleGalleryPost', 'Sale', 'Question']
+                                      'Forum', 'SimpleGalleryPost', 'Sale', 'Question', '$route']
 
     function profileController (Profile, Authentication, dynamicEntries) {
       const self = this;
@@ -34,18 +42,28 @@
       }
 
       this.search = function(searchText) {
-      this.hasSearched = true;
-        let cfg = {search: searchText}
-        self.myPosts = dynamicEntries(Profile.myPosts().query, cfg);
-      }
+        this.hasSearched = true;
+          let cfg = {search: searchText}
+          self.myPosts = dynamicEntries(Profile.myPosts().query, cfg);
+        }
     }
 
-    function userProfileController (UserProfile, Authentication, dynamicEntries, otherUser, Forum,
-                                    SimpleGalleryPost, Sale, Question) {
+    function userProfileController (UserProfile, Authentication, dynamicEntries, Forum,
+                                    SimpleGalleryPost, Sale, Question, $route, user) {
       const self = this;
-      self.user = otherUser;
+      if (!self.user && $route.current.params.id) {
+        UserProfile.get({username: $route.current.params.id}).$promise.then((response) => {
+          self.query = {profile: response.username};
+          self.user = response;
+          self.otherProfile = Authentication.getAuthenticatedAccount().data.username !== self.user.username
+        });
+      }
+
       self.tabIndex = 0;
-      self.query = {profile: self.user.username}
+      this.$onInit = function() {
+        self.query = {profile: self.user.username};
+        self.otherProfile = Authentication.getAuthenticatedAccount().data.username !== self.user.username
+      }
 
       self.onTabSelect = function() {
         if (self.tabIndex === 0) {
@@ -56,7 +74,6 @@
         }
         else if (self.tabIndex === 2) {
           //sale
-          console.log('h')
           self.sales = dynamicEntries(Sale.query, self.query)
         }
         else {

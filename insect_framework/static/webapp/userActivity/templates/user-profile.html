@@ -1,8 +1,15 @@
 <md-card>
   <md-card-header layout="column">
-    <p class="md-title"><i class="far fa-user"></i> {{$ctrl.user.username}}</p>
+    <div layout="row" layout-align="space-between center">
+      <p class="md-title"><i class="far fa-user"></i> {{$ctrl.user.username}}</p>
+      <md-button class="md-icon-button" aria-label="message" href="/chat/create/#{{$ctrl.user.username}}" ng-if="$ctrl.otherProfile">
+        <i class="material-icons">mail_outline</i>
+        <md-tooltip>Message</md-tooltip>
+      </md-button>
+    </div>
     <p class="md-margin">Joined on {{$ctrl.user.created_at | date: 'MM/dd/yyyy'}} </p>
     <p class="md-margin">{{$ctrl.user.tagline}}</p>
+
   </md-card-header>
   <md-card-content>
     <p class="md-subhead">Activities</p>

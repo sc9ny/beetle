@@ -24,106 +24,105 @@
     <base href="/">
   </head>
   <body ng-controller="mainController">
-    <div layout="row" layout-align="end center" style="min-height:50px;">
-      <div class="float-right" style="padding-right:15px;">
-        <span>
-          {% if user.is_authenticated %}
-          <span class="text-uppercase">
-            <a class="auth-panel" href="/profile/">MY PROFILE</a>
-            <a class="auth-panel" href="#" ng-click="logout()">LOGOUT</a>
+    <md-toolbar style="background-color: #333333; height: 64px;" layout="row" layout-align="space-between center" class="main-toolbar">
+      <h1 class="md-toolbar-tools" layout-align="start center">
+        <md-button class="md-icon-button" ng-click="toggleNav()" ng-hide="$mdMedia('gt-md') && lock">
+          <i class="material-icons">dehaze</i>
+        </md-button> &nbsp
+        Insect Brothers
+      </h1>
+      <div layout="row" layout-align="end center" style="min-height:50px;">
+        <div class="float-right" style="padding-right:15px;">
+          <span>
+            {% if user.is_authenticated %}
+
+            <span class="text-uppercase" layout="row" layout-align="space-between center" style="font-size:1rem;">
+              <a class="auth-panel" href="/chat/">
+                <i style="color:white;" class="fas fa-envelope"></i>
+                <md-tooltip>Message</md-tooltip>
+              </a>
+              <a class="auth-panel" href="/profile/">
+                <i style="color:white;" class="far fa-user"></i>
+                <md-tooltip>My Profile</md-tooltip>
+              </a>
+              <a class="auth-panel" href="#" ng-click="logout()">
+                <i style="color:white;" class="fas fa-sign-out-alt"></i>
+                <md-tooltip>Logout</md-tooltip>
+              </a>
+            </span>
+            {% else %}
+            <span style="padding-right: 5em; font-size:1rem;">
+              <a style="color:black; padding-right:2em;" href="/register/">
+                <i style="color:white;" class="fas fa-user-plus"></i>
+                <md-tooltip>Sign up</md-tooltip>
+              </a>
+              <a style="color:black;" href="/login/">
+                <i style="color:white;" class="fas fa-sign-in-alt"></i>
+                <md-tooltip>Login</md-tooltip>
+              </a>
+            </span>
+            {% endif %}
           </span>
-          {% else %}
-          <span style="padding-right: 5em;">
-            <a style="color:black; padding-right:2em;" href="/register/">REGISTER</a>
-            <a style="color:black;" href="/login/">LOGIN</a>
-          </span>
-          {% endif %}
-
-        </span>
-      </div>
-    </div>
-    <nav class="navbar navbar-custom  sticky-top navbar-light">
-      <a class="navbar-brand" href="/">
-        <img src="/static/media/logo.jpeg" width="200" height="110" alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <!--<md-icon class="icon_24" md-svg-icon="/static/media/forum.svg"></md-icon>-->
-            <a class="custom-nav-link active" href="/">HOME <span class="sr-only">(current)</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/forum/">FORUM/DISCUSSION</a>
-          </li>
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/sale/">SALE</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/gallery/">GALLERY</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/question/">Q&A</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div layout="row" class="view-animate-container">
-      <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <nav class="side-nav" id="sidebar">
-        <ul class="navbar-nav" style="margin-top: 150px;">
-
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/forum/">FORUM/DISCUSSION</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/sale/">SALE</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/gallery/">GALLERY</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="custom-nav-link" href="/question/">Q&A</a>
-          </li>
-
-        </ul>
-        <div class=side-nav-footer>
-          <a href="https://www.instagram.com/insectbrothers/" >
-            <i style="font-size:18px;" class="fab fa-instagram">
-            </i>
-          </a>
-          <a href="">
-            <i style="font-size:18px;" class="fab fa-facebook-f">
-            </i>
-          </a>
         </div>
-      </nav>
-      <div layout="column" flex class="align-center">
-        <div class="view-animate background" ng-view>
+      </div>
+    </md-toolbar>
+    <div layout="row" class="view-animate-container" flex>
+      <md-sidenav ng-style="{ 'min-height'  : screenHeight }" flex class="md-sidenav-left"
+                  md-component-id="left" md-is-locked-open="$mdMedia('gt-md') && lock" md-whiteframe="3" layout="column" layout-align="space-between">
+        <md-content>
+          <img src="/static/media/logo.jpeg" width="150" height="110" alt="">
+          <nav class="side-nav" id="sidebar">
+            <ul class="navbar-nav" style="margin-top: 50px;">
+
+              <li class="nav-item">
+                <a class="custom-nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
+              </li>
+
+              <li class="nav-item">
+                <a class="custom-nav-link" href="/forum/">FORUM/DISCUSSION</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="custom-nav-link" href="/sale/">SALE</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="custom-nav-link" href="/gallery/">GALLERY</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="custom-nav-link" href="/question/">Q&A</a>
+              </li>
+
+            </ul>
+            <div class=side-nav-footer>
+              <a href="https://www.instagram.com/insectbrothers/" >
+                <i style="font-size:18px;" class="fab fa-instagram">
+                </i>
+              </a>
+              <a href="">
+                <i style="font-size:18px;" class="fab fa-facebook-f">
+                </i>
+              </a>
+            </div>
+          </nav>
+        </md-content>
+        <div layout="row"  layout-align="end" flex="10">
+          <md-button class="md-icon-button" ng-click="toggleLock()">
+            <i class="material-icons" ng-if="!lock" >lock</i>
+            <i class="material-icons" ng-if="lock">lock_open</i>
+          </md-button>
+        </div>
+      </md-sidenav>
+      <div layout="column" flex class="align-center" style="margin-top: 64px;">
+        <div class="view-animate background" ng-view ng-controller="routeController">
         </div>
 
         <div style="margin-top: 200px;">
           <md-divider></md-divider>
           <a style="font-style: italic; font-family:cursive; font-weight:400;" href="/about/">ABOUT US</a>
         </div>
-      </div>
-
+     </div>
     </div>
-
-
-
   </body>
 </html>

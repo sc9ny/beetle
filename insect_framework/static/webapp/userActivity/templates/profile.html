@@ -26,38 +26,6 @@
   </md-card>
 
   <div layout="row" flex>
-    <md-card flex>
-      <md-card-title layout="row" layout-align="space-between center">
-        <span>My Posts</span>
-        <search on-change="$ctrl.search(searchText)" disabled="!$ctrl.myPosts.length && !$ctrl.hasSearched"></search>
-      </md-card-title>
-      <md-card-content>
-        <md-virtual-repeat-container style="height:500px;">
-          <md-list>
-            <md-divider></md-divider>
-            <div md-virtual-repeat="post in $ctrl.myPosts" md-on-demand md-item-size="70" ng-if="$ctrl.myPosts.length">
-              <md-list-item class="md-2-line" ng-if="post"
-                            href="/forum/{{post.id}}">
-                <span class="md-list-item-text" flex-gt-md="100" flex="50">
-                  <h3>{{post.title}}</h3>
-                  <p> {{post.created | date:'MM/dd/yyyy'}} </p>
-                </span>
-                <span flex layout="row" layout-align="end center">
-                   Comment count: {{post.comments.length}}
-                </span>
-              </md-list-item>
-              <md-divider></md-divider>
-            </div>
-            <div ng-if="!$ctrl.myPosts.length && $ctrl.myPosts.$resolved && !$ctrl.hasSearched"
-                 layout="column" layout-align="center center">
-              You do not have any post
-            </div>
-            <div ng-if="!$ctrl.myPosts.length && $ctrl.hasSearched" flex layout="column" layout-align="center center">
-              No result found
-            </div>
-          </md-list>
-        </md-virtual-repeat-container>
-      </md-card-content>
-    </md-card>
+    <profile-component user="$ctrl.user" flex></profile-component>
   </div>
 </md-content>

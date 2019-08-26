@@ -28,11 +28,20 @@ class HeaderPagination(BasicPageNumberPagination):
             headers['Link'] = ', '.join(links)
         return Response(data, headers=headers)
 
+
 class IsStaffOrAccountOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.user and hasattr(obj, 'author'):
             return request.user.is_staff or str(obj.author) == str(request.user)
         return False
+
+
+class isParticipant(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.user and hasattr(obj, 'involved_users'):
+            return request.user.is_staff or str(request.user.username) in [user.username for user in obj.involved_users.all()]
+        return False
+
 
 def get_permissions(self, cls):
     if self.request.method in permissions.SAFE_METHODS:

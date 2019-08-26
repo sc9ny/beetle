@@ -93,12 +93,6 @@ li.active > a{
 }
 
 
-@media (max-width: 900px) {
-    .side-nav {
-        display: none !important;
-    }
-}
-
 @media only screen and (min-width: 1280px) {
   .centered {
     width: 900px;
@@ -348,4 +342,26 @@ input:focus {outline: none; }
 
 md-tabs .md-tab.md-active {
   color: black;
+}
+
+md-sidenav.md-locked-open {
+ width: 270px;
+ min-width: 270px;
+ max-width: 270px;
+}
+.main-toolbar{
+  position: fixed !important;
+}
+
+md-sidenav > md-toolbar {
+  background-color: #555555 !important;
+}
+
+md-sidenav {
+  margin-top: 64px;
+  position: fixed !important;
+}
+
+md-backdrop {
+position: fixed !important;
 }

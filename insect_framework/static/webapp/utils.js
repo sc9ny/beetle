@@ -29,8 +29,6 @@
           }
         }
       }
-
-        
     });
     dynamicEntries.$inject = [];
     function dynamicEntries () {
@@ -43,6 +41,7 @@
           length : 0,
           loadedPages : {},
           $resolved: false,
+          allLoaded: [],
           getItemAtIndex : function (index) {
             let pageNumber = Math.max(Math.ceil(index / cfg.limit), 1);
             if (index > 0 && index % cfg.limit === 0)
@@ -67,9 +66,10 @@
             };
             angular.extend(queryParams, cfg);
               this.promise = resource(queryParams, (response, headerGetter) => {
-              this.length = parseInt(headerGetter('X-count'))
-              this.loadedPages[pageNumber] = response;
-              this.$resolved = true;
+                this.length = parseInt(headerGetter('X-count'))
+                this.loadedPages[pageNumber] = response;
+                this.allLoaded = this.allLoaded.concat(response);
+                this.$resolved = true;
             });
           },
           updateCfg: function(newCfg) {

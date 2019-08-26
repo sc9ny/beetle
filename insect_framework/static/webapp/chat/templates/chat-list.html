@@ -1,0 +1,26 @@
+<search flex on-change="$ctrl.search(searchText)"
+            disabled="!$ctrl.hasSearched && !$ctrl.chats.length && $ctrl.chats.$resolved">
+</search>
+
+<md-content>
+  <md-virtual-repeat-container style="min-height:600px;">
+    <md-list flex>
+      <div md-virtual-repeat="item in $ctrl.chats" md-on-demand md-item-size="70" ng-if="$ctrl.chats.length">
+        <md-list-item class="md-2-line" href="/chat/{{item.id}}/">
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ item.involved_users }}</h3>
+            <p layout="row">
+              <span>{{$ctrl.user.username == item.last_message.author ? 'You:': item.last_message.author + ': '}}</span>
+              <span style="overflow:hidden; margin-left: 0.5rem; text-overflow: ellipsis;">{{ item.last_message.content }} </span>
+            </p>
+          </div>
+        </md-list-item>
+        <md-divider></md-divider>
+      </div>
+      <div ng-if="!$ctrl.chats.length" layout="row" layout-align="center center">
+        <p>No chat found</p>
+      </div>
+    </md-list>
+  </md-virtual-repeat-container>
+
+</md-content>

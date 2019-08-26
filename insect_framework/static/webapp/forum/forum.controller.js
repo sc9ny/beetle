@@ -9,7 +9,7 @@
 
     forumController.$inject = ['Forum', '$sanitize', 'user'];
     forumDetailController.$inject = ['Forum' , '$routeParams', 'user',
-                                     '$sanitize', 'Comment', '$location', 'IsStaffOrAccountOwner'];
+                                     '$sanitize', 'Comment', '$location', 'currentForum', 'IsStaffOrAccountOwner'];
     manageForumController.$inject = ['Forum', 'currentForum', 'user', '$location'];
 
     function forumController (Forum, $sanitize, user) {
@@ -37,7 +37,6 @@
       });
 
       this.search = function (searchText) {
-      console.log(searchText)
         this.hasSearched = true;
         this.searchQuery = {'search': searchText}
         this.promise = Forum.query({page:1, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
@@ -79,12 +78,12 @@
       }
     }
 
-    function forumDetailController (Forum, $routeParams, user ,$sanitize, Comment, $location, IsStaffOrAccountOwner) {
+    function forumDetailController (Forum, $routeParams, user ,$sanitize, Comment, $location, currentForum, IsStaffOrAccountOwner) {
       const self = this;
       self.currentUser = user;
       self.commentText = '';
       self.navigate ='forum';
-      self.currentForum = Forum.get({id:$routeParams.id});
+      self.currentForum = currentForum;
       self.permission = function(content) {
         return IsStaffOrAccountOwner(self.currentUser, content);
       }

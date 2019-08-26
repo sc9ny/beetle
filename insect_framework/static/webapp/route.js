@@ -1,11 +1,17 @@
 (function () {
   'use strict';
 
-  angular
+  const route = angular
     .module('route', ['ngRoute'])
     .config(config);
 
   config.$inject = ['$routeProvider'];
+
+  route.controller("routeController", function ($rootScope, $location) {
+    $rootScope.$on("$routeChangeError", function () {
+      $location.url('/notFound/')
+    });
+  });
 
   function config($routeProvider) {
     $routeProvider.when('/register/', {
@@ -31,10 +37,28 @@
       controller: 'userProfileController',
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/userActivity/templates/user-profile.html/',
-      resolve : {
-        otherUser: ($route, UserProfile) => {
-          return UserProfile.get({username: $route.current.params.id}).$promise;
-        }
+      resolve: {
+        user : ($route, UserProfile) => {
+          return UserProfile.get({username:$route.current.params.id}).$promise;
+        },
+      }
+    }).
+    when ('/chat/', {
+      controller: 'chatListController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/chat/templates/chat-list.html',
+    }).
+    when ('/chat/:id/', {
+      controller: 'chatController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/chat/templates/room.html/',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        },
+        currentChat : ($route) => {
+          return $route.current.params.id;
+        },
       }
     }).
     when ('/forum/', {
@@ -80,7 +104,10 @@
       resolve: {
         user: (Authentication) => {
           return Authentication.getAuthenticatedAccount().data;
-        }
+        },
+        currentForum : ($route, Forum) => {
+          return Forum.get({id:$route.current.params.id}).$promise;
+        },
       }
     }).
     when ('/gallery/', {
@@ -133,7 +160,10 @@
       resolve: {
         user: (Authentication) => {
           return Authentication.getAuthenticatedAccount().data;
-        }
+        },
+        currentQuestion : ($route, Question) => {
+          return Question.get({id:$route.current.params.id}).$promise;
+        },
       }
     }).
     when ('/question/create/', {
@@ -179,7 +209,10 @@
       resolve: {
         user: (Authentication) => {
           return Authentication.getAuthenticatedAccount().data;
-        }
+        },
+        currentSale : ($route, Sale) => {
+          return Sale.get({id:$route.current.params.id}).$promise;
+        },
       }
     }).
     when ('/sale/create/', {
