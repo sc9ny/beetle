@@ -2,10 +2,7 @@
   <md-progress-circular></md-progress-circular>
 </div>
 
-<div flex ng-if="$ctrl.content" style="margin-top:100px;">
-  <div ng-if="!$ctrl.promise.length && !$ctrl.hasSearched">
-    No registered post yet
-  </div>
+<div flex ng-if="$ctrl.content">
   <div flex layout="row" layout-align="center center">
     <search flex="50" on-change="$ctrl.search(searchText)" flex-gt-xs="100"
             disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved">
@@ -15,6 +12,9 @@
       <i style="font-size:18px;" class="far fa-edit"></i>
       <md-tooltip>Create</md-tooltip>
     </md-button>
+  </div>
+  <div ng-if="!$ctrl.promise.length && !$ctrl.hasSearched">
+    No registered post yet
   </div>
   <div flex layout="column">
     <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length" class="align-center">

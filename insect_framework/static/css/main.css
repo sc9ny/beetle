@@ -365,3 +365,7 @@ md-sidenav {
 md-backdrop {
 position: fixed !important;
 }
+
+input:disabled {
+  background-color: white;
+}
