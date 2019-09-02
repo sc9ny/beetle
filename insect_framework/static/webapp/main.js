@@ -47,7 +47,7 @@
 }]);
 
   run.$inject = ['$http'];
-  mainController.$inject=['Authentication', '$scope', '$window', '$mdMedia', '$mdSidenav', '$timeout', 'Notification'];
+  mainController.$inject=['Authentication', '$scope', '$mdMedia', '$mdSidenav', '$timeout',];
   Notification.$inject =['$resource']
   /**
   * @name run
@@ -58,14 +58,8 @@
     $http.defaults.xsrfCookieName = 'csrftoken';
   }
 
-  function Notification($resource) {
-//    let cfg = {
-//      endpoint: '@endpoint'
-//    }
-    return $resource('api/abcd/')
-  }
 
-  function mainController(Authentication, $scope, $window, $mdMedia, $mdSidenav, $timeout, Notification) {
+  function mainController(Authentication, $scope, $mdMedia, $mdSidenav, $timeout) {
     $scope.$mdMedia = $mdMedia;
     $scope.lock = false;
     $timeout(function () {
@@ -88,12 +82,15 @@
       return $scope.lock;
     }
 
-    $scope.getNotifications = function() {
-      Notification.get().$promise.then((response) => {
-        console.log(response);
-      })
+    $scope.openMenu = function($mdMenu, ev) {
+      $mdMenu.open(ev);
     }
-    $scope.getNotifications();
 
+    $scope.my_special_notification_callback = function(data) {
+      for (var i=0; i < data.unread_list.length; i++) {
+        msg = data.unread_list[i];
+        console.log(msg);
+       }
+    }
   }
 })();

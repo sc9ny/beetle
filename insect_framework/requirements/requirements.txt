@@ -12,3 +12,4 @@ rcssmin==1.0.6
 rjsmin==1.0.12
 django-filter==2.2.0
 django-notifications-hq
+channels==2.2.0

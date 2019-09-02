@@ -84,7 +84,7 @@ li.active > a{
 }
 
 .side-nav-footer {
-  margin-top:100px;
+  margin-top:65px;
   margin-left: 2.5rem;
 }
 .side-nav-footer a {
@@ -351,6 +351,7 @@ md-sidenav.md-locked-open {
 }
 .main-toolbar{
   position: fixed !important;
+  z-index: 1000;
 }
 
 md-sidenav > md-toolbar {
@@ -360,6 +361,11 @@ md-sidenav > md-toolbar {
 md-sidenav {
   margin-top: 64px;
   position: fixed !important;
+}
+
+md-sidenav.md-locked-open {
+    min-width: 200px !important;
+    position:relative !important;
 }
 
 md-backdrop {

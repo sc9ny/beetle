@@ -7,12 +7,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-messages.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.10/angular-material.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-cookies.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-resource.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel = "stylesheet"
-      href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+      href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.1.10/angular-material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel='stylesheet' href='/path/to/unzipped/files/dist/textAngular.min.css'>
@@ -36,29 +36,40 @@
           <span>
             {% if user.is_authenticated %}
 
+            {% load notifications_tags %}
+            {% register_notify_callbacks callbacks='fill_notification_badge, fill_notification_list' menu_class='notify_menu_class' %}
             <span class="text-uppercase" layout="row" layout-align="space-between center" style="font-size:1rem;">
-              <a class="auth-panel" href="/chat/">
+              <md-menu md-offset="-5 15" md-position-mode="target-right bottom">
+                <md-button class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
+                  <i md-menu-origin class="fas fa-bell"></i>
+                  <md-tooltip style="z-index:1001;">Notifications</md-tooltip>
+                </md-button>
+                <md-menu-content width="6" class="notify_menu_class">
+
+                </md-menu-content>
+              </md-menu>
+              <a class="auth-panel" href="/chat/" style="margin-left:6px;s">
                 <i style="color:white;" class="fas fa-envelope"></i>
-                <md-tooltip>Message</md-tooltip>
+                <md-tooltip style="z-index:1001;">Message</md-tooltip>
               </a>
               <a class="auth-panel" href="/profile/">
                 <i style="color:white;" class="far fa-user"></i>
-                <md-tooltip>My Profile</md-tooltip>
+                <md-tooltip style="z-index:1001;">My Profile</md-tooltip>
               </a>
               <a class="auth-panel" href="#" ng-click="logout()">
                 <i style="color:white;" class="fas fa-sign-out-alt"></i>
-                <md-tooltip>Logout</md-tooltip>
+                <md-tooltip style="z-index:1001;">Logout</md-tooltip>
               </a>
             </span>
             {% else %}
-            <span style="padding-right: 5em; font-size:1rem;">
+            <span style="padding-right: 1em; font-size:1rem;" layout="row" layout-align="space-between center">
               <a style="color:black; padding-right:2em;" href="/register/">
                 <i style="color:white;" class="fas fa-user-plus"></i>
-                <md-tooltip>Sign up</md-tooltip>
+                <md-tooltip style="z-index:1001;">Sign up</md-tooltip>
               </a>
               <a style="color:black;" href="/login/">
                 <i style="color:white;" class="fas fa-sign-in-alt"></i>
-                <md-tooltip>Login</md-tooltip>
+                <md-tooltip style="z-index:1001;">Login</md-tooltip>
               </a>
             </span>
             {% endif %}
@@ -108,7 +119,7 @@
           </nav>
         </md-content>
         <div layout="row"  layout-align="end" flex="10">
-          <md-button class="md-icon-button" ng-click="toggleLock()">
+          <md-button class="md-icon-button" ng-click="toggleLock()" ng-if="$mdMedia('gt-md')">
             <i class="material-icons" ng-if="!lock" >lock</i>
             <i class="material-icons" ng-if="lock">lock_open</i>
           </md-button>
