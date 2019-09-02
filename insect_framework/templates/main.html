@@ -39,26 +39,26 @@
             <span class="text-uppercase" layout="row" layout-align="space-between center" style="font-size:1rem;">
               <a class="auth-panel" href="/chat/">
                 <i style="color:white;" class="fas fa-envelope"></i>
-                <md-tooltip>Message</md-tooltip>
+                <md-tooltip style="z-index:1001;">Message</md-tooltip>
               </a>
               <a class="auth-panel" href="/profile/">
                 <i style="color:white;" class="far fa-user"></i>
-                <md-tooltip>My Profile</md-tooltip>
+                <md-tooltip style="z-index:1001;">My Profile</md-tooltip>
               </a>
               <a class="auth-panel" href="#" ng-click="logout()">
                 <i style="color:white;" class="fas fa-sign-out-alt"></i>
-                <md-tooltip>Logout</md-tooltip>
+                <md-tooltip style="z-index:1001;">Logout</md-tooltip>
               </a>
             </span>
             {% else %}
-            <span style="padding-right: 5em; font-size:1rem;">
+            <span style="padding-right: 1em; font-size:1rem;" layout="row" layout-align="space-between center">
               <a style="color:black; padding-right:2em;" href="/register/">
                 <i style="color:white;" class="fas fa-user-plus"></i>
-                <md-tooltip>Sign up</md-tooltip>
+                <md-tooltip style="z-index:1001;">Sign up</md-tooltip>
               </a>
               <a style="color:black;" href="/login/">
                 <i style="color:white;" class="fas fa-sign-in-alt"></i>
-                <md-tooltip>Login</md-tooltip>
+                <md-tooltip style="z-index:1001;">Login</md-tooltip>
               </a>
             </span>
             {% endif %}
@@ -108,7 +108,7 @@
           </nav>
         </md-content>
         <div layout="row"  layout-align="end" flex="10">
-          <md-button class="md-icon-button" ng-click="toggleLock()">
+          <md-button class="md-icon-button" ng-click="toggleLock()" ng-if="$mdMedia('gt-md')">
             <i class="material-icons" ng-if="!lock" >lock</i>
             <i class="material-icons" ng-if="lock">lock_open</i>
           </md-button>
