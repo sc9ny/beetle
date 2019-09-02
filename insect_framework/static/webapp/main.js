@@ -25,6 +25,7 @@
       .defaultIconSet('/static/media/core-icons.svg', 24);
   })
   .controller('mainController', mainController)
+  .factory('Notification', Notification)
   .directive('ckEditor', [function () {
   return {
     require: '?ngModel',
@@ -45,38 +46,54 @@
   };
 }]);
 
-run.$inject = ['$http'];
-mainController.$inject=['Authentication', '$scope', '$window', '$mdMedia', '$mdSidenav', '$timeout'];
-/**
-* @name run
-* @desc Update xsrf $http headers to align with Django's defaults
-*/
-function run($http) {
-  $http.defaults.xsrfHeaderName = 'X-CSRFToken';
-  $http.defaults.xsrfCookieName = 'csrftoken';
-}
-function mainController(Authentication, $scope, $window, $mdMedia, $mdSidenav, $timeout) {
-  $scope.$mdMedia = $mdMedia;
-  $scope.lock = false;
-  $timeout(function () {
-    $mdSidenav('left').open();
-  });
-  $scope.screenHeight = $(window).height()-64 + 'px';
-
-  $scope.toggleNav = function() {
-    $mdSidenav('left').toggle();
+  run.$inject = ['$http'];
+  mainController.$inject=['Authentication', '$scope', '$window', '$mdMedia', '$mdSidenav', '$timeout', 'Notification'];
+  Notification.$inject =['$resource']
+  /**
+  * @name run
+  * @desc Update xsrf $http headers to align with Django's defaults
+  */
+  function run($http) {
+    $http.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $http.defaults.xsrfCookieName = 'csrftoken';
   }
-  $scope.loggedIn = Authentication.isAuthenticated();
-  $scope.logout = function () {
-    Authentication.logout().then( ()=> {
-      $window.location.href ='/';
+
+  function Notification($resource) {
+//    let cfg = {
+//      endpoint: '@endpoint'
+//    }
+    return $resource('api/abcd/')
+  }
+
+  function mainController(Authentication, $scope, $window, $mdMedia, $mdSidenav, $timeout, Notification) {
+    $scope.$mdMedia = $mdMedia;
+    $scope.lock = false;
+    $timeout(function () {
+      $mdSidenav('left').open();
     });
-  };
+    $scope.screenHeight = $(window).height()-64 + 'px';
 
-  $scope.toggleLock = function() {
-    $scope.lock = !$scope.lock;
-    return $scope.lock;
+    $scope.toggleNav = function() {
+      $mdSidenav('left').toggle();
+    }
+    $scope.loggedIn = Authentication.isAuthenticated();
+    $scope.logout = function () {
+      Authentication.logout().then( ()=> {
+        $window.location.href ='/';
+      });
+    };
+
+    $scope.toggleLock = function() {
+      $scope.lock = !$scope.lock;
+      return $scope.lock;
+    }
+
+    $scope.getNotifications = function() {
+      Notification.get().$promise.then((response) => {
+        console.log(response);
+      })
+    }
+    $scope.getNotifications();
+
   }
-
-}
 })();

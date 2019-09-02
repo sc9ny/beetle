@@ -6,6 +6,7 @@ from rest_framework.routers import DefaultRouter
 
 from authentication.views import LoginView, LogoutView
 from .views import IndexView, notFoundView
+import notifications.urls
 v1_router = DefaultRouter()
 
 urlpatterns = [
@@ -15,10 +16,12 @@ urlpatterns = [
     path('question/', include('question.urls')),
     path('sale/', include('sale.urls')),
     path('chat/', include('chat.urls')),
+    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
     path('authentication/', include('authentication.urls')),
     path('api/v1/login/', LoginView.as_view(), name='login'),
     path('api/v1/logout/', LogoutView.as_view(), name='logout'),
     path('api/v1/', include(v1_router.urls)),
+
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [re_path('^.*', IndexView.as_view(), name='index')]

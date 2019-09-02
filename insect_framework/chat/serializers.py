@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Chat, Message
 from authentication.models import Account
+from notifications.models import Notification
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -24,6 +25,7 @@ class ChatSerializer(serializers.ModelSerializer):
 
 class CreateChatSerializer(ChatSerializer):
     involved_users = serializers.SlugRelatedField(many=True, queryset= Account.objects.all(), slug_field='username')
+
     class Meta:
         model = Chat
         fields = ['id', 'created', 'updated', 'message', 'involved_users']
@@ -40,3 +42,13 @@ class SimpleChatSerializer(serializers.ModelSerializer):
 
     def get_last_message(self, obj):
         return MessageSerializer(obj.message.last()).data
+
+
+class NotificationSerializer(serializers.ModelSerializer):
+    unread = serializers.BooleanField(read_only=True)
+    recipient = serializers.SlugRelatedField(read_only=True, slug_field='username')
+    verb = serializers.CharField(read_only=True)
+
+    class Meta:
+        model = Notification
+        fields = ['unread', 'recipient', 'verb', ]

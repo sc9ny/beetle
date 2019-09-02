@@ -51,3 +51,68 @@ def get_permissions(self, cls):
     else:
         self.permission_classes = [IsStaffOrAccountOwner,]
     return super(cls, self).get_permissions()
+
+
+def get_involved_users_from_post(instance):
+    users = [instance.author]
+    duplicate = {}
+    if hasattr(instance, 'comments'):
+        for comment in instance.comments.all():
+            if comment.author.username in duplicate:
+                continue
+            else:
+                users.append(comment.author)
+                duplicate[comment.author.username] = True
+    else:
+        for answer in instance.answers.all():
+            if answer.author.username in duplicate:
+                continue
+            else:
+                users.append(answer.author)
+                duplicate[answer.author.username] = True
+    return users
+
+
+def get_involved_users_from_comments(instance):
+    users = []
+    duplicate = {}
+    if hasattr(instance, 'gallery_post'):
+        users.append(instance.gallery_post.author)
+        duplicate[instance.gallery_post.author.username] = True
+        for comment in instance.gallery_post.comments.all():
+            if comment.author.username in duplicate:
+                continue
+            else:
+                users.append(comment.author)
+                duplicate[comment.author.username] = True
+
+    if hasattr(instance, 'associated_post'):
+        users.append(instance.associated_post.author)
+        duplicate[instance.associated_post.author.username] = True
+        for comment in instance.associated_post.comments.all():
+            if comment.author.username in duplicate:
+                continue
+            else:
+                users.append(comment.author)
+                duplicate[comment.author.username] = True
+
+    if hasattr(instance, 'associated_sale'):
+        users.append(instance.associated_sale.author)
+        duplicate[instance.associated_sale.author.username] = True
+        for comment in instance.associated_sale.comments.all():
+            if comment.author.username in duplicate:
+                continue
+            else:
+                users.append(comment.author)
+                duplicate[comment.author.username] = True
+
+    if hasattr(instance, 'associated_question'):
+        users.append(instance.associated_question.author)
+        duplicate[instance.associated_question.author.username] = True
+        for answer in instance.associated_question.answers.all():
+            if answer.author.username in duplicate:
+                continue
+            else:
+                users.append(answer.author)
+                duplicate[answer.author.username] = True
+    return users

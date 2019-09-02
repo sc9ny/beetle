@@ -4,7 +4,8 @@ from django_filters import rest_framework as filters
 from rest_framework import filters as rest_filters
 import django_filters
 from .models import Chat
-from .serializers import ChatSerializer, CreateChatSerializer, SimpleChatSerializer
+from notifications.models import Notification
+from .serializers import ChatSerializer, CreateChatSerializer, SimpleChatSerializer, NotificationSerializer
 from authentication.models import Account
 
 
@@ -14,6 +15,15 @@ class ChatFilter (django_filters.FilterSet):
     class Meta:
         model = Chat
         fields = ['involved_users__username', ]
+
+
+class NotificationFilter (django_filters.FilterSet):
+    recipient = django_filters.ModelChoiceFilter(queryset=Account.objects.all(), to_field_name='username')
+    unread = django_filters.BooleanFilter(field_name='unread')
+
+    class Meta:
+        model = Notification
+        fields = ['recipient', 'unread', ]
 
 
 class ChatViewSet (viewsets.ModelViewSet):
@@ -29,6 +39,7 @@ class ChatViewSet (viewsets.ModelViewSet):
         else:
             return ChatSerializer
 
+
 class SimpeChatViewSet (viewsets.ModelViewSet):
     queryset = Chat.objects.all()
     pagination_class = HeaderPagination
@@ -37,6 +48,13 @@ class SimpeChatViewSet (viewsets.ModelViewSet):
     search_fields = ['involved_users__username', ]
     permission_classes = [isParticipant, ]
     serializer_class = SimpleChatSerializer
+
+
+class NotificationViewSet(viewsets.ModelViewSet):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer
+    filter_backends = (filters.DjangoFilterBackend, )
+    filter_class = NotificationFilter
 
 
 

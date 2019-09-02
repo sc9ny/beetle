@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'chat',
     'channels',
     'django_filters',
+    'notifications',
 ]
 
 MIDDLEWARE = [
