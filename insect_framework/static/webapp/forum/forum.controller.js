@@ -127,6 +127,15 @@
         })
       }
 
+      this.cancel = function() {
+        if (currentForum) {
+          $location.url('/forum/' + currentForum.id + '/');
+        }
+        else {
+          $location.url('/forum/');
+        }
+      }
+
       this.submit = function() {
         if (self.forum.id) {
           Forum.update(self.forum).$promise.then(()=> {

@@ -47,7 +47,7 @@
 }]);
 
   run.$inject = ['$http'];
-  mainController.$inject=['Authentication', '$scope', '$mdMedia', '$mdSidenav', '$timeout',];
+  mainController.$inject=['Authentication','$window', '$scope', '$mdMedia', '$mdSidenav', '$timeout',];
   Notification.$inject =['$resource']
   /**
   * @name run
@@ -59,7 +59,7 @@
   }
 
 
-  function mainController(Authentication, $scope, $mdMedia, $mdSidenav, $timeout) {
+  function mainController(Authentication, $window, $scope, $mdMedia, $mdSidenav, $timeout) {
     $scope.$mdMedia = $mdMedia;
     $scope.lock = false;
     $timeout(function () {
@@ -84,13 +84,6 @@
 
     $scope.openMenu = function($mdMenu, ev) {
       $mdMenu.open(ev);
-    }
-
-    $scope.my_special_notification_callback = function(data) {
-      for (var i=0; i < data.unread_list.length; i++) {
-        msg = data.unread_list[i];
-        console.log(msg);
-       }
     }
   }
 })();

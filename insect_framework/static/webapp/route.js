@@ -9,7 +9,7 @@
 
   route.controller("routeController", function ($rootScope, $location) {
     $rootScope.$on("$routeChangeError", function () {
-      $location.url('/notFound/')
+      //$location.url('/notFound/')
     });
   });
 
@@ -153,19 +153,7 @@
         }
       }
     }).
-    when('/question/:id/', {
-      controller: 'questionDetailController',
-      controllerAs: '$ctrl',
-      templateUrl: 'static/webapp/forum/templates/forum_detail.html/',
-      resolve: {
-        user: (Authentication) => {
-          return Authentication.getAuthenticatedAccount().data;
-        },
-        currentQuestion : ($route, Question) => {
-          return Question.get({id:$route.current.params.id}).$promise;
-        },
-      }
-    }).
+
     when ('/question/create/', {
       controller: 'manageQuestionController',
       controllerAs: '$ctrl',
@@ -192,11 +180,39 @@
         }
       }
     }).
+    when('/question/:id/', {
+      controller: 'questionDetailController',
+      controllerAs: '$ctrl',
+      templateUrl: 'static/webapp/forum/templates/forum_detail.html/',
+      resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        },
+        currentQuestion : ($route, Question) => {
+          return Question.get({id:$route.current.params.id}).$promise;
+        },
+      }
+    }).
+
     when('/sale/', {
       controller: 'saleController',
       controllerAs: '$ctrl',
       templateUrl: '/static/webapp/forum/templates/forum.html/',
       resolve: {
+        user: (Authentication) => {
+          return Authentication.getAuthenticatedAccount().data;
+        }
+      }
+    }).
+
+    when ('/sale/create/', {
+      controller: 'manageSaleController',
+      controllerAs: '$ctrl',
+      templateUrl: '/static/webapp/forum/templates/forum_manage.html/',
+      resolve : {
+        currentForum : () => {
+          return null;
+        },
         user: (Authentication) => {
           return Authentication.getAuthenticatedAccount().data;
         }
@@ -215,19 +231,7 @@
         },
       }
     }).
-    when ('/sale/create/', {
-      controller: 'manageSaleController',
-      controllerAs: '$ctrl',
-      templateUrl: '/static/webapp/forum/templates/forum_manage.html/',
-      resolve : {
-        currentForum : () => {
-          return null;
-        },
-        user: (Authentication) => {
-          return Authentication.getAuthenticatedAccount().data;
-        }
-      }
-    }).
+
     when ('/sale/update/:id/', {
       controller: 'manageSaleController',
       controllerAs: '$ctrl',

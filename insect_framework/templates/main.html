@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="main">
   <head>
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-messages.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.10/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-cookies.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-resource.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel = "stylesheet"
-      href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.1.10/angular-material.min.css">
+      href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel='stylesheet' href='/path/to/unzipped/files/dist/textAngular.min.css'>
@@ -35,23 +34,22 @@
         <div class="float-right" style="padding-right:15px;">
           <span>
             {% if user.is_authenticated %}
-
-            {% load notifications_tags %}
-            {% register_notify_callbacks callbacks='fill_notification_badge, fill_notification_list' menu_class='notify_menu_class' %}
+<!--            {% load notifications_tags %}-->
+<!--            {% register_notify_callbacks callbacks='fill_notification_badge, fill_notification_list' menu_class='notify_menu_class' %}-->
             <span class="text-uppercase" layout="row" layout-align="space-between center" style="font-size:1rem;">
-              <md-menu md-offset="-5 15" md-position-mode="target-right bottom">
-                <md-button class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
-                  <i md-menu-origin class="fas fa-bell"></i>
-                  <md-tooltip style="z-index:1001;">Notifications</md-tooltip>
-                </md-button>
-                <md-menu-content width="6" class="notify_menu_class">
-
-                </md-menu-content>
-              </md-menu>
-              <a class="auth-panel" href="/chat/" style="margin-left:6px;s">
-                <i style="color:white;" class="fas fa-envelope"></i>
-                <md-tooltip style="z-index:1001;">Message</md-tooltip>
-              </a>
+<!--              <md-menu md-offset="-5 15" md-position-mode="target-right bottom">-->
+<!--                <md-button class="md-icon-button" ng-click="openMenu($mdMenu, $event)">-->
+<!--                  <i md-menu-origin class="fas fa-bell"></i>-->
+<!--                  <md-tooltip style="z-index:1001;">Notifications</md-tooltip>-->
+<!--                </md-button>-->
+<!--                <md-menu-content width="6" class="notify_menu_class">-->
+<!--                  <md-menu-item>View all</md-menu-item>-->
+<!--                </md-menu-content>-->
+<!--              </md-menu>-->
+<!--              <a class="auth-panel" href="/chat/" style="margin-left:6px;s">-->
+<!--                <i style="color:white;" class="fas fa-envelope"></i>-->
+<!--                <md-tooltip style="z-index:1001;">Message</md-tooltip>-->
+<!--              </a>-->
               <a class="auth-panel" href="/profile/">
                 <i style="color:white;" class="far fa-user"></i>
                 <md-tooltip style="z-index:1001;">My Profile</md-tooltip>
@@ -119,7 +117,7 @@
           </nav>
         </md-content>
         <div layout="row"  layout-align="end" flex="10">
-          <md-button class="md-icon-button" ng-click="toggleLock()" ng-if="$mdMedia('gt-md')">
+          <md-button class="md-icon-button" aria-label="sidenav-lock" ng-click="toggleLock()" ng-if="$mdMedia('gt-md')">
             <i class="material-icons" ng-if="!lock" >lock</i>
             <i class="material-icons" ng-if="lock">lock_open</i>
           </md-button>

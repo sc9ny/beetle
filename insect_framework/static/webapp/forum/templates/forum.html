@@ -8,7 +8,7 @@
             disabled="!$ctrl.hasSearched && !$ctrl.promise.length && $ctrl.promise.$resolved">
     </search>
     <md-button class="md-icon-button" ng-if="$ctrl.currentUser" aria-label="forum-create"
-               href="/forum/create/" style="margin-right:30px;">
+               href="/{{$ctrl.navigate}}/create/" style="margin-right:30px;">
       <i style="font-size:18px;" class="far fa-edit"></i>
       <md-tooltip>Create</md-tooltip>
     </md-button>

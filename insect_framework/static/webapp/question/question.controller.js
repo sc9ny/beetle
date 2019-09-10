@@ -108,7 +108,6 @@
 
   function manageQuestionController(Question, currentForum, user, $location) {
     const self = this;
-    console.log('here')
       self.forum = currentForum;
       self.currentUser = user;
       if (!self.forum) {
@@ -124,6 +123,15 @@
         Question.delete({id:self.forum.id}).$promise.then(()=> {
           $location.url('/question/');
         })
+      }
+
+      this.cancel = function() {
+        if (currentForum) {
+          $location.url('/question/' + currentForum.id + '/');
+        }
+        else {
+          $location.url('/question/');
+        }
       }
 
       this.submit = function() {

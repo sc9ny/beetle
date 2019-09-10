@@ -190,9 +190,8 @@ a.radius-button.btn.btn-dark {
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
 
-    "pic1 pic3"
+    "pic1 forum"
     "pic2 pic3"
-    "intro intro "
   }
 }
 
@@ -236,10 +235,16 @@ a.radius-button.btn.btn-dark {
     -moz-background-size: cover;
     background-position: center;
   	height: 100%;
-  	min-height: 100vh;
+  	min-height: 50vh;
   	padding: 0;
     padding: 4em 0;
     text-align: center;
+}
+
+.q5 {
+  grid-area: forum;
+  height: 100%;
+  	min-height: 50vh;
 }
 
 .md-content.md-default-them, md-content {

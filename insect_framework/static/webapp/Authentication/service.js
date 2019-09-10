@@ -73,7 +73,6 @@
     function logout() {
       return $http.post('/api/v1/logout/').then((success) =>{
         unAuthenticate();
-        $location.url('/')
       })
     }
     // function login() {

@@ -78,70 +78,79 @@
 
   function saleDetailController(Sale , $routeParams, user, $sanitize, SaleComment, $location, IsStaffOrAccountOwner, currentSale) {
     const self = this;
-      self.currentUser = user;
-      self.commentText = '';
-      self.navigate ='sale';
-      self.currentForum = currentSale;
-      self.permission = function(content) {
-        return IsStaffOrAccountOwner(self.currentUser, content);
-      }
-      self.submitComment = function() {
-        let newComment = {
-          content: self.commentText,
-          associated_sale: self.currentForum.id,
-          author: self.currentUser.username
-        };
-        SaleComment.post(newComment).$promise.then((response) => {
-          //$location.url('/forum/' + self.currentForum.id);
-          self.commentText='';
-          self.currentForum.comments.push(response);
-        })
-      }
+    self.currentUser = user;
+    self.commentText = '';
+    self.navigate ='sale';
+    self.currentForum = currentSale;
+    self.permission = function(content) {
+      return IsStaffOrAccountOwner(self.currentUser, content);
+    }
+    self.submitComment = function() {
+      let newComment = {
+        content: self.commentText,
+        associated_sale: self.currentForum.id,
+        author: self.currentUser.username
+      };
+      SaleComment.post(newComment).$promise.then((response) => {
+        //$location.url('/forum/' + self.currentForum.id);
+        self.commentText='';
+        self.currentForum.comments.push(response);
+      })
+    }
 
-      self.deleteComment = function(comment, index) {
-        // need to manually remove item from DOM
-        SaleComment.delete({id:comment.id}).$promise.then((response) => {
-          self.currentForum.comments.splice(index, 1);
-        });
-      }
+    self.deleteComment = function(comment, index) {
+      // need to manually remove item from DOM
+      SaleComment.delete({id:comment.id}).$promise.then((response) => {
+        self.currentForum.comments.splice(index, 1);
+      });
+    }
   }
 
   function manageSaleController(Sale, currentForum, user, $location) {
     const self = this;
     console.log('here')
-      self.forum = currentForum;
-      self.currentUser = user;
-      if (!self.forum) {
-        self.forum = {
-          title: "",
-          content: "",
-          author: self.currentUser.username,
-          comments: []
-        };
-      }
+    self.forum = currentForum;
+    self.currentUser = user;
+    if (!self.forum) {
+      self.forum = {
+        title: "",
+        content: "",
+        author: self.currentUser.username,
+        comments: []
+      };
+    }
 
-      this.deleteForum = function() {
-        Sale.delete({id:self.forum.id}).$promise.then(()=> {
-          $location.url('/sale/');
-        })
-      }
+    this.deleteForum = function() {
+      Sale.delete({id:self.forum.id}).$promise.then(()=> {
+        $location.url('/sale/');
+      })
+    }
 
-      this.submit = function() {
-        if (self.forum.id) {
-          Sale.update(self.forum).$promise.then(()=> {
-            $location.url('/sale/' + self.forum.id)
-          }).catch ((error) => {
-            self.errorMessage = error.data.content[0];
-          });
-        }
-        else {
-          Sale.post(self.forum).$promise.then((response) => {
-            $location.url('/sale/' + response.id)
-          }).catch((error) => {
-            self.errorMessage = error.data.content[0];
-          });
-        }
+    this.cancel = function() {
+      if (currentForum) {
+        $location.url('sale/' + currentForum.id + '/');
       }
+      else {
+        $location.url('/sale/');
+      }
+    }
+
+    this.submit = function() {
+      if (self.forum.id) {
+        Sale.update(self.forum).$promise.then(()=> {
+          $location.url('/sale/' + self.forum.id)
+        }).catch ((error) => {
+          self.errorMessage = error.data.content[0];
+        });
+      }
+      else {
+        Sale.post(self.forum).$promise.then((response) => {
+          $location.url('/sale/' + response.id)
+        }).catch((error) => {
+          self.errorMessage = error.data.content[0];
+        });
+      }
+    }
   }
 
 })();
