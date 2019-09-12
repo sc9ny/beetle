@@ -1,31 +1,23 @@
-<div class="login-container container">
-
-  <div class="login-reg-panel">
-    <div class="register-info-box">
-      <h2> Don't have an account?</h2>
-      <a href="/register"> Register Here!</a>
+<div layout-fill flex layout="row" layout-align="center center" style="background-image: url('/static/media/metal.jpg');">
+  <md-card flex="30" style="background: rgba(255, 255, 255, 0.1);">
+    <div flex layout="row" layout-align="center center">
+      <img style="background:black;" src="/static/media/logo.jpeg" width="150" height="110" alt="">
     </div>
-    <div class="white-panel">
-      <div>
-        <h2>Login</h2>
-        <div>
-          <form name="LoginForm" class="col-md-10" role="form" ng-submit="$ctrl.login()">
-            <div class="form-group">
-              <label class="float-left"> Email </label>
-              <input class="form-control" type="email" name="email" ng-model="$ctrl.email">
-            </div>
-
-            <div class="form-group">
-              <label class="float-left">Password</label>
-              <input class="form-control" type="password" name="password" ng-model="$ctrl.password">
-            </div>
-            {{error}}
-            <div >
-              <md-button class="float-left btn btn-dark" type="submit" >Submit</md-button>
-            </div>
-          </form>
-        </div>
-      </div>
+    <form style="margin:16px;" flex name="LoginForm" ng-submit="$ctrl.login()" layout="column">
+      <md-input-container>
+        <label style="color:#333333"> Email </label>
+        <input style="border-color:#333333" type="email" name="email" ng-model="$ctrl.email"></input>
+      </md-input-container>
+      <md-input-container>
+        <label style="color:#333333">Password</label>
+        <input style="border-color:#333333" type="password" name="password" ng-model="$ctrl.password"></input>
+      </md-input-container>
+      {{error}}
+      <md-button type="submit" style="background-color:#333333"><span style="color:white;">Log in</span></md-button>
+    </form>
+    <div style="margin:16px;" layout="row" layout-align="space-between center">
+      <a href="/register" class="regular-text-anchor">Register</a>
+      <a href="/password/" class="regular-text-anchor">Lost your password?</a>
     </div>
-	</div>
+  </md-card>
 </div>

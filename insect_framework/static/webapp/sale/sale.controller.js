@@ -4,12 +4,12 @@
   .controller('saleDetailController', saleDetailController)
   .controller('manageSaleController', manageSaleController);
 
-  saleController.$inject =['user', 'Sale', '$sanitize'];
+  saleController.$inject =['user', 'Sale', '$sanitize', '$location'];
   saleDetailController.$inject = ['Sale' , '$routeParams', 'user',
                                      '$sanitize', 'SaleComment', '$location', 'IsStaffOrAccountOwner', 'currentSale'];
   manageSaleController.$inject = ['Sale', 'currentForum', 'user', '$location'];
 
-  function saleController (user, Sale, $sanitize) {
+  function saleController (user, Sale, $sanitize, $location) {
     let self = this;
       this.limit = 15;
       this.currentPage = 1;
@@ -19,7 +19,11 @@
       this.hasSearched = false;
       this.navigate ='sale';
 
-      this.promise = Sale.query({page:1, limit: this.limit}, (response, headerGetter) => {
+      if ($location.hash()) {
+        this.currentPage = $location.hash();
+      }
+
+      this.promise = Sale.query({page:this.currentPage, limit: this.limit}, (response, headerGetter) => {
         self.postCounts = (parseInt(headerGetter('X-count')));
         self.paginate = Math.ceil(self.postCounts / this.limit);
         let page = 0;
@@ -37,7 +41,7 @@
       console.log(searchText)
         this.hasSearched = true;
         this.searchQuery = {'search': searchText}
-        this.promise = Sale.query({page:1, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
+        this.promise = Sale.query({page:this.currentPage, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
           self.postCounts = (parseInt(headerGetter('X-count')));
           self.paginate = Math.ceil(self.postCounts / this.limit);
           let page = 0;
@@ -63,6 +67,7 @@
         }
         this.promise = Sale.query(query);
         this.currentPage =$event;
+        $location.hash(this.currentPage);
       }
 
       this.moveToNext = function ($event) {

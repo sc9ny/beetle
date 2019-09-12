@@ -28,6 +28,14 @@
       controller: function () {},
       templateUrl:'/static/webapp/about.html/'
     }).
+    when ('/contact/', {
+      controller: function () {},
+      templateUrl:'/static/webapp/contact.html/'
+    }).
+    when ('/policy/', {
+      controller: function () {},
+      templateUrl:'/static/webapp/policy.html/'
+    }).
     when ('/profile/', {
       controller: 'profileController',
       controllerAs: '$ctrl',
@@ -246,7 +254,23 @@
       }
     }).
     when ('/', {
-      templateUrl: '/static/webapp/base.html'
+      templateUrl: '/static/webapp/base.html',
+      controller: function(Forum, SimpleGalleryPost, Sale, Question) {
+        this.recentForums = Forum.query({limit: 6}).$promise.then((response) => {
+          this.forums = response;
+        });
+        this.recentGallery = SimpleGalleryPost.query({limit:6}).$promise.then((response) => {
+          this.galleries = response;
+        });
+        this.sale = Sale.query({limit: 6}).$promise.then((response) => {
+          this.sales = response;
+        });
+
+        this.question = Question.query({limit:6}).$promise.then((response) => {
+          this.questions = response;
+        })
+      },
+      controllerAs: '$ctrl'
     }).
     otherwise({
       redirectTo: '/notFound/',

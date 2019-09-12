@@ -2,25 +2,82 @@
   <div class="q2">
     <h3 class="md-display-1" style="font-weight:600;"> Insect Breeding </h3>
     <span class=md-title> People have all sorts of pets. Why not insects? </span>
-    <span> Visit our forum and see how other people breed insects</span>
+    <p> Visit our forum and see how other people breed insects</p>
   </div>
-  <div class="q3">
-    <h3 class="md-display-1" style="font-weight:600; padding: 30px 0;">
-      Share your knowledge
-    </h3>
-    <p class=md-title style="margin-bottom:30px;">
-      If you have any question regarding breeding an insect or want to share
-      what you have found, visit our forum.
-    </p>
-    <a class="button-looking-anchor" href="/forum"> FORUM </a>
+<!--  <div class="q3">-->
+<!--    <h3 class="md-display-1" style="font-weight:600; padding: 30px 0;">-->
+<!--      Share your knowledge-->
+<!--    </h3>-->
+<!--    <p class=md-title style="margin-bottom:30px;">-->
+<!--      If you have any question regarding breeding an insect or want to share-->
+<!--      what you have found, visit our forum.-->
+<!--    </p>-->
+<!--    <a class="button-looking-anchor" href="/forum"> FORUM </a>-->
+<!--  </div>-->
+  <div class="q5" flex layout="column" style="margin-top: 100px;">
+    <h4>Recent Activities</h4>
+    <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center center" style="margin-top: 100px;">
+      <md-card style="min-height:372px;" flex="80" flex-gt-sm="40">
+        <img ng-src="../static/media/ox.jpg">
+        <md-card-content>
+          <md-button href="/forum/" style="margin-left:0; background-color:#555555; color:white; padding-left:6px;">Recent Forums</md-button>
+          <a class="regular-text-anchor" ng-repeat="post in $ctrl.forums" href="/forum/{{post.id}}" flex layout="row" layout-align="space-between center">
+            <span flex="70" class="overflow-title">{{post.title}}</span>
+            <span> {{post.author}}</span>
+          </a>
+        </md-card-content>
+
+      </md-card>
+      <md-card style="min-height:372px;" flex="80" flex-gt-sm="40">
+        <img ng-src="../static/media/muel.jpg">
+        <md-card-content>
+          <md-button href="/gallery/" style="margin-left:0; background-color:#777888; color:white; padding-left:6px;">Recent Galleries</md-button>
+          <a class="regular-text-anchor" ng-repeat="post in $ctrl.galleries" href="/gallery/{{post.id}}" flex layout="row" layout-align="space-between center">
+            <span flex="70" class="overflow-title">{{post.title}}</span>
+            <span> {{post.author}}</span>
+          </a>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center center">
+      <md-card style="min-height:372px;" flex="80" flex-gt-sm="40">
+        <img ng-src="../static/media/metal.jpg">
+        <md-card-content>
+          <md-button href="/sale/" style="margin-left:0; background-color:#AAAAAA; color:white; padding-left:6px;">Recent Sales</md-button>
+          <a class="regular-text-anchor" ng-repeat="post in $ctrl.sales" href="/sale/{{post.id}}" flex layout="row" layout-align="space-between center">
+            <span flex="70" class="overflow-title">{{post.title}}</span>
+            <span> {{post.author}}</span>
+          </a>
+        </md-card-content>
+      </md-card>
+
+      <md-card style="min-height:372px;" flex="80" flex-gt-sm="40">
+        <img ng-src="../static/media/titanus.jpg">
+        <md-card-content>
+          <md-button href="/sale/" style="margin-left:0; background-color:#CCCCCC; color:white; padding-left:6px;">Recent Questions</md-button>
+          <a class="regular-text-anchor" ng-repeat="post in $ctrl.questions" href="/question/{{post.id}}" flex layout="row" layout-align="space-between center">
+            <span flex="70" class="overflow-title">{{post.title}}</span>
+            <span> {{post.author}}</span>
+          </a>
+        </md-card-content>
+      </md-card>
+    </div>
+
   </div>
-  <div class="q4">
-    <h3 class="md-display-1" style="font-weight:600; padding: 30px 0;">
-      Share your insect pictures with us
-    </h3>
-    <a class="button-looking-anchor" href="/gallery"> GALLERY </a>
-  </div>
-  <div class="q5">
-    Hello
+  <div class="q7" style="margin-top:100px; margin-left:150px; color:#333333;">
+    <h4> Why Insects for Pet?</h4>
+    <div layout="column" layout-gt-sm="row" layout-align="center end" layout-align-gt-sm="space-between center" style="margin-top: 30px; margin-left:16px;">
+      <div flex flex-gt-sm="70">
+        Dogs and cats definitely are great pets. But sometimes it requires too much of responsibility to take care of them.
+        Then what about reptiles or Tarantula? They are great too, but you sometimes have to feed them live insects/animals.
+        If these are blockers for you to keep pets or if you are simply looking for a exotic pets, maybe consider insects.
+        You can feed them with anything (unless they are carnivours), easy to keep and breed and does not require much responsibility as other pets.
+      </div>
+      <div flex layout="row" layout-align="center center">
+        <img style="width:32px; height:32px;" src="../static/media/rhino.svg">
+        <img style="width:32px; height:32px; margin: 0 16px;" src="../static/media/beetle.svg">
+        <img style="width:32px; height:32px;" src="../static/media/cockroach.svg">
+      </div>
+    </div>
   </div>
 </div>

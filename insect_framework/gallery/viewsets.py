@@ -58,7 +58,7 @@ class SimpleGalleryPostViewSet(viewsets.ModelViewSet):
         if username is not None:
             queryset = GalleryPost.objects.filter(author__username=username)
             return queryset
-        queryset = super(GalleryPostViewSet, self).get_queryset()
+        queryset = super(SimpleGalleryPostViewSet, self).get_queryset()
         return queryset
 
 

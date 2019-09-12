@@ -104,32 +104,40 @@
               </li>
 
             </ul>
-            <div class=side-nav-footer>
-              <a href="https://www.instagram.com/insectbrothers/" >
-                <i style="font-size:18px;" class="fab fa-instagram">
-                </i>
-              </a>
-              <a href="">
-                <i style="font-size:18px;" class="fab fa-facebook-f">
-                </i>
-              </a>
+            <div class=side-nav-footer layout="row" layout-align="space-between center">
+              <div>
+                <a href="https://www.instagram.com/insectbrothers/" >
+                  <i style="font-size:18px;" class="fab fa-instagram">
+                  </i>
+                </a>
+                <a href="">
+                  <i style="font-size:18px;" class="fab fa-facebook-f">
+                  </i>
+                </a>
+              </div>
+              <div>
+                <md-button class="md-icon-button" aria-label="sidenav-lock" ng-click="toggleLock()" ng-if="$mdMedia('gt-md')">
+                  <i class="material-icons" ng-if="!lock" >lock</i>
+                  <i class="material-icons" ng-if="lock">lock_open</i>
+                </md-button>
+              </div>
             </div>
           </nav>
         </md-content>
-        <div layout="row"  layout-align="end" flex="10">
-          <md-button class="md-icon-button" aria-label="sidenav-lock" ng-click="toggleLock()" ng-if="$mdMedia('gt-md')">
-            <i class="material-icons" ng-if="!lock" >lock</i>
-            <i class="material-icons" ng-if="lock">lock_open</i>
-          </md-button>
-        </div>
+
       </md-sidenav>
-      <div layout="column" flex class="align-center" style="margin-top: 164px;">
+      <div layout="column" flex class="align-center" style="margin-top: 100px;">
         <div class="view-animate background" ng-view ng-controller="routeController">
         </div>
 
         <div style="margin-top: 200px;">
           <md-divider></md-divider>
-          <a style="font-style: italic; font-family:cursive; font-weight:400;" href="/about/">ABOUT US</a>
+          <div layout="row" layout-align="space-between center">
+            <strong>Copyright &copy 2019, Insect Brothers</strong>
+            <md-button href="/about/">About</md-button>
+            <md-button href="/contact">Contact</md-button>
+            <md-button href="/policy/">Policy</md-button>
+          </div>
         </div>
      </div>
     </div>

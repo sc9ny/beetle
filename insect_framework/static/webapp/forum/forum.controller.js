@@ -7,12 +7,12 @@
     .controller('forumDetailController', forumDetailController)
     .controller('manageForumController', manageForumController);
 
-    forumController.$inject = ['Forum', '$sanitize', 'user'];
+    forumController.$inject = ['Forum', '$sanitize', 'user', '$location'];
     forumDetailController.$inject = ['Forum' , '$routeParams', 'user',
                                      '$sanitize', 'Comment', '$location', 'currentForum', 'IsStaffOrAccountOwner'];
     manageForumController.$inject = ['Forum', 'currentForum', 'user', '$location'];
 
-    function forumController (Forum, $sanitize, user) {
+    function forumController (Forum, $sanitize, user, $location) {
       let self = this;
       this.limit = 15;
       this.currentPage = 1;
@@ -22,7 +22,11 @@
       this.hasSearched = false;
       this.navigate ='forum';
 
-      this.promise = Forum.query({page:1, limit: this.limit}, (response, headerGetter) => {
+      if ($location.hash()) {
+        this.currentPage = $location.hash();
+      }
+
+      this.promise = Forum.query({page:this.currentPage, limit: this.limit}, (response, headerGetter) => {
         self.postCounts = (parseInt(headerGetter('X-count')));
         self.paginate = Math.ceil(self.postCounts / this.limit);
         let page = 0;
@@ -65,6 +69,7 @@
         }
         this.promise = Forum.query(query);
         this.currentPage =$event;
+        $location.hash(this.currentPage);
       }
 
       this.moveToNext = function ($event) {

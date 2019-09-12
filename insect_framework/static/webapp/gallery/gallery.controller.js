@@ -6,11 +6,11 @@
   .controller('galleryManageController', galleryManageController)
   .controller('galleryDetailController', galleryDetailController);
 
-  galleryController.$inject = ['user', 'GalleryPost'];
+  galleryController.$inject = ['user', 'GalleryPost', '$location'];
   galleryManageController.$inject = ['user', '$scope', 'Gallery', 'GalleryPost', '$location'];
   galleryDetailController.$inject = ['user', 'currentGallery', 'GalleryComment', 'IsStaffOrAccountOwner', '$location'];
 
-  function galleryController(user, GalleryPost) {
+  function galleryController(user, GalleryPost, $location) {
     const self = this;
     this.hasSearched = false;
     this.limit =15;
@@ -18,7 +18,11 @@
     this.current =1;
     this.proceed = {};
     this.currentUser = user;
-    this.promise = GalleryPost.query({page:1, limit: this.limit}, (response, headerGetter) => {
+
+    if ($location.hash()) {
+      this.currentPage = $location.hash();
+    }
+    this.promise = GalleryPost.query({page:this.currentPage, limit: this.limit}, (response, headerGetter) => {
       self.postCounts = (parseInt(headerGetter('X-count')));
       self.paginate = Math.ceil(self.postCounts / this.limit);
       let page = 0;
@@ -60,6 +64,7 @@
       }
       this.promise = GalleryPost.query(query);
       this.currentPage =$event;
+      $location.hash(this.currentPage);
     }
 
     this.moveToNext = function ($event) {
@@ -139,12 +144,16 @@
     });
 
     $scope.upload = function() {
-      console.log($scope.files);
       $scope.newGalleryPost.$save().then(response => {
         for (let i = 0; i < $scope.files.length; i++) {
           $scope.files[i].gallery_post = response.id
           let gallery = new Gallery ($scope.files[i])
-          gallery.$save();
+          gallery.$save().then(()=> {
+          }, (error) => {
+            alert('There was an error in processing one of your images. Check the image type or the image size : Valid image types are png,jpg, and jpeg and the max file size is 3MB');
+            $scope.newGalleryPost.$delete();
+            $location.url('/gallery/create/');
+          });
         }
         $location.url('/gallery/'+response.id+'/');
       }, (error) => {
@@ -181,7 +190,6 @@
         if(i == event.target.files.length - 1){
           isLastFile  = true;
         }
-        console.log(event.target.files[i]);
         if (event.target.files[i].type.split('/')[0] !== 'image') {
           alert ('Excluded invalid images')
 

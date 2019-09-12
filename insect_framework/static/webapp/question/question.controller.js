@@ -4,12 +4,12 @@
   .controller('questionDetailController', questionDetailController)
   .controller('manageQuestionController', manageQuestionController);
 
-  questionController.$inject =['user', 'Question', '$sanitize'];
+  questionController.$inject =['user', 'Question', '$sanitize', '$location'];
   questionDetailController.$inject = ['Question' , '$routeParams', 'user',
                                      '$sanitize', 'Answer', '$location', 'IsStaffOrAccountOwner', 'currentQuestion'];
   manageQuestionController.$inject = ['Question', 'currentForum', 'user', '$location'];
 
-  function questionController (user, Question, $sanitize) {
+  function questionController (user, Question, $sanitize, $location) {
     let self = this;
       this.limit = 15;
       this.currentPage = 1;
@@ -19,7 +19,11 @@
       this.hasSearched = false;
       this.navigate ='question';
 
-      this.promise = Question.query({page:1, limit: this.limit}, (response, headerGetter) => {
+      if ($location.hash()) {
+        this.currentPage = $location.hash();
+      }
+
+      this.promise = Question.query({page:this.currentPage, limit: this.limit}, (response, headerGetter) => {
         self.postCounts = (parseInt(headerGetter('X-count')));
         self.paginate = Math.ceil(self.postCounts / this.limit);
         let page = 0;
@@ -34,7 +38,6 @@
       });
 
       this.search = function (searchText) {
-      console.log(searchText)
         this.hasSearched = true;
         this.searchQuery = {'search': searchText}
         this.promise = Question.query({page:1, limit: this.limit, 'search' : searchText}, (response, headerGetter) => {
@@ -63,6 +66,7 @@
         }
         this.promise = Question.query(query);
         this.currentPage =$event;
+        $location.hash(this.currentPage);
       }
 
       this.moveToNext = function ($event) {
