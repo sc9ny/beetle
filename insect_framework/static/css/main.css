@@ -393,3 +393,16 @@ input:disabled {
   padding: 7px 5px;
   border-radius :2px;
 }
+
+.login-background {
+  background-image: url('/static/media/metal.jpg');
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-position: center;
+  height: 100%;
+  min-height: 50vh;
+  padding: 4em 0;
+  text-align: center;
+  color: black;
+}

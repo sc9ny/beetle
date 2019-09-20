@@ -2,7 +2,7 @@
   <md-progress-circular></md-progress-circular>
 </div>
 
-<div flex ng-if="$ctrl.content">
+<div layout="row" layout-align="end center">
   <div ng-if="!$ctrl.promise.length && !$ctrl.hasSearched">
     No registered post yet
   </div>
@@ -16,6 +16,9 @@
       <md-tooltip>Create</md-tooltip>
     </md-button>
   </div>
+</div>
+
+<div flex ng-if="$ctrl.content" layout="column" layout-align="start center">
   <div flex layout="column">
     <div ng-if="$ctrl.hasSearched && !$ctrl.promise.length" class="align-center">
       No result found

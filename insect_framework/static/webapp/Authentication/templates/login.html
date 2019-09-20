@@ -1,5 +1,5 @@
-<div layout-fill flex layout="row" layout-align="center center" style="background-image: url('/static/media/metal.jpg');">
-  <md-card flex="30" style="background: rgba(255, 255, 255, 0.1);">
+<div flex layout="row" layout-align="center center">
+  <md-card flex="80" flex-gt-xs="45" flex-gt-sm="30" style="background: rgba(255, 255, 255, 0.1);">
     <div flex layout="row" layout-align="center center">
       <img style="background:black;" src="/static/media/logo.jpeg" width="150" height="110" alt="">
     </div>
@@ -12,12 +12,12 @@
         <label style="color:#333333">Password</label>
         <input style="border-color:#333333" type="password" name="password" ng-model="$ctrl.password"></input>
       </md-input-container>
-      {{error}}
+      <span style="color:red;">{{error}}</span>
       <md-button type="submit" style="background-color:#333333"><span style="color:white;">Log in</span></md-button>
     </form>
     <div style="margin:16px;" layout="row" layout-align="space-between center">
       <a href="/register" class="regular-text-anchor">Register</a>
-      <a href="/password/" class="regular-text-anchor">Lost your password?</a>
+      <a href="password-reset/" target="_self" class="regular-text-anchor">Lost your password?</a>
     </div>
   </md-card>
 </div>

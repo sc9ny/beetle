@@ -33,6 +33,8 @@ class IsStaffOrAccountOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.user and hasattr(obj, 'author'):
             return request.user.is_staff or str(obj.author) == str(request.user)
+        else:
+            return str(obj) == str(request.user)
         return False
 
 
